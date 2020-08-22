@@ -1,0 +1,72 @@
+---
+title: Magic Arts
+layout: ~/layouts/Default.vue
+---
+
+# {{ $frontmatter.title }}
+
+## Natural Arts
+
+Natural arts are closely related to natural sciences and follow strict rules and
+have predictable cause-and-effect results.
+
+Spells require the caster to use their body to channel the effect, thus
+unpracticed or overly eager casters can harm themselves by putting too much of a
+load on their bodies.
+
+Beginners typically need to make direct skin contact to channel, but experts
+learn to use the air or other objects as a medium to indirectly contact the
+target. That said, if the medium is insufficient for channeling the effect, the
+spell will fail. For instance, Animare spells can not be channeled through pure,
+solid lead. And a thermal spell may cause the medium to combust, scattering the
+effect.
+
+While typically a trained practitioner can achieve their desired effect within a
+short window of time, it is not an instantaneous process. Thus, if attempting to
+oppose an active force of their domain, the practitioner may be unable to act in
+time. For instance, attempting to use Kineturgy to stop a rock hurtling at the
+user's head.
+
+### [Energeia](magic/energeia)
+
+### [Animare](magic/animare)
+
+## Supernatural Arts
+
+Supernatural arts bargain with otherworldly influences to further the user's
+goals. They are consequently both unpredictable and potentially very powerful.
+
+Supernatural arts are carried out by the mechanations of a powerful patron deity
+or a host of spirits. They are often negotiative in nature. A benevolant being,
+for instance, may require the practicioner to uphold a set of sacred laws and
+reward their dedication with direct assistance. A malevolant being may provide
+substantial power upfront but leave the cost vague and to be determined at will.
+
+While the give and take of Supernatural Arts is in some ways similar to the
+cause and effect of Natural Arts, Supernatural Arts follow symbolic logic. The
+cost of summoning water from thin air may be reciting 70 prayers while facing
+the setting sun. If it's a full moon that night, then the practitioner may
+instead have to lay prostrate with a hyssop branch in hand for an hour.
+
+### [Thaumaturgy](magic/thaumaturgy)
+
+### [Hemoturgy](magic/hemoturgy)
+
+## [THE RULE OF LAW](magic/rule-of-law)
+
+## Enchanting
+
+Enchanting is the art of infusing inanimate objects with magical effects. There
+are different fundamental methods, but they all abide the same core process. A
+source of power is drawn from the world and suffused into the target object,
+changing its nature.
+
+All enchanting is a long form process. Usually involving multiple steps and days
+of effort. But its effects are almost always permanent, so long as they
+enchanted object stays intact.
+
+### [Essence Weaving](magic/essence-weaving)
+
+### [Soul Binding](magic/soul-binding)
+
+### [Veneration](magic/veneration)

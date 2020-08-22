@@ -1,0 +1,23 @@
+{
+  "name": "othnell",
+  "private": true,
+  "scripts": {
+    "build": "gridsome build",
+    "develop": "gridsome develop",
+    "explore": "gridsome explore"
+  },
+  "dependencies": {
+    "@gridsome/transformer-remark": "^0.6.1",
+    "@gridsome/transformer-yaml": "^0.2.1",
+    "@gridsome/vue-remark": "^0.2.2",
+    "gray-matter": "^4.0.2",
+    "gridsome": "^0.7.0",
+    "remark-attr": "^0.11.1",
+    "remark-autolink-headings": "^6.0.1",
+    "remark-bracketed-spans": "^3.0.0"
+  },
+  "devDependencies": {
+    "stylus": "^0.54.7",
+    "stylus-loader": "^3.0.2"
+  }
+}

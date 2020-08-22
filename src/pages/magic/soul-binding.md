@@ -1,0 +1,25 @@
+---
+title: Soul Binding
+layout: ~/layouts/Default.vue
+---
+
+# {{ $frontmatter.title }}
+
+Soul Binding is the practice of animating an object with an existing living
+soul. However the binder acquires the soul, they then inscribe markings onto the
+target object to make it a vessel and guide the soul into it.
+
+Once in, the vessel can be enhanced in several ways by the soul. For instance, a
+blade may embolden its wielder qnd make them keen of eye. A small statue may
+begin moving or talking. Skill Binders can better predict these effects and
+shape the vessel to achieve them.
+
+The quality and permanence of the markings directly scales the stability of the
+binding. If unstable, then the vessel may break if the soul exerts too much
+power.
+
+While often misconstrued as a relative to Hemoturgy, Soul Binding does not
+require the sacrifice of the bound soul's living body. Many times, the soul
+bound was lost and wandering, or even a spirit who never had a body. In
+addition, some practitioners make great effort to recruit the soul or spirit as
+a willing participant. Though certainly not all.
