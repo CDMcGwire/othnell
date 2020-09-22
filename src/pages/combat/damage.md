@@ -8,19 +8,32 @@ layout: ~/layouts/Default.vue
 Damage is tracked as a number counting up from zero. If a character is hit,
 their total damage increases by the amount they are hit for.
 
+## Threshold
+
+Every character has a certain amount of damage they can endure before they
+receive any significant ill effects. This amount is the character's "Threshold"
+and is equal to 4 + (2 x Brawn) + Poise.
+
+So, a character with 2 Brawn and 1 Poise has a damage Threshold of 9.
+
 ## Wounds
 
-Wounds represent semi-permanent results of damage. Like breaking a limb,
-bleeding profusely, or something lethal like a blade through the heart. Each
-character has a damage "Threshold" value. If their damage total is at or above
-their Threshold, they suffer a wound.
+Wounds represent damage that has become significant enough to hinder the
+character. Like breaking a limb, bleeding profusely, or something lethal like a
+blade through the heart. A wound is acquired everytime a characters damage
+reaches their threshold value ("reach" meaning, Damage greater than or equal to
+Threshold).
+
+So, if a character has a Threshold of 7 and they take 4 damage, no effect occurs
+immediately. If that character takes another 3 damage to get them to 7, they
+immediately suffer a wound.
 
 If the character's Damage total is equal or greater than twice their Threshold,
 they additionally suffer a critical wound. If damage reaches triple Threshold,
 the character dies immediately.
 
-If a character is Wounded and survives to their next turn, their Damage total is
-reset to 0.
+If a character's damage is greater than or equal to their Threshold and they are
+alive at the start of their their next turn, their Damage total is reset to 0.
 
 > Example: John's Threshold is 10 and he takes his first 6 damage. No wounds. On
 > a following round he takes another 4, bringing his Damage total to 10. Since
@@ -46,7 +59,7 @@ effect table instead:
 - 13 to 20) Normal Wound. No additional effect.
 - 1 to 12) Severe Crippling Wound. Roll for a severe crippling effect.
 
-### Cripple Effects
+### Crippling Effects
 
 Cripple effects are assigned based on the effect, with it being you and the DM's
 job to describe the concrete details of the damage. For instance, your character
@@ -85,7 +98,7 @@ make sense for the scenario.
 ### First Aid
 
 If in combat, the only conventional (non-magic) option for healing is First Aid.
-Applying first aid allows regular crippled effects to be removed in combat.
+Applying first aid allows minor crippling effects to be removed in combat.
 
 To apply First Aid, the performing character must choose a target and make a
 skill check with a difficulty of 6. If the character is targeting themself, the
@@ -136,7 +149,7 @@ they say.
 
 Some Supernatural spells can protect characters. This is not considered "Armor"
 for the sake of damage calculations. These spells bypass natural laws, after
-all. They apply on their own rules.
+all. The source of the magical protection will explain its own effect.
 
 ## Damage Scaling
 

@@ -34,10 +34,10 @@ Two Die Roll Ranks - Used when specified by other rules
 - 2d2 > d4 + d2 > 2d4 > d6 + d4 > 2d6 > d8 + d6...
 
 > **Example:** A barbarian with a great axe attacks a old wizard with a dagger.
-> The greataxe gives the barbarian a base die of d8 and the wizard has a d4 with
-> their dagger. The barbarian has a +3 Brawn so the d8 goes up three sizes to
-> d12 + d2. The wizard has a -1 Brawn, and so the d4 is downgraded to a d2. They
-> roll, Barbarian gets an 8 total, Wizard gets a 1. The Wizard loses and is
+> The greataxe gives the barbarian a base die of d10 and the wizard has a d6
+> with their dagger. The barbarian has a +3 Brawn so the d10 goes up three sizes
+> to d12 + d4. The wizard has a -1 Brawn, and so the d6 is downgraded to a d4.
+> They roll, Barbarian gets an 8 total, Wizard gets a 1. The Wizard loses and is
 > damaged by 7.
 
 ## Skill Checks
@@ -67,15 +67,18 @@ DM's in suit or rank the DM must give correct and forthright information (they
 do not have to reveal more than what was asked). The DM will not reveal their
 card.
 
+> Probability at: +0 ≈ 31%, +1 ≈ 53%, +2 ≈ 69%, +3 ≈ 79%
+
 At negative values of Memory, the player must draw additional cards equal to the
-number of negative points, but EVERY card must match suit or rank.
+number of negative points, but EVERY card must match suit or rank with the DM's
+card.
 
 ## Cognitive Load
 
 A resource each player has representing their capacity for strenuous mental
 activity. A character's maximum pool size is 4 by default and doubled once for
-each point of Wit. A negative Wit subtracts from the pool size by double the
-number of negative Wit points (negative pool sizes are valid).
+each point of Wit. A negative Wit halves the pool size once for each negative
+Wit point (negative pool sizes are valid).
 
 The Cognitive Load Resource (name pending) can be used like a currency to "buy
 secrets" from the DM. That is, reveal information that would otherwise be hidden
@@ -95,15 +98,17 @@ Charisma lets a character compel or change the thinking of another by forcing
 the target to make a check on one of the other four attributes, depending on the
 type of influence being exerted.
 
-- **Charm)** The target must a Poise check with a DC based on the acting
-  character's Charisma: -1=3/0=5/1=7/2=10/3=King (or something like that).
+Charisma mechanics are
+
+- **Charm)** Make a Skill Check with a DC of 5 + (2 x Target's Poise). You may
+  add your Charisma bonus to the card you play.
 - **Intimidate)** Actor and Target start a Clash roll with a dice based on their
   Charisma + Brawn: -2=d2-1/-1=d2/0=d4/1=d6/etc.
-- **Deceive)** Target must make a memory check against a card the Actor draws.
-  Actor may draw an additional card for each point of Charisma. If one of those
-  cards has no matches in the target's pulls, the attempt succeeds.
-- **Persuade)** Target must spend CL points as if checking the actor's
-  motivation but value is scaled by Actor's Charisma: 2 + (2 x Actor Charisma)
+- **Lie)** Make a Memory Pull. You may discard and redraw a number of cards up
+  to your Charisma.
+- **Persuade)** Make a Cognition wager where the cost is based on the target's
+  Wit and the nature of the action you are attempting to compel them to. Your
+  starting wager is equal to your Charisma bonus.
 
 ## Advantage
 
