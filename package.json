@@ -6,7 +6,7 @@
     "develop": "gridsome develop",
     "explore": "gridsome explore",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -b master -d dist"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@gridsome/transformer-remark": "^0.6.1",
@@ -22,6 +22,7 @@
     "remark-bracketed-spans": "^3.0.0",
     "tippy.js": "^6.2.6",
     "vue": "^2.6.12",
+    "vue-server-renderer": "2.6.12",
     "vue-template-compiler": "^2.6.12",
     "vue-tree-navigation": "^4.0.1"
   },

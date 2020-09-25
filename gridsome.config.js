@@ -5,34 +5,36 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = {
-  siteName: "Othnell Tabletop RPG",
+  siteName: 'Othnell Tabletop RPG',
+  siteUrl: 'http://cdmcgwire.com',
+  pathPrefix: '/othnell',
   plugins: [
     {
-      use: "@gridsome/vue-remark",
+      use: '@gridsome/vue-remark',
       options: {
-        typeName: "Markdown",
-        baseDir: "src/pages/",
+        typeName: 'Markdown',
+        baseDir: 'src/pages/',
         refs: {
           author: {
-            typeName: "Author",
-            create: true
-          }
+            typeName: 'Author',
+            create: true,
+          },
         },
         plugins: [
           [
-            "remark-autolink-headings",
+            'remark-autolink-headings',
             {
               content: {
-                type: "element",
-                tagName: "span",
-                properties: { className: ["icon", "icon-link"] },
-                children: [{ type: "text", value: "🠶" }]
-              }
-            }
+                type: 'element',
+                tagName: 'span',
+                properties: { className: ['icon', 'icon-link'] },
+                children: [{ type: 'text', value: '🠶' }],
+              },
+            },
           ],
-          ["remark-bracketed-spans"]
-        ]
-      }
-    }
+          ['remark-bracketed-spans'],
+        ],
+      },
+    },
   ],
-};
+}

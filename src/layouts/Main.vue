@@ -17,13 +17,18 @@
               >
                 Select Section
               </button>
-              <vue-tree-navigation
-                :items="routes"
-                :defaultOpenLevel="0"
-                ref="navtree"
-              />
+              <ClientOnly
+                ><vue-tree-navigation
+                  :items="routes"
+                  :defaultOpenLevel="0"
+                  ref="navtree"
+              /></ClientOnly>
             </div>
-            <input id="section-search" type="text" placeholder="Search... (not yet implemented)" />
+            <input
+              id="section-search"
+              type="text"
+              placeholder="Search... (not yet implemented)"
+            />
           </nav>
           <slot />
         </div>
@@ -41,50 +46,99 @@
               </button>
             </div>
             <div class="col m-end c-start">
-              <div id="char-name"><input type="text" placeholder="Character Name"/></div>
-              <div id="char-title">the <input type="text" placeholder="Character Title"/></div>
+              <div id="char-name">
+                <input type="text" placeholder="Character Name" />
+              </div>
+              <div id="char-title">
+                the <input type="text" placeholder="Character Title" />
+              </div>
             </div>
           </div>
           <div class="spacer-sheet" />
           <div class="row m-spaced">
             <div class="col char-attr">
               <div class="char-attr-label row m-center c-center">Brawn</div>
-              <div id="char-brawn" class="char-attr-value row m-center c-center">2</div>
+              <div
+                id="char-brawn"
+                class="char-attr-value row m-center c-center"
+              >
+                2
+              </div>
               <div class="row grow">
-                <button class="char-attr-bttn lower row m-center c-center">&lt;</button>
-                <button class="char-attr-bttn higher row m-center c-center">&gt;</button>
+                <button class="char-attr-bttn lower row m-center c-center">
+                  &lt;
+                </button>
+                <button class="char-attr-bttn higher row m-center c-center">
+                  &gt;
+                </button>
               </div>
             </div>
             <div class="col char-attr">
               <div class="char-attr-label row m-center c-center">Poise</div>
-              <div id="char-brawn" class="char-attr-value row m-center c-center">0</div>
+              <div
+                id="char-brawn"
+                class="char-attr-value row m-center c-center"
+              >
+                0
+              </div>
               <div class="row grow">
-                <button class="char-attr-bttn lower row m-center c-center">&lt;</button>
-                <button class="char-attr-bttn higher row m-center c-center">&gt;</button>
+                <button class="char-attr-bttn lower row m-center c-center">
+                  &lt;
+                </button>
+                <button class="char-attr-bttn higher row m-center c-center">
+                  &gt;
+                </button>
               </div>
             </div>
             <div class="col char-attr">
               <div class="char-attr-label row m-center c-center">Memory</div>
-              <div id="char-brawn" class="char-attr-value row m-center c-center">-1</div>
+              <div
+                id="char-brawn"
+                class="char-attr-value row m-center c-center"
+              >
+                -1
+              </div>
               <div class="row grow">
-                <button class="char-attr-bttn lower row m-center c-center">&lt;</button>
-                <button class="char-attr-bttn higher row m-center c-center">&gt;</button>
+                <button class="char-attr-bttn lower row m-center c-center">
+                  &lt;
+                </button>
+                <button class="char-attr-bttn higher row m-center c-center">
+                  &gt;
+                </button>
               </div>
             </div>
             <div class="col char-attr">
               <div class="char-attr-label row m-center c-center">Wit</div>
-              <div id="char-brawn" class="char-attr-value row m-center c-center">3</div>
+              <div
+                id="char-brawn"
+                class="char-attr-value row m-center c-center"
+              >
+                3
+              </div>
               <div class="row grow">
-                <button class="char-attr-bttn lower row m-center c-center">&lt;</button>
-                <button class="char-attr-bttn higher row m-center c-center">&gt;</button>
+                <button class="char-attr-bttn lower row m-center c-center">
+                  &lt;
+                </button>
+                <button class="char-attr-bttn higher row m-center c-center">
+                  &gt;
+                </button>
               </div>
             </div>
             <div class="col char-attr">
               <div class="char-attr-label row m-center c-center">Charisma</div>
-              <div id="char-brawn" class="char-attr-value row m-center c-center">3</div>
+              <div
+                id="char-brawn"
+                class="char-attr-value row m-center c-center"
+              >
+                3
+              </div>
               <div class="row grow">
-                <button class="char-attr-bttn lower row m-center c-center">&lt;</button>
-                <button class="char-attr-bttn higher row m-center c-center">&gt;</button>
+                <button class="char-attr-bttn lower row m-center c-center">
+                  &lt;
+                </button>
+                <button class="char-attr-bttn higher row m-center c-center">
+                  &gt;
+                </button>
               </div>
             </div>
           </div>
@@ -390,7 +444,7 @@ export default {
       cursor pointer
       object-fit cover
       object-position center
-  
+
   button:hover, button:focus
     img
       filter brightness(0.5)

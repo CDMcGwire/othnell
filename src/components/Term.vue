@@ -12,13 +12,9 @@
 
 <script>
 import tippy from 'tippy.js'
-import { PixelSpinner } from 'epic-spinners'
 import 'tippy.js/dist/tippy.css'
 
 export default {
-  components: {
-    PixelSpinner
-  },
   props: {
     target: String
   },
