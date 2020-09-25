@@ -6,8 +6,8 @@
 
 module.exports = {
   siteName: 'Othnell Tabletop RPG',
-  siteUrl: 'http://cdmcgwire.com',
-  pathPrefix: '/othnell',
+  siteUrl: 'http://othnell.com',
+  pathPrefix: '/',
   plugins: [
     {
       use: '@gridsome/vue-remark',

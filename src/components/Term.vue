@@ -1,12 +1,11 @@
 <template>
   <button class="term" ref="button">
     <slot />
-    <pixel-spinner
-      :animation-duration="1500"
-      :size="40"
-      color="black"
-      ref="spinner"
-    />
+    <div ref="spinner">
+      <ClientOnly>
+        <pixel-spinner :animation-duration="1500" :size="40" color="black" />
+      </ClientOnly>
+    </div>
   </button>
 </template>
 
@@ -15,18 +14,24 @@ import tippy from 'tippy.js'
 import 'tippy.js/dist/tippy.css'
 
 export default {
+  components: {
+    PixelSpinner: () =>
+      import('epic-spinners')
+        .then(m => m.PixelSpinner)
+        .catch(r => console.error("Couldn't load epic-spinners: " + r)),
+  },
   props: {
-    target: String
+    target: String,
   },
   data: function() {
     return {
-      loaded: false
+      loaded: false,
     }
   },
   methods: {
     loadContent: async function(tooltip) {
       if (this.loaded || tooltip === null) return
-      tooltip.setContent(this.$refs.spinner.$el)
+      tooltip.setContent(this.$refs.spinner)
 
       var response = await fetch(`/terms/${this.target}.html`)
       if (!response.ok) {
@@ -37,11 +42,11 @@ export default {
       var content = await response.text()
       tooltip.setContent(content)
       this.loaded = true
-    }
+    },
   },
   mounted: function() {
     const component = this
-    const spinner = this.$refs.spinner.$el
+    const spinner = this.$refs.spinner
     tippy(this.$refs.button, {
       content: spinner,
       theme: 'term',
@@ -57,20 +62,20 @@ export default {
           {
             name: 'flip',
             options: {
-              fallbackPlacements: ['top', 'right', 'left']
-            }
+              fallbackPlacements: ['top', 'right', 'left'],
+            },
           },
           {
             name: 'preventOverflow',
             options: {
               altAxis: true,
-              tether: true
-            }
-          }
-        ]
-      }
+              tether: true,
+            },
+          },
+        ],
+      },
     })
-  }
+  },
 }
 </script>
 

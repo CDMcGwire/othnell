@@ -17,12 +17,11 @@
               >
                 Select Section
               </button>
-              <ClientOnly
-                ><vue-tree-navigation
-                  :items="routes"
-                  :defaultOpenLevel="0"
-                  ref="navtree"
-              /></ClientOnly>
+              <div class="col" ref="navtree">
+                <ClientOnly>
+                  <vue-tree-navigation :items="routes" :defaultOpenLevel="0" />
+                </ClientOnly>
+              </div>
             </div>
             <input
               id="section-search"
@@ -337,7 +336,7 @@ export default {
   },
   mounted() {
     tippy(this.$refs.navbutton, {
-      content: this.$refs.navtree.$el,
+      content: this.$refs.navtree,
       arrow: false,
       allowHTML: true,
       interactive: true,

@@ -8,16 +8,12 @@ import '~/assets/main.styl'
 export default function(Vue, { router, head, isClient }) {
   // Set default layout as a global component
   Vue.component('Layout', DefaultLayout)
-  Vue.use(() =>
+  console.log(isClient)
+  if (isClient) {
     import('vue-tree-navigation')
-      .then(m => m.VueTreeNavigation)
-      .catch(r => console.error("Couldn't load vue-tree-navigation: " + r)),
-  )
-  Vue.use(() =>
-    import('epic-spinners')
-      .then(m => m.PixelSpinner)
-      .catch(r => console.error("Couldn't load epic-spinners: " + r)),
-  )
+      .then(esm => Vue.use(esm))
+      .catch(msg => console.error("Failed to load tree nav. " + msg))
+  }
 
   router.addRoutes([
     {
