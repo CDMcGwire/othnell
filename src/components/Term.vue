@@ -1,109 +1,93 @@
 <template>
-  <span class="term">
-    <button class="open" v-on:click="open()" :disabled="isOpen">
-      <slot />
-    </button>
-    <div class="center" v-if="isOpen">
-      <div class="popup">
-        <div class="header">
-          <button class="close" v-on:click="close()">X</button>
-        </div>
-        <div class="content">
-          lorem ipsum ot dolore taco velveeta Trump sonatra in C
-        </div>
-      </div>
-    </div>
-  </span>
+  <button class="term" ref="button">
+    <slot />
+    <pixel-spinner
+      :animation-duration="1500"
+      :size="40"
+      color="black"
+      ref="spinner"
+    />
+  </button>
 </template>
 
 <script>
+import tippy from 'tippy.js'
+import { PixelSpinner } from 'epic-spinners'
+import 'tippy.js/dist/tippy.css'
+
 export default {
-  props: ["target"],
-  data () {
+  components: {
+    PixelSpinner
+  },
+  props: {
+    target: String
+  },
+  data: function() {
     return {
-      isOpen: false
+      loaded: false
     }
   },
   methods: {
-    open: function() {
-      this.isOpen = true;
-    },
-    close: function() {
-      this.isOpen = false;
+    loadContent: async function(tooltip) {
+      if (this.loaded || tooltip === null) return
+      tooltip.setContent(this.$refs.spinner.$el)
+
+      var response = await fetch(`/terms/${this.target}.html`)
+      if (!response.ok) {
+        tooltip.setContent('Failed to load')
+        return
+      }
+
+      var content = await response.text()
+      tooltip.setContent(content)
+      this.loaded = true
     }
+  },
+  mounted: function() {
+    const component = this
+    const spinner = this.$refs.spinner.$el
+    tippy(this.$refs.button, {
+      content: spinner,
+      theme: 'term',
+      allowHTML: true,
+      delay: [400, 200],
+      interactive: true,
+      maxWidth: 400,
+      placement: 'bottom',
+      onShow: instance => component.loadContent(instance),
+      popperOptions: {
+        strategy: 'fixed',
+        modifiers: [
+          {
+            name: 'flip',
+            options: {
+              fallbackPlacements: ['top', 'right', 'left']
+            }
+          },
+          {
+            name: 'preventOverflow',
+            options: {
+              altAxis: true,
+              tether: true
+            }
+          }
+        ]
+      }
+    })
   }
-};
+}
 </script>
 
 <style lang="stylus" scoped>
-.term
-  position relative
-
-.center
-  position absolute
-  top 3ex
-  left 0
-  right 0
-  width 0
-  margin auto
-
-.popup
-  display flex
-  flex-direction column
-  margin auto
-  width 40ch
-  color white
-  background-color green
-  transform translateX(-50%)
-
-.header
-  display flex
-  flex-direction row-reverse
-  background-color hsl(0, 0%, 10%)
-
-.content
-  padding .4ch
-
-.close
-  flex 0 0 1.5ch
-  height 1.5ex
-  line-height 1.5ex
+@import '../assets/colors.styl'
 
 button
-  box-sizing content-box
-  transition all 0.2s
-  margin 0
-  font-weight bold
-
-.open
-  padding 3px 6px
-  border 2px solid blue
-  border-radius 3px
+  color accent-sec
   background-color transparent
+button:hover, button:focus, button:active
+  color accent-sec-dark
+  opacity 1
 
-.open:hover
-  color white
-  background-color blue
-
-.open:active
-  background-color cyan
-  border-color cyan
-
-.open:disabled
-  color grey
-  background-color cyan
-  border-color cyan
-
-.close
-  padding .8ex 1ch
-  border none
-  color white
-  background-color transparent
-
-.close:hover
-  background-color red
-
-.close:active
-  background-color dark-red
-  border-color dark-red
+pixel-spinner
+  display none
 </style>

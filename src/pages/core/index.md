@@ -3,12 +3,64 @@ title: Core Gameplay
 layout: ~/layouts/Default.vue
 ---
 
+import term from "~/components/Term.vue"
+
 # {{ $frontmatter.title }}
 
 The actual gameplay elements that players will engage with. That is, when the
 player or DM wants their character to perform some non-trivial action in-game,
 the DM will choose the appropriate challenge type from the ones below and the
 involved players will do as written there.
+
+### Game Materials
+
+To play Othnell, you'll want two packs of playing cards and at least one set of
+polyhedral dice (a four, six, eight, twelve, and twenty-sided die plus two
+ten-sided), but preferably one set per player.
+
+This site also provides a digital character sheet which players will likely want
+to track their progress and combat stats.
+
+### Reading Dice Roll Shorthand
+
+Some mechanics involve rolling a number of dice of varying number of sides. To
+alleviate the verbosity of having to write out "roll three eight-sided dice" or
+such all over the rules, most RPGs and players have accepted a standard
+shorthand pattern.
+
+> **NdR** where "N" is the number of dice and "R" is the _rank_ or number of
+> sides on each.
+
+So if the rules or the DM say "roll 2d8" that means "roll two eight-sided dice."
+If the rules say "increase die rank by one" then that 2d8 becomes 2d10, since a
+ten-sided die is the next larger die.
+
+### Brief on Attributes
+
+While described in more detail in the [Attributes](/characters/attributes) page
+of the [Characters](/characters) section, for this section you will at least
+need to be aware of the basics.
+
+Every character has five defining characteristics called "Attributes" which are
+each represented by a number from -1 to 3. These numbers have an influence on
+results of the mechanics described below.
+
+The five attributes are: <term target="attr-brawn">Brawn</term>,
+<term target="attr-poise">Poise</term>,
+<term target="attr-memory">Memory</term>, <term target="attr-wit">Wit</term>,
+and <term target="attr-charisma">Charisma</term>.
+
+## Player Actions
+
+For all trivial and mundane actions the player character performs (opening an
+unlocked door, drinking water, etc.) the player simply tells the DM what they
+are doing, then the DM continues the narrative based on what you did.
+
+However, when the desired action is non-trivial or otherwise has significant
+risk (dodging and arrow, jumping a ravine), the DM will require the player to
+engage in one of the following mechanics based on the nature of the action. If
+the player "succeeds" then their character performs the action in the game
+world. If the player "fails", then so does their character.
 
 ## Clash Rolls
 
@@ -17,13 +69,6 @@ with melee weapons or using psychic powers to break someone's mind, both parties
 simultaneously roll a die. The side with a higher roll wins by the difference.
 The size of die each party uses is based on the situational starting conditions
 and then is increased (or lowered) by one "rank" based on their Brawn.
-
-> Reading dice roll shorthand:
->
-> NdR - N = number of dice of that rank; d for dice; R = rank of the dice to
-> roll
->
-> So 2d8 means "roll two 8-sided dice" while d12 means "roll one 12-sided die"
 
 Single Die Roll Ranks - This is the default type of roll
 
@@ -48,12 +93,30 @@ they say they wish to make an action the DM sees fit to challenge, the DM will
 set a value based on an objective difficulty and the player must play a card of
 equal or greater value.
 
-If the player has 1 or more Poise, they may choose to draw up to their Poise in
-additional cards, but they must play the last one drawn. At negative Poise
-values, they player instead is compelled to draw additional cards up to their
-negative value and choose the lowest between those and what's in their hand.
+The lowest possible DC is 3, as anything lower would be automatic with a
+standard set of playing cards. The highest is an Ace.
 
-(Will probably need to tweak the odds on this one)
+If the player has 1 or more Poise, they may choose to discard one card from
+their hand to draw up to their Poise in additional cards, but they must play the
+last one drawn. At negative Poise, the player's hand size is reduced to two.
+
+After the check is complete, the player should draw back to their default hand
+size if below, or discard down to their hand size if above.
+
+> **Example:** The semi-dashing rogue in the party with a poise of 2 wants to
+> open a locked door. If it was a cheap lock on a shed, the DM may determine the
+> difficulty of the action is relatively low and so they say DC is 4. The player
+> of the Rogue has three cards in their hand: a 2, a 4, and a Queen. Since they
+> don't want to waste the Queen and they don't want to fail, the player throws
+> down their 4 and successfully opens the lock. They then draw a new card to
+> replace the old and get a 7.
+>
+> Later the Rogue is in a secured palace and is trying to unlock a safe. The DM
+> determined (hopefully ahead of time) that the safe is a "King" challenge. The
+> player now has a 2, 7, and Queen in their hand, so they won't succeed off the
+> cards in their hand. So the player discards their 2 and uses their additional
+> Poise draws and hopes for the best. Unfortunately they pull a 3 and a Jack, so
+> they still fail.
 
 ## Memory Pull
 
@@ -110,20 +173,28 @@ Charisma mechanics are
   Wit and the nature of the action you are attempting to compel them to. Your
   starting wager is equal to your Charisma bonus.
 
-## Advantage
+## Acting with Advantage
 
-For cases where the exact situation warrants modifiers beyond base stats. Pretty
-much lifted off 5e but applies differently to each 'Core' mechanic.
+Sometimes the specific situation of an action will stack in the player's favor
+or disfavor. Since it would be cumbersome (if not impossible) to figure out and
+determine the precise effect of every little environment condition, this game
+opts to take a simple approach of more binary Advantage/Disadvantage mechanic.
 
-- **Clash Rolls)** Character with advantage goes up one die, other character
-  goes down one. Vice versa for disadvantage. Adv/Dis applies once to all
-  parties or not at all.
-- **Skill Checks)** A character with advantage adds an additional card to their
+If the DM thinks the context of your action would make it significantly easier
+than normal, then they'll give the acting player **Advantage (Adv)**. If the DM
+thinks the situation makes performing the action significantly harder, they'll
+give the player **Disadvantage (Dis)**.
+
+Advantage and Disadvantage then effect the action based on its mechanic in the
+following ways:
+
+- **Clash Rolls)** A player with advantage increases their die rank by two. A
+  player with disadvantage decreases their die rank by two.
+- **Skill Checks)** A player with advantage adds an additional card to their
   hand before playing or drawing. A character with disadvantage removes one card
   from their hand.
-- **Memory Pulls)** Character with advantage may elect to redraw each of their
+- **Memory Pulls)** A player with advantage may elect to redraw each of their
   cards once, discarding the original. A character with disadvantage must match
   rank.
-- **Cognitive Load)** Advantage doubles the value of the character's
-  points/tokens. Disadvantage halves them.
-- **Charisma)** If actor has advantage, target has disadvantage and vice versa.
+- **Cognitive Load)** Advantage halves the cost of the requested information.
+  Disadvantage doubles the cost.

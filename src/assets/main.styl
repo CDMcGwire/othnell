@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&display=swap')
+@import 'colors.styl'
 
 *
   box-sizing border-box
@@ -8,18 +9,27 @@ html, body
   margin 0
   padding 0
   font 14pt "David Libre", serif
-  color white
-  background-color hsl(0, 72%, 24%)
+  color foreground
+  background-color background
 
-select
-  color white
-  background-color hsla(0, 0%, 0%, 0.2)
+select, input
+  transition background-color 0.2s
+  color field-fg
+  background-color field-bg
+select:hover, select:focus, input:hover, input:focus
+  background-color field-focus
 option
   font-size 0.8em
+  background-color button-bg
 
 button
-  color white
-  background-color grey
+  transition background-color 0.2s
+  color button-fg
+  background-color button-bg
+button:hover, button:focus
+  background-color button-hover
+button:active
+  opacity 0.5
 
 button, input, select
   font 1em "David Libre", serif
@@ -35,6 +45,9 @@ a
 
 li
   list-style none
+
+.block
+  display block
 
 .row
   display flex
@@ -68,6 +81,9 @@ li
 .c-end
   align-items flex-end
 
+.txt-left
+  text-align left
+
 .txt-center
   text-align center
 
@@ -83,34 +99,118 @@ li
 .filler
   flex 1 1 100%
 
-.dropdown
-  display flex
-  position relative
-  padding 0.5em
-  background-color grey
+// .dropdown
+//   display flex
+//   position relative
+//   padding 0.5em
+//   background-color grey
 
-  a
-    color white
+//   a
+//     color white
   
-  ul
-    display none
+//   > .TreeNavigation
+//     display none
+//     position absolute
+//     left 0
+//     min-width 100%
+//     max-width auto
+//     margin-top 1.5em
+//     background-color grey
+
+//     li
+//       clear both
+//       a
+//         display block
+//         padding 1ex
+//         color white
+//     li:hover
+//       background-color red
+
+// .dropdown:hover,
+// .dropdown:focus-within
+//   cursor pointer
+//   background-color red
+//   > .TreeNavigation, .TreeNavigation:hover
+//     display block
+
+.tippy-box
+  font-size unset
+  z-index 50
+
+.tippy-box[data-theme~='term']
+  padding 0.8ch
+  border-radius 0
+  color tooltip-fg
+  background-color tooltip-bg
+  font-size 0.9em
+  line-height 1.2
+  filter drop-shadow(0 2px 10px black)
+  .tippy-arrow
+    color tooltip-bg
+  blockquote
+    margin 0
+    padding 0 0 0 1ch
+    border-left 2px solid tooltip-fg
+    font-style italic
+  .tippy-content
+    > *
+      margin-top 1ex
+    > *:first-child
+      margin-top 0
+
+.tippy-box[data-theme~='section-nav']
+  min-width 30ch
+  height calc(100vh - 80px)
+  margin 0
+  padding 0
+  border-radius 0
+  background-color button-bg
+  overflow-y auto
+  a
+    color button-fg
+  .tippy-content
+    display flex
+    flex-direction column
+
+nav.rule-nav
+  .TreeNavigation
+    padding 0 0 4ex 0
+    ul
+      display flex
+      flex-direction column
+      li
+        display flex
+        flex-direction row
+  .NavigationLevel
+    flex 1 1 auto
+  .NavigationLevel__parent
+    position relative
+    display flex
+    flex-direction row
+    align-items center
+  .NavigationToggle
     position absolute
-    left 0
-    margin-top 1.5em
-    background-color grey
-
-    li
-      clear both
-      a
-        display block
-        padding 1ex
-        color white
-    li:hover
-      background-color red
-
-.dropdown:hover,
-.dropdown:focus-within
-  cursor pointer
-  background-color red
-  > ul, ul:hover
-    display block
+    top auto
+    left -2.25ch
+    width 30px
+    padding 0 1ch 0.5ex 1ch
+  .NavigationToggle__icon
+    transition transform 0.2s
+    border-color button-fg
+  .NavigationLevel--level-1
+    font-size 0.9em
+  .NavigationItem
+    transition background-color 0.2s
+    flex 1 1 auto
+    padding 0
+    a
+      transition background-color 0.2s
+      display block
+      width 100%
+      padding 1ex 2ch 1ex 0.5ch
+    a:hover, a:focus
+      color accent-light
+  .NavigationItem--active
+    background-color accent-dark
+  .NavigationLevel--closed ul
+    display none !important

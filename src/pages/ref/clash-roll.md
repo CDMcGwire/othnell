@@ -1,3 +1,0 @@
-**Clash Roll**
-
-Lorem ipsum

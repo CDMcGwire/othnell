@@ -3,28 +3,32 @@
     <div class="banner row c-center">
       <span class="title">Othnell</span>
     </div>
-    <div class="main row m-space-around">
-      <div class="row reader-wrapper m-center">
+    <div class="main row m-center">
+      <div class="row reader-wrapper m-end">
         <div class="reader">
           <nav class="row rule-nav">
-            <div id="section-select-dropdown" class="dropdown">
-              <a href="#" aria-haspopup="true">Select Section v</a>
-              <ul aria-label="submenu">
-                <li><a href="#">Intro</a></li>
-                <li><a href="#">Core Mechanics</a></li>
-                <li><a href="#">Player Characters</a></li>
-                <li><a href="#">Combat</a></li>
-                <li><a href="#">Magic</a></li>
-                <li><a href="#">Items</a></li>
-              </ul>
+            <div class="row section-select-container">
+              <button
+                id="section-select"
+                href="#"
+                class="txt-left"
+                aria-haspopup="true"
+                ref="navbutton"
+              >
+                Select Section
+              </button>
+              <vue-tree-navigation
+                :items="routes"
+                :defaultOpenLevel="0"
+                ref="navtree"
+              />
             </div>
-            <input id="section-search" type="text" placeholder="Search..." />
-            <button id="section-search-bttn">?</button>
+            <input id="section-search" type="text" placeholder="Search... (not yet implemented)" />
           </nav>
           <slot />
         </div>
       </div>
-      <div class="row m-center toolview-wrapper">
+      <div class="row m-start toolview-wrapper">
         <div class="toolview">
           <div class="row">
             <div class="frame">
@@ -37,50 +41,50 @@
               </button>
             </div>
             <div class="col m-end c-start">
-              <div id="char-name">Character Name</div>
-              <div id="char-title">the Character Title</div>
+              <div id="char-name"><input type="text" placeholder="Character Name"/></div>
+              <div id="char-title">the <input type="text" placeholder="Character Title"/></div>
             </div>
           </div>
           <div class="spacer-sheet" />
           <div class="row m-spaced">
             <div class="col char-attr">
-              <div class="char-attr-label">Brawn</div>
-              <div id="char-brawn" class="char-attr-value">2</div>
-              <div class="row">
-                <button class="char-attr-bttn lower">&lt;</button>
-                <button class="char-attr-bttn higher">&gt;</button>
+              <div class="char-attr-label row m-center c-center">Brawn</div>
+              <div id="char-brawn" class="char-attr-value row m-center c-center">2</div>
+              <div class="row grow">
+                <button class="char-attr-bttn lower row m-center c-center">&lt;</button>
+                <button class="char-attr-bttn higher row m-center c-center">&gt;</button>
               </div>
             </div>
             <div class="col char-attr">
-              <div class="char-attr-label">Poise</div>
-              <div id="char-brawn" class="char-attr-value">0</div>
-              <div class="row">
-                <button class="char-attr-bttn lower">&lt;</button>
-                <button class="char-attr-bttn higher">&gt;</button>
+              <div class="char-attr-label row m-center c-center">Poise</div>
+              <div id="char-brawn" class="char-attr-value row m-center c-center">0</div>
+              <div class="row grow">
+                <button class="char-attr-bttn lower row m-center c-center">&lt;</button>
+                <button class="char-attr-bttn higher row m-center c-center">&gt;</button>
               </div>
             </div>
             <div class="col char-attr">
-              <div class="char-attr-label">Memory</div>
-              <div id="char-brawn" class="char-attr-value">-1</div>
-              <div class="row">
-                <button class="char-attr-bttn lower">&lt;</button>
-                <button class="char-attr-bttn higher">&gt;</button>
+              <div class="char-attr-label row m-center c-center">Memory</div>
+              <div id="char-brawn" class="char-attr-value row m-center c-center">-1</div>
+              <div class="row grow">
+                <button class="char-attr-bttn lower row m-center c-center">&lt;</button>
+                <button class="char-attr-bttn higher row m-center c-center">&gt;</button>
               </div>
             </div>
             <div class="col char-attr">
-              <div class="char-attr-label">Wit</div>
-              <div id="char-brawn" class="char-attr-value">3</div>
-              <div class="row">
-                <button class="char-attr-bttn lower">&lt;</button>
-                <button class="char-attr-bttn higher">&gt;</button>
+              <div class="char-attr-label row m-center c-center">Wit</div>
+              <div id="char-brawn" class="char-attr-value row m-center c-center">3</div>
+              <div class="row grow">
+                <button class="char-attr-bttn lower row m-center c-center">&lt;</button>
+                <button class="char-attr-bttn higher row m-center c-center">&gt;</button>
               </div>
             </div>
             <div class="col char-attr">
-              <div class="char-attr-label">Charisma</div>
-              <div id="char-brawn" class="char-attr-value">3</div>
-              <div class="row">
-                <button class="char-attr-bttn lower">&lt;</button>
-                <button class="char-attr-bttn higher">&gt;</button>
+              <div class="char-attr-label row m-center c-center">Charisma</div>
+              <div id="char-brawn" class="char-attr-value row m-center c-center">3</div>
+              <div class="row grow">
+                <button class="char-attr-bttn lower row m-center c-center">&lt;</button>
+                <button class="char-attr-bttn higher row m-center c-center">&gt;</button>
               </div>
             </div>
           </div>
@@ -193,7 +197,119 @@
   </div>
 </template>
 
+<script>
+import tippy from 'tippy.js'
+
+export default {
+  data() {
+    return {
+      routes: [
+        {
+          name: 'Home',
+          path: '/home',
+        },
+        {
+          name: 'Core Rules',
+          path: '/core',
+        },
+        {
+          name: 'Player Characters',
+          path: '/characters',
+          children: [
+            {
+              name: 'Attributes',
+              path: '/attributes',
+            },
+            {
+              name: 'Races',
+              path: '/races',
+            },
+            {
+              name: 'Traits',
+              path: '/traits',
+            },
+          ],
+        },
+        {
+          name: 'Combat',
+          path: '/combat',
+          children: [
+            {
+              name: 'Damage',
+              path: '/damage',
+            },
+          ],
+        },
+        {
+          name: 'Magic',
+          path: '/magic',
+          children: [
+            {
+              name: 'Animare',
+              path: '/animare',
+            },
+            {
+              name: 'Energeia',
+              path: '/energeia',
+            },
+            {
+              name: 'Essense Weaving',
+              path: '/essence-weaving',
+            },
+            {
+              name: 'Hemoturgy',
+              path: '/hemoturgy',
+            },
+            {
+              name: 'THE RULE OF LAW',
+              path: '/rule-of-law',
+            },
+            {
+              name: 'Soul Binding',
+              path: '/soul-binding',
+            },
+            {
+              name: 'Thaumaturgy',
+              path: '/thaumaturgy',
+            },
+            {
+              name: 'Veneration',
+              path: '/veneration',
+            },
+          ],
+        },
+      ],
+    }
+  },
+  mounted() {
+    tippy(this.$refs.navbutton, {
+      content: this.$refs.navtree.$el,
+      arrow: false,
+      allowHTML: true,
+      interactive: true,
+      maxWidth: 600,
+      offset: 0,
+      placement: 'bottom-start',
+      theme: 'section-nav',
+      popperOptions: {
+        padding: 0,
+        modifiers: [
+          {
+            name: 'preventOverflow',
+            options: {
+              mainAxis: false,
+            },
+          },
+        ],
+      },
+    })
+  },
+}
+</script>
+
 <style lang="stylus" scoped>
+@import '../assets/colors.styl'
+
 .banner
   position sticky
   top 0
@@ -203,24 +319,39 @@
   z-index 1000
 
 .title
-  padding 4px
+  padding 4px 2ch
 
 .reader-wrapper
   flex 1 1 800px
 
 .reader
+  position relative
   flex 0 1 800px
-  padding 1ex 5px 20ex 30px
-  background-color hsla(0, 0%, 0%, 0.2)
+  background-color background-dark
+
+  nav
+    position sticky
+    top 40px
+    height 40px
+    font-size 1.1em
+    z-index 100
+
+  .section-select-container
+    flex 0 0 18ch
 
   #section-select
-    flex 0 0 auto
-  
+    flex 1 1 auto
+    height 100%
+    padding 0 2ch
+    color button-fg
+    background-color button-bg
+  #section-select[aria-expanded="true"]
+    background-color accent-dark
+
   #section-search
     flex 1 0 12ch
-
-  #section-search-bttn
-    flex 0 0 4ch
+    padding-left 1ch
+    padding-right 1ch
 
 .toolview-wrapper
   flex 1 0 600px
@@ -230,8 +361,8 @@
   flex 0 0 600px
   flex-direction column
   position sticky
-  top 30px
-  height calc(100vh - 30px)
+  top 40px
+  height calc(100vh - 40px)
   padding 1ex 10px 2ex 5px
   overflow-x hidden
   overflow-y auto
@@ -256,36 +387,51 @@
     img
       width 100%
       height 100%
+      cursor pointer
       object-fit cover
       object-position center
+  
+  button:hover, button:focus
+    img
+      filter brightness(0.5)
+  button:active
+    img
+      filter brightness(1.5)
 
 #char-name
   margin-left 10px
   font-size 2em
+  input
+    color accent-light
+    background-color transparent
 
 #char-title
   margin-left 10px
   padding-bottom 15px
+  input
+    width 40ch
+    color accent-light
+    background-color transparent
 
 .char-attr
   justify-content center
   width 90px
   height 110px
   border-radius 15px
-  background-color hsla(0, 0%, 0%, 0.2)
+  background-color background-dark
+  overflow hidden
 
 .char-attr-label
-  text-align center
+  flex 1 0 2ex
+  margin-top 1ex
 
 .char-attr-value
+  flex 1 0 2ex
   text-align center
   font-size 2.5em
 
 .char-attr-bttn
   flex 1 1 50%
-  height 1ch
-  background-color transparent
-  border none
 
 .trackers
   font-size 1.5em
@@ -300,37 +446,30 @@
   grid-column 2
   width 100%
   height 100%
-  background-color white
+  background-color foreground
 
 .thresh-over-wounds
   grid-column 1 / span 2
   width 100%
-  background-color white
-
   button
     display block
     height 100%
     width 100%
-    border none
-    background-color grey
     font-size 0.8em
 
 .dmg-bttn
+  display flex
+  flex-direction row
+  justify-content center
+  align-items center
   width 1.6ch
-  height 1.6ch
-  border none
-  border-radius 9999px
-  background-color transparent
-  text-align center
-  vertical-align text-top
+  height 100%
 
 .number-entry
   width 2.4ch
   text-align center
   border none
   font-size 1em
-  color white
-  background-color hsla(0, 0%, 0%, 0.2)
 
 .other-trackers
   justify-content space-between
@@ -358,6 +497,9 @@
 query {
   metadata {
     siteName
+  }
+  pages: allPage(filter: {path: {nin: ["/404"]}}) {
+    path
   }
 }
 </static-query>

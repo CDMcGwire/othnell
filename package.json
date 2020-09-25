@@ -4,17 +4,26 @@
   "scripts": {
     "build": "gridsome build",
     "develop": "gridsome develop",
-    "explore": "gridsome explore"
+    "explore": "gridsome explore",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b master -d dist"
   },
   "dependencies": {
     "@gridsome/transformer-remark": "^0.6.1",
     "@gridsome/transformer-yaml": "^0.2.1",
     "@gridsome/vue-remark": "^0.2.2",
+    "@popperjs/core": "^2.4.4",
+    "epic-spinners": "^1.1.0",
+    "gh-pages": "^3.1.0",
     "gray-matter": "^4.0.2",
     "gridsome": "^0.7.0",
     "remark-attr": "^0.11.1",
     "remark-autolink-headings": "^6.0.1",
-    "remark-bracketed-spans": "^3.0.0"
+    "remark-bracketed-spans": "^3.0.0",
+    "tippy.js": "^6.2.6",
+    "vue": "^2.6.12",
+    "vue-template-compiler": "^2.6.12",
+    "vue-tree-navigation": "^4.0.1"
   },
   "devDependencies": {
     "stylus": "^0.54.7",
