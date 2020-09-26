@@ -14,23 +14,23 @@ query {
 </static-query>
 
 <script>
-import MainLayout from "~/layouts/Main.vue";
+import MainLayout from '~/layouts/Main.vue'
 
 export default {
   components: {
-    MainLayout: MainLayout
+    MainLayout: MainLayout,
   },
   metaInfo() {
     return {
       title: this.$static.metadata.siteName,
       meta: [
         {
-          key: "description",
-          name: "description",
+          key: 'description',
+          name: 'description',
           content: this.$static.metadata.siteDescription,
         },
       ],
-    };
+    }
   },
-};
+}
 </script>

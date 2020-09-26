@@ -11,7 +11,9 @@
   padding 40px 2ch 120px 2.5ch
 
 .layout > p, .layout > ul, .layout > blockquote
-  padding-right 15ch
+  padding-right 20%
+  @media screen and (max-width: content-width)
+    padding-right 10%
 
 p, li
   line-height 1.5

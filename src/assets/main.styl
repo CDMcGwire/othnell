@@ -53,9 +53,21 @@ li
   display flex
   flex-direction row
 
+.row-mobile-col
+  display flex
+  flex-direction row
+  @media screen and (max-width: content-width)
+    flex-direction column
+
 .col
   display flex
   flex-direction column
+
+.col-mobile-row
+  display flex
+  flex-direction column
+  @media screen and (max-width: content-width)
+    flex-direction row
 
 .grow
   flex 1 0 auto
@@ -98,40 +110,6 @@ li
 
 .filler
   flex 1 1 100%
-
-// .dropdown
-//   display flex
-//   position relative
-//   padding 0.5em
-//   background-color grey
-
-//   a
-//     color white
-  
-//   > .TreeNavigation
-//     display none
-//     position absolute
-//     left 0
-//     min-width 100%
-//     max-width auto
-//     margin-top 1.5em
-//     background-color grey
-
-//     li
-//       clear both
-//       a
-//         display block
-//         padding 1ex
-//         color white
-//     li:hover
-//       background-color red
-
-// .dropdown:hover,
-// .dropdown:focus-within
-//   cursor pointer
-//   background-color red
-//   > .TreeNavigation, .TreeNavigation:hover
-//     display block
 
 .tippy-box
   font-size unset
