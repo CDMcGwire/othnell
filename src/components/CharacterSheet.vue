@@ -21,20 +21,37 @@
     </div>
     <div class="spacer-sheet" />
     <div class="row-mobile-col m-spaced">
-      <attribute-field name="Brawn" :value="brawn" />
-      <attribute-field name="Poise" :value="poise" />
-      <attribute-field name="Memory" :value="memory" />
-      <attribute-field name="Wit" :value="wit" />
-      <attribute-field name="Charisma" :value="charisma" />
+      <div class="col-mobile-row m-spaced char-attribute">
+        <div>Brawn</div>
+        <number-input class="row" v-model="brawn" :min="-1" :max="3" />
+      </div>
+      <div class="col-mobile-row m-spaced char-attribute">
+        <div>Poise</div>
+        <number-input class="row" v-model="poise" :min="-1" :max="3" />
+      </div>
+      <div class="col-mobile-row m-spaced char-attribute">
+        <div>Memory</div>
+        <number-input class="row" v-model="memory" :min="-1" :max="3" />
+      </div>
+      <div class="col-mobile-row m-spaced char-attribute">
+        <div>Wit</div>
+        <number-input class="row" v-model="wit" :min="-1" :max="3" />
+      </div>
+      <div class="col-mobile-row m-spaced char-attribute">
+        <div>Charisma</div>
+        <number-input class="row" v-model="charisma" :min="-1" :max="3" />
+      </div>
     </div>
     <div class="spacer-sheet" />
     <div class="row trackers m-spaced">
       <div class="dmg-grid">
         <div>Damage</div>
         <div class="row m-center c-center">
-          <button class="dmg-bttn">-</button>
-          <input id="dmg-display" class="number-entry" type="text" value="0" />
-          <button class="dmg-bttn">+</button>
+          <number-input
+            class="row minor-stat"
+            v-model="damage"
+            :min="0"
+          />
         </div>
         <div />
         <div class="dmg-over-thresh" />
@@ -49,20 +66,24 @@
       <div class="col defense">
         <div class="row">
           <div>Armor</div>
-          <input id="armor-entry" class="number-entry" type="text" value="2" />
+          <number-input
+            class="row m-center minor-stat"
+            v-model="armor"
+            :min="-99"
+            :max="99"
+            textOnly
+          />
         </div>
       </div>
       <div class="col other-trackers">
         <div class="row">
           <div>Cognition</div>
-          <button class="dmg-bttn">-</button>
-          <input
-            id="char-cognition"
-            class="number-entry"
-            type="text"
-            value="32"
+          <number-input
+            class="row m-center minor-stat"
+            v-model="cognition"
+            :min="0"
+            :max="cognitionMax"
           />
-          <button class="dmg-bttn">+</button>
         </div>
         <button>Sleep</button>
         <div class="row">
@@ -124,11 +145,11 @@
 </template>
 
 <script>
-import AttributeField from '~/components/AttributeField.vue'
+import NumberInput from '~/components/NumberInput.vue'
 
 export default {
   components: {
-    AttributeField: AttributeField,
+    NumberInput: NumberInput,
   },
   data() {
     return {
@@ -137,6 +158,10 @@ export default {
       memory: 0,
       wit: 0,
       charisma: 0,
+      damage: 1,
+      armor: 2,
+      cognition: 32,
+      cognitionMax: 32,
     }
   },
 }
@@ -259,4 +284,15 @@ export default {
 
 .trait-desc
   margin-top 0.5ex
+</style>
+
+<style lang="stylus">
+.char-attribute
+  font-size 1.6em
+  input
+    width 2ch
+
+.minor-stat
+  input
+    width 3ch
 </style>
