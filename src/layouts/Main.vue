@@ -32,9 +32,28 @@
           <slot />
         </div>
       </div>
-      <div class="row m-start toolview-wrapper">
+      <div
+        :class="[
+          'row',
+          'm-start',
+          'toolview-wrapper',
+          { 'toolview-open': toolviewOpen },
+        ]"
+      >
+        <button
+          class="toolview-bttn toolview-bttn-open"
+          @click="toolviewOpen = true"
+        >
+          Character Sheet
+        </button>
         <div class="toolview">
-          <character-sheet />
+          <button
+            class="toolview-bttn toolview-bttn-close"
+            @click="toolviewOpen = false"
+          >
+            Close
+          </button>
+          <character-sheet class="toolview-content" />
         </div>
       </div>
     </div>
@@ -47,10 +66,11 @@ import CharacterSheet from '~/components/CharacterSheet.vue'
 
 export default {
   components: {
-    CharacterSheet: CharacterSheet
+    CharacterSheet: CharacterSheet,
   },
   data() {
     return {
+      toolviewOpen: false,
       routes: [
         {
           name: 'Home',
@@ -167,7 +187,7 @@ export default {
   z-index 1000
 
 .title
-  padding 4px 2ch
+  padding 4px 15px
 
 .reader-wrapper
   flex 1 1 800px
@@ -211,14 +231,48 @@ export default {
     padding-right 1ch
 
 .toolview-wrapper
+  transition transform 0.5s
   flex 1 0 600px
+  z-index 100
   @media screen and (max-width: content-width)
     flex unset
     position fixed
-    top 80px
+    top 40px
     left 0
     width 100vw
-
+    transform translateX(100vw)
+.toolview-wrapper.toolview-open
+  @media screen and (max-width: content-width)
+    transform translateX(0vw)
+.toolview-bttn-open
+  display none
+  position fixed
+  top 45px
+  left -35px
+  width 35px
+  height 16ch
+  border-top 2px solid accent-pri
+  border-left 2px solid accent-pri
+  border-bottom 2px solid accent-pri
+  border-radius 10px 0 0 10px
+  writing-mode vertical-rl
+  @media screen and (max-width: content-width)
+    display block
+.toolview-bttn-close
+  display none
+  position fixed
+  top 0
+  left 0
+  width 7ch
+  height 48px
+  padding 0.3ex 15px
+  border-right 2px solid accent-pri
+  border-bottom 2px solid accent-pri
+  border-radius 0 0 20px 0
+  font-size 1.2em
+  text-align left
+  @media screen and (max-width: content-width)
+    display block
 .toolview
   display flex
   flex 0 0 600px
@@ -226,13 +280,15 @@ export default {
   position sticky
   top 40px
   height calc(100vh - 40px)
-  padding 1ex 10px 2ex 5px
   overflow-x hidden
   overflow-y auto
   background-color background
   @media screen and (max-width: content-width)
     flex unset
     width 100%
+.toolview-content
+  @media screen and (max-width: content-width)
+    padding 15px
 </style>
 
 <static-query>

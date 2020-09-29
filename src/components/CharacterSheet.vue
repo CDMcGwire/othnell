@@ -1,6 +1,6 @@
 <template>
   <div class="col container">
-    <div class="row">
+    <div class="row-mobile-col">
       <div class="frame">
         <button id="portrait-upload">
           <img
@@ -10,36 +10,36 @@
           />
         </button>
       </div>
-      <div class="col m-end c-start">
+      <div class="col title-row">
         <div id="char-name">
           <input type="text" placeholder="Character Name" />
         </div>
-        <div id="char-title">
-          the <input type="text" placeholder="Character Title" />
+        <div id="char-title" class="row-mobile-col">
+          <div class="title-prefix">the</div><input type="text" placeholder="Character Title" />
         </div>
       </div>
     </div>
     <div class="spacer-sheet" />
     <div class="row-mobile-col m-spaced">
       <div class="col-mobile-row m-spaced char-attribute">
-        <div>Brawn</div>
-        <number-input class="row" v-model="brawn" :min="-1" :max="3" />
+        <div class="attribute-label">Brawn</div>
+        <number-input class="char-attr-grid" v-model="brawn" :min="-1" :max="3" />
       </div>
       <div class="col-mobile-row m-spaced char-attribute">
-        <div>Poise</div>
-        <number-input class="row" v-model="poise" :min="-1" :max="3" />
+        <div class="attribute-label">Poise</div>
+        <number-input class="char-attr-grid" v-model="poise" :min="-1" :max="3" />
       </div>
       <div class="col-mobile-row m-spaced char-attribute">
-        <div>Memory</div>
-        <number-input class="row" v-model="memory" :min="-1" :max="3" />
+        <div class="attribute-label">Memory</div>
+        <number-input class="char-attr-grid" v-model="memory" :min="-1" :max="3" />
       </div>
       <div class="col-mobile-row m-spaced char-attribute">
-        <div>Wit</div>
-        <number-input class="row" v-model="wit" :min="-1" :max="3" />
+        <div class="attribute-label">Wit</div>
+        <number-input class="char-attr-grid" v-model="wit" :min="-1" :max="3" />
       </div>
       <div class="col-mobile-row m-spaced char-attribute">
-        <div>Charisma</div>
-        <number-input class="row" v-model="charisma" :min="-1" :max="3" />
+        <div class="attribute-label">Charisma</div>
+        <number-input class="char-attr-grid" v-model="charisma" :min="-1" :max="3" />
       </div>
     </div>
     <div class="spacer-sheet" />
@@ -64,11 +64,21 @@
         <div class="txt-center">0</div>
       </div>
       <div class="col defense">
-        <div class="row">
+        <div class="row m-spaced">
           <div>Armor</div>
           <number-input
             class="row m-center minor-stat"
             v-model="armor"
+            :min="-99"
+            :max="99"
+            textOnly
+          />
+        </div>
+        <div class="row m-spaced">
+          <div>Speed</div>
+          <number-input
+            class="row m-center minor-stat"
+            v-model="speed"
             :min="-99"
             :max="99"
             textOnly
@@ -160,6 +170,7 @@ export default {
       charisma: 0,
       damage: 1,
       armor: 2,
+      speed: 5,
       cognition: 32,
       cognitionMax: 32,
     }
@@ -182,21 +193,26 @@ export default {
   width 100px
   height 100px
   background center / contain no-repeat url('https://previews.123rf.com/images/markusgann/markusgann0904/markusgann090400005/4595771-an-illustration-of-a-square-wooden-frame.jpg')
-
+  @media screen and (max-width: content-width)
+    align-self center
+    width 180px
+    height 180px
   button
     width 80px
     height 80px
     margin 10px
     border none
     background-color black
-
+    @media screen and (max-width: content-width)
+      margin 25px
+      width 130px
+      height 130px
     img
       width 100%
       height 100%
       cursor pointer
       object-fit cover
       object-position center
-
   button:hover, button:focus
     img
       filter brightness(0.5)
@@ -204,20 +220,52 @@ export default {
     img
       filter brightness(1.5)
 
+.title-row
+  justify-content end
+  align-items center
+  @media screen and (max-width: content-width)
+    justify-content start
+    align-items center
+    max-width 100%
+    overflow hidden
+
 #char-name
   margin-left 10px
   font-size 2em
+  overflow hidden
+  @media screen and (max-width: content-width)
+    margin-top 1ex
+    margin-left 0
+    width 100%
+    font-size 1.7em
   input
     color accent-light
     background-color transparent
+    @media screen and (max-width: content-width)
+      width 100%
+      text-align center
 
 #char-title
   margin-left 10px
   padding-bottom 15px
+  @media screen and (max-width: content-width)
+    align-items center
+    margin-left 0
+    padding-bottom 0
+    width 100%
+  .title-prefix
+    margin-right 0.5ch
+    @media screen and (max-width: content-width)
+      margin-top 0.4ex
   input
     width 40ch
     color accent-light
     background-color transparent
+    @media screen and (max-width: content-width)
+      margin-top 0.4ex
+      width 100%
+      text-align center
+      font-size 1.2em
 
 .trackers
   font-size 1.5em
@@ -287,10 +335,59 @@ export default {
 </style>
 
 <style lang="stylus">
+@import '../assets/colors.styl'
+
+.char-attr-grid
+  display grid
+  grid-template-columns 1fr 1fr
+  grid-template-rows 2fr 1fr
+  grid-template-areas "input input" "down up"
+  @media screen and (max-width: content-width)
+    grid-template-columns 1fr 1.2fr 1fr
+    grid-template-rows 1fr
+    grid-template-areas "down input up"
+  .number-input-field
+    grid-area input
+  .number-input-down
+    grid-area down
+  .number-input-up
+    grid-area up
+
 .char-attribute
-  font-size 1.6em
-  input
-    width 2ch
+  max-width 9ch
+  background-color field-bg
+  border-radius 20px
+  font-size 1.2em
+  text-align center
+  overflow hidden
+  @media screen and (max-width: content-width)
+    max-width unset
+    border-radius 25px
+    font-size 1.4em
+  .attribute-label
+    padding .4ex 0 0 0
+    @media screen and (max-width: content-width)
+      padding 1ex 1ch
+  .number-input-field
+    min-width 2ch
+    width 100%
+    font-size 1.8em
+    order 0
+    @media screen and (max-width: content-width)
+      width 3ch
+      font-size 1.4em
+  .number-input-bttn
+    order 1
+    border-radius 0
+  @media screen and (max-width: content-width)
+    .number-input-down
+      border-radius 25px 0 0 25px
+    .number-input-up
+      border-radius 0 25px 25px 0
+
+@media screen and (max-width: content-width)
+  .char-attribute + .char-attribute
+    margin-top 5px
 
 .minor-stat
   input
