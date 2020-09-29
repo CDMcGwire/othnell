@@ -191,7 +191,7 @@ export default {
 
 .reader-wrapper
   flex 1 1 800px
-  @media screen and (max-width: content-width)
+  @media screen and (max-width: desktop-min-width)
     flex 1 1 100%
 
 .reader
@@ -199,7 +199,7 @@ export default {
   flex 0 1 800px
   min-width 300px
   background-color background-dark
-  @media screen and (max-width: content-width)
+  @media screen and (max-width: desktop-min-width)
     flex 1 1 100%
 
   nav
@@ -208,7 +208,7 @@ export default {
     height 40px
     font-size 1.1em
     z-index 100
-    @media screen and (max-width: content-width)
+    @media screen and (max-width: desktop-min-width)
       font-size 0.9em
 
   .section-select-container
@@ -220,7 +220,7 @@ export default {
     padding 0 2ch
     color button-fg
     background-color button-bg
-    @media screen and (max-width: content-width)
+    @media screen and (max-width: desktop-min-width)
       padding 0 1.5ch
   #section-select[aria-expanded="true"]
     background-color accent-dark
@@ -231,10 +231,10 @@ export default {
     padding-right 1ch
 
 .toolview-wrapper
-  transition transform 0.5s
-  flex 1 0 600px
+  flex 1 1 600px
   z-index 100
-  @media screen and (max-width: content-width)
+  @media screen and (max-width: tablet-min-width)
+    transition transform 0.5s
     flex unset
     position fixed
     top 40px
@@ -242,7 +242,7 @@ export default {
     width 100vw
     transform translateX(100vw)
 .toolview-wrapper.toolview-open
-  @media screen and (max-width: content-width)
+  @media screen and (max-width: tablet-min-width)
     transform translateX(0vw)
 .toolview-bttn-open
   display none
@@ -256,7 +256,7 @@ export default {
   border-bottom 2px solid accent-pri
   border-radius 10px 0 0 10px
   writing-mode vertical-rl
-  @media screen and (max-width: content-width)
+  @media screen and (max-width: tablet-min-width)
     display block
 .toolview-bttn-close
   display none
@@ -271,11 +271,11 @@ export default {
   border-radius 0 0 20px 0
   font-size 1.2em
   text-align left
-  @media screen and (max-width: content-width)
+  @media screen and (max-width: tablet-min-width)
     display block
 .toolview
   display flex
-  flex 0 0 600px
+  flex 0 1 600px
   flex-direction column
   position sticky
   top 40px
@@ -283,11 +283,10 @@ export default {
   overflow-x hidden
   overflow-y auto
   background-color background
-  @media screen and (max-width: content-width)
+  @media screen and (max-width: desktop-min-width)
     flex unset
     width 100%
 .toolview-content
-  @media screen and (max-width: content-width)
     padding 15px
 </style>
 

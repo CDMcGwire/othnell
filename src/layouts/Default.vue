@@ -12,7 +12,7 @@
 
 .layout > p, .layout > ul, .layout > blockquote
   padding-right 20%
-  @media screen and (max-width: content-width)
+  @media screen and (max-width: desktop-min-width)
     padding-right 10%
 
 p, li
