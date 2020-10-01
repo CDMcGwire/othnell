@@ -22,6 +22,7 @@
     "remark-bracketed-spans": "^3.0.0",
     "tippy.js": "^6.2.6",
     "vue": "^2.6.12",
+    "vue-select": "^3.10.8",
     "vue-server-renderer": "2.6.12",
     "vue-template-compiler": "^2.6.12",
     "vue-tree-navigation": "^4.0.1",

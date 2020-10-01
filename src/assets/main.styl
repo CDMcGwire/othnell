@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&display=swap')
-@import 'colors.styl'
+@require 'colors.styl'
 
 *
   box-sizing border-box
@@ -12,7 +12,7 @@ html, body
   color foreground
   background-color background
 
-select, input
+select, input, .v-select
   transition background-color 0.2s
   color field-fg
   background-color field-bg
@@ -21,6 +21,8 @@ select:hover, select:focus, input:hover, input:focus
 option
   font-size 0.8em
   background-color button-bg
+optgroup::before
+  background-color buggon-bg-dark
 
 button
   transition background-color 0.2s
@@ -34,6 +36,15 @@ button:active
 button, input, select
   font 1em "David Libre", serif
   border none
+.basic-input
+  border-radius 15px
+  overflow hidden
+.basic-input-left
+  border-radius 15px 0 0 15px
+  overflow hidden
+.basic-input-right
+  border-radius 0 15px 15px 0
+  overflow hidden
 
 h1, h2, h3, h4, h5, h6, p, ul, li, a, button, input, select, option
   margin 0

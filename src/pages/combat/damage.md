@@ -75,7 +75,7 @@ make sense for the scenario.
 
 **Minor Effects**
 
-- **Minor Damage Over Time)** Take 1 damage at the start of every turn in
+- **Minor Damage Over Time)** Take 1 damage at the end of your turn in
   combat, stacking.
 - **Slowed)** Can only walk or run at half speed.
 - **Weakend)** -1 Brawn, stacking.

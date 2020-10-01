@@ -176,7 +176,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '../assets/colors.styl'
+@require '../assets/colors.styl'
 
 .banner
   position sticky
@@ -287,7 +287,7 @@ export default {
     flex unset
     width 100%
 .toolview-content
-    padding 15px
+  padding 15px 15px 80px 15px
 </style>
 
 <static-query>

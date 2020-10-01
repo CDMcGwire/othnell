@@ -5,7 +5,7 @@
 </template>
 
 <style lang="stylus" scoped>
-@import '../assets/colors.styl'
+@require '../assets/colors.styl'
 
 .layout
   padding 40px 2ch 120px 2.5ch

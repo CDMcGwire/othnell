@@ -80,7 +80,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '../assets/colors.styl'
+@require '../assets/colors.styl'
 
 button
   color accent-sec

@@ -15,7 +15,8 @@
           <input type="text" placeholder="Character Name" />
         </div>
         <div id="char-title" class="row-mobile-col">
-          <div class="title-prefix">the</div><input type="text" placeholder="Character Title" />
+          <div class="title-prefix">the</div>
+          <input type="text" placeholder="Character Title" />
         </div>
       </div>
     </div>
@@ -23,15 +24,30 @@
     <div class="row-mobile-col m-spaced">
       <div class="col-mobile-row m-spaced char-attribute">
         <div class="attribute-label">Brawn</div>
-        <number-input class="char-attr-grid" v-model="brawn" :min="-1" :max="3" />
+        <number-input
+          class="char-attr-grid"
+          v-model="brawn"
+          :min="-1"
+          :max="3"
+        />
       </div>
       <div class="col-mobile-row m-spaced char-attribute">
         <div class="attribute-label">Poise</div>
-        <number-input class="char-attr-grid" v-model="poise" :min="-1" :max="3" />
+        <number-input
+          class="char-attr-grid"
+          v-model="poise"
+          :min="-1"
+          :max="3"
+        />
       </div>
       <div class="col-mobile-row m-spaced char-attribute">
         <div class="attribute-label">Memory</div>
-        <number-input class="char-attr-grid" v-model="memory" :min="-1" :max="3" />
+        <number-input
+          class="char-attr-grid"
+          v-model="memory"
+          :min="-1"
+          :max="3"
+        />
       </div>
       <div class="col-mobile-row m-spaced char-attribute">
         <div class="attribute-label">Wit</div>
@@ -39,35 +55,36 @@
       </div>
       <div class="col-mobile-row m-spaced char-attribute">
         <div class="attribute-label">Charisma</div>
-        <number-input class="char-attr-grid" v-model="charisma" :min="-1" :max="3" />
+        <number-input
+          class="char-attr-grid"
+          v-model="charisma"
+          :min="-1"
+          :max="3"
+        />
       </div>
     </div>
     <div class="spacer-sheet" />
-    <div class="row trackers m-spaced">
+    <div class="trackers">
       <div class="dmg-grid">
         <div>Damage</div>
         <div class="row m-center c-center">
-          <number-input
-            class="row minor-stat"
-            v-model="damage"
-            :min="0"
-          />
+          <number-input class="row minor-stat" v-model="damage" :min="0" />
         </div>
         <div />
         <div class="dmg-over-thresh" />
         <div>Threshold</div>
         <div class="txt-center">8</div>
         <div class="thresh-over-wounds">
-          <button>Resolve</button>
+          <button class="basic-input">Resolve</button>
         </div>
         <div>Wounds</div>
         <div class="txt-center">0</div>
       </div>
-      <div class="col defense">
+      <div class="col defense other-trackers">
         <div class="row m-spaced">
           <div>Armor</div>
           <number-input
-            class="row m-center minor-stat"
+            class="row m-center minor-stat basic-input"
             v-model="armor"
             :min="-99"
             :max="99"
@@ -77,7 +94,7 @@
         <div class="row m-spaced">
           <div>Speed</div>
           <number-input
-            class="row m-center minor-stat"
+            class="row m-center minor-stat basic-input"
             v-model="speed"
             :min="-99"
             :max="99"
@@ -86,7 +103,7 @@
         </div>
       </div>
       <div class="col other-trackers">
-        <div class="row">
+        <div class="row m-spaced">
           <div>Cognition</div>
           <number-input
             class="row m-center minor-stat"
@@ -95,71 +112,105 @@
             :max="cognitionMax"
           />
         </div>
-        <button>Sleep</button>
+        <button class="basic-input">Sleep</button>
         <div class="row">
-          <select name="Food Die" id="food-die">
-            <option value="-4">-d4</option>
-            <option value="2">d2</option>
-            <option value="4" selected>d4</option>
-            <option value="6">d6</option>
-            <option value="8">d8</option>
-            <option value="10">d10</option>
-            <option value="12">d12</option>
+          <select id="meal-type" name="Food Die" class="basic-input-left">
+            <option value="-4">Questionable Item</option>
+            <option value="2">Snack</option>
+            <option value="4" selected>Decent Meal</option>
+            <option value="8">Good Meal</option>
+            <option value="12">Hearty Meal</option>
           </select>
-          <button class="grow">Eat</button>
+          <button id="eat-button" class="grow basic-input-right">Eat</button>
         </div>
       </div>
     </div>
     <div class="spacer-sheet" />
     <div class="col">
-      <h1>Injuries</h1>
-      <div class="col">
-        <div class="row">
-          <div class="injury-label">Burning</div>
-          <div class="injury-type">DoT</div>
-          <div class="injury-effect">d2 Damage per turn</div>
+      <div class="row">
+        <h1 class="row c-center">Injuries</h1>
+        <div>
+          <select name="injury-type" id="injury-type">
+            <optgroup label="Minor">
+              <option value="minorDot">Minor DoT</option>
+              <option value="slowed">Slowed</option>
+              <option value="weakened">Weakened</option>
+              <option value="staggered">Staggered</option>
+              <option value="distracted">Distracted</option>
+              <option value="dulled">Dulled</option>
+            </optgroup>
+            <optgroup label="Severe">
+              <option value="severeDot">Severe DoT</option>
+              <option value="immobile">Immobile</option>
+              <option value="drained">Drained</option>
+              <option value="unstable">Unstable</option>
+              <option value="amnesia">Amnesia</option>
+              <option value="dazed">Dazed</option>
+            </optgroup>
+          </select>
         </div>
-        <div class="row">
-          <div class="injury-label">Broken Arm</div>
-          <div class="injury-type">Arm Injury</div>
-          <div class="injury-effect">Clash roll -1 die rank</div>
-        </div>
-        <div class="row">
-          <div class="injury-label">Hobbled</div>
-          <div class="injury-type">Leg Injury</div>
-          <div class="injury-effect">Half movement speed</div>
+      </div>
+      <div class="col injury-list">
+        <div class="row injury-list-entry" v-if="injuries.minorDot > 0">
+          <div class="injury-type">Minor DoT</div>
+          <div class="injury-label">Burn</div>
+          <button class="injury-remove" @click="injuries.minorDot--">-</button>
         </div>
       </div>
     </div>
     <div class="spacer-sheet" />
-    <div class="col">
-      <h1>Traits</h1>
-      <div class="col">
-        <div class="col">
-          <h2 class="trait-name">Inspiring</h2>
-          <div class="trait-desc">
-            fdlafdsaf fdsafd safdsa fdsafdsafdsafds afdsa fdsa fds afsd afsd f
-            dsafdsafdsafdsa fdasfd safdsa fdsafdsafdsafdsaf
-          </div>
-        </div>
-        <div class="col">
-          <h2 class="trait-name">Clever</h2>
-          <div class="trait-desc">
-            fdlafdsaf fdsafd safdsa fdsafdsafdsafds afdsa fdsa fds afsd afsd f
-            dsafdsafdsafdsa fdasfd safdsa fdsafdsafdsafdsaf
-          </div>
-        </div>
+    <div class="col reference-list">
+      <h1 class="reference-list-section-title">
+        <g-link to="/characters/skills" @click="close">Proficiencies</g-link>
+      </h1>
+      <div class="empty-reference-list" v-if="proficiencies.length < 1">
+        None... Go to the Proficiencies page of the rules to add some.
       </div>
+      <reference-list
+        class="col"
+        :entries="proficiencies"
+        @remove="removeProficiency"
+      />
+    </div>
+    <div class="spacer-sheet" />
+    <div class="col reference-list">
+      <h1 class="reference-list-section-title">
+        <g-link to="/characters/traits" @click="close">Traits</g-link>
+      </h1>
+      <h2 class="reference-list-section-title">
+        <g-link to="/characters/traits/mundane" @click="close">Mundane</g-link>
+      </h2>
+      <div class="empty-reference-list" v-if="mundaneTraits.length < 1">
+        None... Go to the Mundane Traits page of the rules to add some.
+      </div>
+      <reference-list
+        class="col"
+        :entries="mundaneTraits"
+        @remove="removeMundaneTrait"
+      />
+      <h2 class="reference-list-section-title">
+        <g-link to="/characters/traits/heroic" @click="close">Heroic</g-link>
+      </h2>
+      <div class="empty-reference-list" v-if="heroicTraits.length < 1">
+        None... Go to the Heroic Traits page of the rules to add some.
+      </div>
+      <reference-list
+        class="col"
+        :entries="heroicTraits"
+        @remove="removeHeroicTrait"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import NumberInput from '~/components/NumberInput.vue'
+import ReferenceList from '~/components/ReferenceList.vue'
 
 export default {
   components: {
     NumberInput: NumberInput,
+    ReferenceList: ReferenceList,
   },
   data() {
     return {
@@ -173,16 +224,61 @@ export default {
       speed: 5,
       cognition: 32,
       cognitionMax: 32,
+      injuries: {
+        minorDot: 1,
+      },
+      proficiencies: [
+        {
+          name: 'Thaumaturgy',
+          desc:
+            'Allows the use of Thaumaturgy magic and can make skill checks on related tasks without penalty.',
+        },
+      ],
+      mundaneTraits: [
+        {
+          name: 'Inspiring',
+          desc: 'Your Charisma actions get additional team based effects.',
+        },
+      ],
+      heroicTraits: [
+        {
+          name: 'Iron Stomach',
+          desc:
+            "You don't care about <em>what</em> the food is. All that matters is if there's enough to fill you up.",
+        },
+      ],
     }
+  },
+  methods: {
+    close() {
+      this.$emit('close')
+    },
+    removeInjury(target) {
+      this.injuries = this.injuries.filter(
+        entry => entry.label !== target.label,
+      )
+    },
+    removeProficiency(target) {
+      this.proficiencies = this.proficiencies.filter(
+        entry => entry.name !== target.name,
+      )
+    },
+    removeMundaneTrait(target) {
+      this.mundaneTraits = this.mundaneTraits.filter(
+        entry => entry.name !== target.name,
+      )
+    },
+    removeHeroicTrait(target) {
+      this.heroicTraits = this.heroicTraits.filter(
+        entry => entry.name !== target.name,
+      )
+    },
   },
 }
 </script>
 
 <style lang="stylus" scoped>
-@import '../assets/colors.styl'
-
-.container
-  padding-bottom 80px
+@require '../assets/colors.styl'
 
 .spacer-sheet
   flex 0 0 2px
@@ -268,14 +364,21 @@ export default {
       font-size 1.2em
 
 .trackers
+  display grid
+  grid-template-columns 1fr 1fr
+  grid-gap 5px
   font-size 1.5em
   @media screen and (max-width: desktop-min-width)
-    display grid
-    grid-template-columns 1fr 1fr
-    grid-gap 20px
-    font-size 1.2em
-    > div
-      background-color background-dark
+    grid-template-columns 1fr
+  > div
+    padding 5px
+    background-color background-dark
+    border-radius 10px
+.other-trackers
+  display grid
+  grid-template-columns 1fr
+  grid-auto-rows min-content
+  grid-gap 5px
 
 .dmg-grid
   display grid
@@ -298,44 +401,76 @@ export default {
     width 100%
     font-size 0.8em
 
-.dmg-bttn
-  display flex
-  flex-direction row
-  justify-content center
-  align-items center
-  width 1.6ch
-  height 100%
-
 .number-entry
   width 2.4ch
   text-align center
   border none
   font-size 1em
 
-.other-trackers
-  justify-content space-between
-
 #armor-entry
   margin 0 1ch
+#meal-type
+  flex 1 1 auto
+  padding-left 5px
+  font-size 0.8em
+#eat-button
+  flex 0 0 5ch
 
-.injury-label
-  flex 1 1 30%
+.injury-add-bttn
+  display flex
+  justify-content center
+  align-items center
+  width 1.5ch
+  height 1.5ch
+  margin-left 10px
+  border-radius 9999px
+  text-align center
+.injury-list
+  display grid
+  grid-template-columns 1fr 1fr
+  grid-auto-rows min-content
+  grid-gap 5px
+  @media screen and (max-width: desktop-min-width)
+    grid-template-columns 1fr
+.injury-list-entry
+  display grid
+  grid-template-columns 1fr 1fr 3ch
+  grid-gap 10px
+  background-color background-dark
+  border-radius 5px
+  font-size 0.9em
+  overflow hidden
+  > *:nth-child(1)
+    color accent-light
+.injury-label, .injury-type
+  padding 4px
 
-.injury-type
-  flex 1 1 20%
-
-.injury-effect
-  flex 1 1 50%
-
-.trait-name
-  margin-top 1ex
-
-.trait-desc
-  margin-top 0.5ex
+.reference-list
+  > h1 + h2
+    margin-top .4ex
+  > div + .reference-list-section-title
+    margin-top 2ex
+.reference-list-section-title
+  display flex
+  flex-direction row
+  align-items center
+  a
+    color unset
+  a:hover, a:focus
+    color accent-dark
+  a::after
+    content "❱"
+    margin-left 0.5ch
+    color accent-link
+  a:hover::after, a:focus::after
+    color accent-link-dark
+.empty-reference-list
+  color foreground-faint
+  font-style italic
 </style>
 
 <style lang="stylus">
-@import '../assets/colors.styl'
+@require '../assets/colors.styl'
 
 .char-attr-grid
   display grid
@@ -392,4 +527,12 @@ export default {
 .minor-stat
   input
     width 3ch
+
+.reference-list
+  .reference-entry-name
+    margin-top 1ex
+    color accent-light
+  .reference-entry-desc
+    margin-top .5ex
+
 </style>
