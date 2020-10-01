@@ -26,19 +26,21 @@
         ]"
       />
     </div>
-    <div :class="['bs-dropdown', { 'bs-dropdown-open': open }]">
-      <div v-for="option in flatOptions" :key="option.label">
-        <div
-          v-if="option.index !== undefined"
-          @mousedown="setTarget(option.index)"
-          @click="select(option)"
-          :class="['bs-option', { 'bs-option-sub': option.grouped }]"
-          role="option"
-          ref="optionElms"
-        >
-          {{ option.label }}
+    <div :class="['bs-dropdown', { 'bs-dropdown-open': open }]" @click.self="open = false">
+      <div>
+        <div v-for="option in flatOptions" :key="option.label">
+          <div
+            v-if="option.index !== undefined"
+            @mousedown="setTarget(option.index)"
+            @click="select(option)"
+            :class="['bs-option', { 'bs-option-sub': option.grouped }]"
+            role="option"
+            ref="optionElms"
+          >
+            {{ option.label }}
+          </div>
+          <div v-else class="bs-option-group">{{ option.label }}</div>
         </div>
-        <div v-else class="bs-option-group">{{ option.label }}</div>
       </div>
     </div>
   </div>
@@ -187,21 +189,47 @@ export default {
   transform rotate(0.5turn)
 .bs-dropdown
   display none
+  flex-direction column
   position absolute
   top 100%
   min-width 100%
   color white
   background-color hsl(0, 0, 15%)
+  > div
+    width
+  @media screen and (max-width: 760px)
+    position fixed
+    justify-content center
+    align-items center
+    top 0
+    left 0
+    width 100vw
+    height 100vh
+    background-color hsla(0, 0, 0, 0.4)
+    z-index 1000
+    > div
+      width 80%
+      max-height min(60%, 450px)
+      background-color hsl(0, 0, 15%)
+      overflow-y scroll
+      scrollbar-width thin
+
 .bs-dropdown.bs-dropdown-open
-  display block
+  display flex
 .bs-option
   user-select none
   cursor pointer
+  @media screen and (max-width: 760px)
+    padding 1ex
 .bs-option.target
   background-color hsl(0, 0, 25%)
 .bs-option-group
+  color hsl(0, 0, 60%)
   background-color hsl(0, 0, 10%)
   user-select none
+  font-size 0.8em
+  @media screen and (max-width: 760px)
+    padding 0.8ex
 .bs-option-sub
   padding-left 2ch
 </style>
