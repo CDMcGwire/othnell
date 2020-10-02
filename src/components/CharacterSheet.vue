@@ -114,40 +114,18 @@
         </div>
         <button class="basic-input">Sleep</button>
         <div class="row">
-          <select id="meal-type" name="Food Die" class="basic-input-left">
-            <option value="-4">Questionable Item</option>
-            <option value="2">Snack</option>
-            <option value="4" selected>Decent Meal</option>
-            <option value="8">Good Meal</option>
-            <option value="12">Hearty Meal</option>
-          </select>
+          <bs id="meal-type" class="food-type-select" :options="foodTypes" />
           <button id="eat-button" class="grow basic-input-right">Eat</button>
         </div>
       </div>
     </div>
     <div class="spacer-sheet" />
     <div class="col">
-      <div class="row">
+      <div class="row m-spaced c-center">
         <h1 class="row c-center">Injuries</h1>
-        <div>
-          <select name="injury-type" id="injury-type">
-            <optgroup label="Minor">
-              <option value="minorDot">Minor DoT</option>
-              <option value="slowed">Slowed</option>
-              <option value="weakened">Weakened</option>
-              <option value="staggered">Staggered</option>
-              <option value="distracted">Distracted</option>
-              <option value="dulled">Dulled</option>
-            </optgroup>
-            <optgroup label="Severe">
-              <option value="severeDot">Severe DoT</option>
-              <option value="immobile">Immobile</option>
-              <option value="drained">Drained</option>
-              <option value="unstable">Unstable</option>
-              <option value="amnesia">Amnesia</option>
-              <option value="dazed">Dazed</option>
-            </optgroup>
-          </select>
+        <div class="row injury-controls">
+          <bs class="injury-type-select" :options="injuryTypes" />
+          <button class="injury-add-bttn basic-input-right">+</button>
         </div>
       </div>
       <div class="col injury-list">
@@ -224,9 +202,91 @@ export default {
       speed: 5,
       cognition: 32,
       cognitionMax: 32,
+      foodTypes: [
+        {
+          label: 'Questionable',
+          value: '-4,2',
+        },
+        {
+          label: 'Snack',
+          value: '2',
+        },
+        {
+          label: 'Decent Meal',
+          value: '4',
+        },
+        {
+          label: 'Good Meal',
+          value: '8',
+        },
+        {
+          label: 'Hearty Meal',
+          value: '12',
+        },
+      ],
       injuries: {
         minorDot: 1,
       },
+      injuryTypes: [
+        {
+          label: 'Minor Injuries',
+          options: [
+            {
+              label: 'Minor DoT',
+              value: 'minorDot',
+            },
+            {
+              label: 'Slowed',
+              value: 'slowed',
+            },
+            {
+              label: 'Weakened',
+              value: 'weakened',
+            },
+            {
+              label: 'Staggered',
+              value: 'staggered',
+            },
+            {
+              label: 'Distracted',
+              value: 'distracted',
+            },
+            {
+              label: 'Dulled Senses',
+              value: 'dulled',
+            },
+          ],
+        },
+        {
+          label: 'Severe Injuries',
+          options: [
+            {
+              label: 'Severe DoT',
+              value: 'severeDot',
+            },
+            {
+              label: 'Immobile',
+              value: 'immobile',
+            },
+            {
+              label: 'Drained',
+              value: 'drained',
+            },
+            {
+              label: 'Unstable',
+              value: 'unstable',
+            },
+            {
+              label: 'Amnesia',
+              value: 'amnesia',
+            },
+            {
+              label: 'Dazed',
+              value: 'Dazed',
+            },
+          ],
+        },
+      ],
       proficiencies: [
         {
           name: 'Thaumaturgy',
@@ -411,20 +471,18 @@ export default {
   margin 0 1ch
 #meal-type
   flex 1 1 auto
-  padding-left 5px
   font-size 0.8em
 #eat-button
   flex 0 0 5ch
 
 .injury-add-bttn
   display flex
+  flex 0 0 2.5ch
   justify-content center
   align-items center
-  width 1.5ch
-  height 1.5ch
-  margin-left 10px
-  border-radius 9999px
   text-align center
+  font-size 1.5em
+  font-weight 700
 .injury-list
   display grid
   grid-template-columns 1fr 1fr
@@ -528,11 +586,30 @@ export default {
   input
     width 3ch
 
+.bs-selectbox
+  padding 0.6ex 0.5ch 0.6ex 1ch
+.bs-option, .bs-option-group
+  padding 4px
+.food-type-select
+  transition border-radius 0.2s
+  border-radius 15px 0 0 15px
+.food-type-select.open
+  border-radius 15px 0 0 0
+.food-type-select.open.flipped
+  border-radius 0 0 0 15px
+.injury-type-select
+  width 20ch
+  transition border-radius 0.2s
+  border-radius 15px 0 0 15px
+.injury-type-select.open
+  border-radius 15px 0 0 0
+.injury-type-select.open.flipped
+  border-radius 0 0 0 15px
+
 .reference-list
   .reference-entry-name
     margin-top 1ex
     color accent-light
   .reference-entry-desc
     margin-top .5ex
-
 </style>

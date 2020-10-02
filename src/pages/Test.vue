@@ -5,12 +5,7 @@
 </template>
 
 <script>
-import bs from '~/components/BetterSelect.vue'
-
 export default {
-  components: {
-    bs: bs,
-  },
   data() {
     return {
       options: [

@@ -1,10 +1,14 @@
 <template>
   <div
-    class="container"
-    @keyup.space="handleFocus"
-    @keyup.up="handleUpArrow"
-    @keyup.down="handleDownArrow"
-    @keyup.enter="handleEnter"
+    :class="['bs-container', { open: open }, { flipped: flipped }]"
+    @keydown.space.prevent=""
+    @keyup.space.prevent="handleFocus"
+    @keyup.up.prevent="handleUpArrow"
+    @keydown.up.prevent=""
+    @keyup.down.prevent="handleDownArrow"
+    @keydown.down.prevent=""
+    @keyup.enter.prevent="handleEnter"
+    @keydown.enter.prevent=""
     @focusout="handleBlur"
     tabindex="0"
     role="listbox"
@@ -17,16 +21,14 @@
       @click="handleClick"
     >
       <div class="bs-current">{{ current }}</div>
-      <div
-        v-html="arrow"
-        :class="[
-          'bs-arrow',
-          { 'bs-arrow-closed': !open },
-          { 'bs-arrow-open': open },
-        ]"
-      />
+      <div v-html="arrow" :class="['bs-arrow', { open: open }]" />
     </div>
-    <div :class="['bs-dropdown', { 'bs-dropdown-open': open }]" @click.self="open = false">
+    <div
+      :class="['bs-dropdown', { open: open }, { flipped: flipped }]"
+      @click.self="open = false"
+      @scroll.stop.prevent=""
+      ref="dropdown"
+    >
       <div>
         <div v-for="option in flatOptions" :key="option.label">
           <div
@@ -72,12 +74,14 @@ export default {
       target: -1,
       open: false,
       cancelClick: false,
+      flipped: false,
     }
   },
   methods: {
     handleFocus(event) {
       this.beganClick = false
       this.open = true
+      this.size()
     },
     handleBlur(event) {
       if (event.currentTarget.contains(event.relatedTarget)) {
@@ -94,14 +98,15 @@ export default {
     handleClick() {
       if (!this.beganClick) return
       this.open = !this.open
+      if (this.open) this.size()
     },
     handleUpArrow() {
       this.setTarget(this.target - 1)
-      if (!this.open) this.select()
+      if (!this.open) this.$refs.optionElms[this.target].click()
     },
     handleDownArrow() {
       this.setTarget(this.target + 1)
-      if (!this.open) this.select()
+      if (!this.open) this.$refs.optionElms[this.target].click()
     },
     handleEnter() {
       this.$refs.optionElms[this.target].click()
@@ -128,6 +133,26 @@ export default {
     },
     clampSelection(selection) {
       return Math.max(Math.min(selection, this.$refs.optionElms.length - 1), 0)
+    },
+    size() {
+      const dropdown = this.$refs.dropdown
+      const bounds = this.$refs.container.getBoundingClientRect()
+      const distToBot = window.innerHeight - bounds.bottom
+      this.flipped = false
+      if (window.innerWidth < 760) {
+        dropdown.style.removeProperty('top')
+        dropdown.style.removeProperty('bottom')
+        dropdown.style.removeProperty('maxHeight')
+      } else if (distToBot > 200) {
+        dropdown.style.top = '100%'
+        dropdown.style.removeProperty('bottom')
+        dropdown.style.maxHeight = `${distToBot}px`
+      } else {
+        dropdown.style.removeProperty('top')
+        dropdown.style.bottom = '100%'
+        dropdown.style.maxHeight = `${bounds.top}px`
+        this.flipped = true
+      }
     },
   },
   computed: {
@@ -167,15 +192,19 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-.container
+<style lang="stylus">
+.bs-container
   position relative
-.bs-selectbox
   display flex
-  flex-direction row
-  justify-content space-between
+  flex-direction column
   color white
   background-color hsla(0, 0, 0, 0.4)
+.bs-selectbox
+  display flex
+  flex 1 1 auto
+  flex-direction row
+  justify-content space-between
+  align-items center
   cursor pointer
   overflow hidden
 .bs-current
@@ -183,20 +212,21 @@ export default {
 .bs-arrow
   transition transform 0.2s
   user-select none
-.bs-arrow-open
   transform rotate(0turn)
-.bs-arrow-open
+.bs-arrow.open
   transform rotate(0.5turn)
 .bs-dropdown
   display none
   flex-direction column
   position absolute
-  top 100%
   min-width 100%
   color white
-  background-color hsl(0, 0, 15%)
+  padding-top 0
+  padding-bottom 10px
   > div
-    width
+    background-color hsl(0, 0, 15%)
+    overflow-y scroll
+    scrollbar-width thin
   @media screen and (max-width: 760px)
     position fixed
     justify-content center
@@ -205,16 +235,19 @@ export default {
     left 0
     width 100vw
     height 100vh
-    background-color hsla(0, 0, 0, 0.4)
-    z-index 1000
+    background-color hsla(0, 0, 0, 0.6)
+    z-index 9999
     > div
       width 80%
       max-height min(60%, 450px)
       background-color hsl(0, 0, 15%)
       overflow-y scroll
       scrollbar-width thin
+.bs-dropdown.flipped
+  padding-top 10px
+  padding-bottom 0
 
-.bs-dropdown.bs-dropdown-open
+.bs-dropdown.open
   display flex
 .bs-option
   user-select none

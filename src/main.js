@@ -3,13 +3,14 @@
 
 import DefaultLayout from '~/layouts/Default.vue'
 import Vuex from 'vuex'
+import bs from '~/components/BetterSelect.vue'
 import 'tippy.js/dist/tippy.css'
 import '~/assets/main.styl'
 
 export default function(Vue, { appOptions, router, head, isClient }) {
-  // Set default layout as a global component
-  Vue.component('Layout', DefaultLayout)
   Vue.use(Vuex)
+  Vue.component('Layout', DefaultLayout)
+  Vue.component('bs', bs)
   if (isClient) {
     import('vue-tree-navigation')
       .then(esm => Vue.use(esm))
