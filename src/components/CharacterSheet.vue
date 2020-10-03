@@ -193,19 +193,11 @@
           <div class="row stat-injury-grid">
             <div>Slowed</div>
             <div>
-              {{
-                immobile > 0
-                  ? 'Speed to 0'
-                  : `Speed -${slowed}`
-              }}
+              {{ immobile > 0 ? 'Speed to 0' : `Speed -${slowed}` }}
             </div>
           </div>
           <div class="row">
-            <button
-              class="grow"
-              @click="heal('slowed')"
-              :disabled="slowed < 1"
-            >
+            <button class="grow" @click="heal('slowed')" :disabled="slowed < 1">
               Heal Minor [{{ slowed }}]
             </button>
             <button
@@ -221,11 +213,7 @@
           <div class="row stat-injury-grid">
             <div>Weakened</div>
             <div>
-              {{
-                drained > 0
-                  ? 'Brawn to 0'
-                  : `Brawn -${weakened}`
-              }}
+              {{ drained > 0 ? 'Brawn to 0' : `Brawn -${weakened}` }}
             </div>
           </div>
           <div class="row">
@@ -249,11 +237,7 @@
           <div class="row stat-injury-grid">
             <div>Staggered</div>
             <div>
-              {{
-                unstable > 0
-                  ? 'Poise to 0'
-                  : `Poise -${staggered}`
-              }}
+              {{ unstable > 0 ? 'Poise to 0' : `Poise -${staggered}` }}
             </div>
           </div>
           <div class="row">
@@ -277,11 +261,7 @@
           <div class="row stat-injury-grid">
             <div>Distracted</div>
             <div>
-              {{
-                amnesia > 0
-                  ? 'Memory to 0'
-                  : `Memory -${distracted}`
-              }}
+              {{ amnesia > 0 ? 'Memory to 0' : `Memory -${distracted}` }}
             </div>
           </div>
           <div class="row">
@@ -309,18 +289,10 @@
             </div>
           </div>
           <div class="row">
-            <button
-              class="grow"
-              @click="heal('dulled')"
-              :disabled="dulled < 1"
-            >
+            <button class="grow" @click="heal('dulled')" :disabled="dulled < 1">
               Heal Minor [{{ dulled }}]
             </button>
-            <button
-              class="grow"
-              @click="heal('dazed')"
-              :disabled="dazed < 1"
-            >
+            <button class="grow" @click="heal('dazed')" :disabled="dazed < 1">
               Heal Major [{{ dazed }}]
             </button>
           </div>
@@ -329,57 +301,73 @@
     </div>
     <div class="spacer-sheet" />
     <div class="col reference-list">
-      <h1 class="reference-list-section-title">
-        <g-link to="/characters/skills" @click="close">Proficiencies</g-link>
+      <h1 class="reference-list-section-title" @click="close">
+        <g-link to="/characters/proficiencies">Proficiencies</g-link>
       </h1>
       <div class="empty-reference-list" v-if="proficiencies.length < 1">
         None... Go to the Proficiencies page of the rules to add some.
       </div>
-      <reference-list
-        class="col"
-        :entries="proficiencies"
+      <reference-entry
+        v-for="entry in proficiencies"
+        :key="entry"
+        :entry="entry"
+        @close="close"
         @remove="removeProficiency"
+        baseRulesUrl="/characters/proficiencies"
+        baseRefUrl="/ref/proficiencies"
       />
     </div>
     <div class="spacer-sheet" />
     <div class="col reference-list">
-      <h1 class="reference-list-section-title">
-        <g-link to="/characters/traits" @click="close">Traits</g-link>
+      <h1 class="reference-list-section-title" @click="close">
+        <g-link to="/characters/traits">Traits</g-link>
       </h1>
-      <h2 class="reference-list-section-title">
-        <g-link to="/characters/traits/mundane" @click="close">Mundane</g-link>
+      <h2 class="reference-list-section-title" @click="close">
+        <g-link to="/characters/traits/mundane">Mundane</g-link>
       </h2>
       <div class="empty-reference-list" v-if="mundaneTraits.length < 1">
         None... Go to the Mundane Traits page of the rules to add some.
       </div>
-      <reference-list
-        class="col"
-        :entries="mundaneTraits"
-        @remove="removeMundaneTrait"
-      />
-      <h2 class="reference-list-section-title">
-        <g-link to="/characters/traits/heroic" @click="close">Heroic</g-link>
+      <div class="col">
+        <reference-entry
+          v-for="entry in mundaneTraits"
+          :key="entry"
+          :entry="entry"
+          @close="close"
+          @remove="removeMundaneTrait"
+          baseRulesUrl="/characters/traits/mundane"
+          baseRefUrl="/ref/traits/mundane"
+        />
+      </div>
+      <h2 class="reference-list-section-title" @click="close">
+        <g-link to="/characters/traits/exceptional">Exceptional</g-link>
       </h2>
       <div class="empty-reference-list" v-if="heroicTraits.length < 1">
         None... Go to the Heroic Traits page of the rules to add some.
       </div>
-      <reference-list
-        class="col"
-        :entries="heroicTraits"
-        @remove="removeHeroicTrait"
-      />
+      <div class="col">
+        <reference-entry
+          v-for="entry in heroicTraits"
+          :key="entry"
+          :entry="entry"
+          @close="close"
+          @remove="removeHeroicTrait"
+          baseRulesUrl="/characters/traits/exceptional"
+          baseRefUrl="/ref/traits/exceptional"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import NumberInput from '~/components/NumberInput.vue'
-import ReferenceList from '~/components/ReferenceList.vue'
+import ReferenceEntry from '~/components/ReferenceEntry.vue'
 
 export default {
   components: {
     NumberInput: NumberInput,
-    ReferenceList: ReferenceList,
+    ReferenceEntry: ReferenceEntry,
   },
   data() {
     return {
@@ -464,26 +452,6 @@ export default {
               value: 'Dazed',
             },
           ],
-        },
-      ],
-      proficiencies: [
-        {
-          name: 'Thaumaturgy',
-          desc:
-            'Allows the use of Thaumaturgy magic and can make skill checks on related tasks without penalty.',
-        },
-      ],
-      mundaneTraits: [
-        {
-          name: 'Inspiring',
-          desc: 'Your Charisma actions get additional team based effects.',
-        },
-      ],
-      heroicTraits: [
-        {
-          name: 'Iron Stomach',
-          desc:
-            "You don't care about <em>what</em> the food is. All that matters is if there's enough to fill you up.",
         },
       ],
     }
@@ -720,6 +688,21 @@ export default {
         this.$store.dispatch('save')
       },
     },
+    proficiencies: {
+      get() {
+        return this.$store.state.character.proficiencies
+      },
+    },
+    mundaneTraits: {
+      get() {
+        return this.$store.state.character.mundaneTraits
+      },
+    },
+    heroicTraits: {
+      get() {
+        return this.$store.state.character.heroicTraits
+      },
+    },
     dead() {
       return this.wounds >= this.threshold
     },
@@ -727,12 +710,9 @@ export default {
       return this.minorDot + this.severeDot
     },
     dotRange() {
-      const minorDotTotal =
-        this.minorDot > 0 ? `${this.minorDot}` : ''
-      const combined =
-        this.minorDot > 0 && this.severeDot > 0 ? ' + ' : ''
-      const severeDotTotal =
-        this.severeDot > 0 ? `${this.severeDot}d3` : ''
+      const minorDotTotal = this.minorDot > 0 ? `${this.minorDot}` : ''
+      const combined = this.minorDot > 0 && this.severeDot > 0 ? ' + ' : ''
+      const severeDotTotal = this.severeDot > 0 ? `${this.severeDot}d3` : ''
       return minorDotTotal + combined + severeDotTotal
     },
     totalSlow() {
@@ -764,19 +744,16 @@ export default {
       this.$emit('close')
     },
     removeProficiency(target) {
-      this.proficiencies = this.proficiencies.filter(
-        entry => entry.name !== target.name,
-      )
+      this.$store.commit('removeProficiency', target)
+      this.$store.dispatch('save')
     },
     removeMundaneTrait(target) {
-      this.mundaneTraits = this.mundaneTraits.filter(
-        entry => entry.name !== target.name,
-      )
+      this.$store.commit('removeMundaneTrait', target)
+      this.$store.dispatch('save')
     },
     removeHeroicTrait(target) {
-      this.heroicTraits = this.heroicTraits.filter(
-        entry => entry.name !== target.name,
-      )
+      this.$store.commit('removeHeroicTrait', target)
+      this.$store.dispatch('save')
     },
     resolveDamage() {
       if (this.damage < this.threshold) return
@@ -804,7 +781,12 @@ export default {
       this.selectedInjury = option.value
     },
     addInjury() {
-      if (!this.$store.state.character.injuries.hasOwnProperty(this.selectedInjury)) return
+      if (
+        !this.$store.state.character.injuries.hasOwnProperty(
+          this.selectedInjury,
+        )
+      )
+        return
       const current = this[this.selectedInjury]
       this[this.selectedInjury] = current + 1
     },
@@ -820,9 +802,7 @@ export default {
     applyDot() {
       if (this.minorDot > 0) this.damage += this.minorDot > 0
       if (this.severeDot > 0)
-        this.damage += Math.ceil(
-          Math.random() * 3 + (this.severeDot - 1),
-        )
+        this.damage += Math.ceil(Math.random() * 3 + (this.severeDot - 1))
     },
     heal(injuryType) {
       const current = this[injuryType]
@@ -831,7 +811,7 @@ export default {
   },
   created() {
     this.$store.dispatch('load')
-  }
+  },
 }
 </script>
 
@@ -1027,6 +1007,7 @@ export default {
     content "❱"
     margin-left 0.5ch
     color accent-link
+    font-size 0.8em
   a:hover::after, a:focus::after
     color accent-link-dark
 .empty-reference-list
@@ -1116,7 +1097,6 @@ export default {
 .reference-list
   .reference-entry-name
     align-self flex-end
-    color accent-light
   .reference-entry-desc
     margin-top .5ex
 </style>

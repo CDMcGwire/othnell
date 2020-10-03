@@ -5,7 +5,7 @@ layout: ~/layouts/Default.vue
 
 # {{ $frontmatter.title }}
 
-The art of using blood to bargain with otherworldly beings. While similar in
+The arte of using blood to bargain with otherworldly beings. While similar in
 effect to Thaumaturgy, Hemoturgy almost always achieves the effect requested in
 the deal. However, the terms are prone to unintended side effects. And the
 caster must be sure their demand does not outpace their supply, for their

@@ -175,7 +175,7 @@ nav.rule-nav
       li
         display flex
         flex-direction row
-        padding-left 2.5ch
+        padding-left 25px
   .NavigationLevel
     flex 1 1 auto
   .NavigationLevel__parent
@@ -183,14 +183,20 @@ nav.rule-nav
     display flex
     flex-direction row
     align-items center
-  .NavigationLevel__children
-    font-size 0.85em
+  // .NavigationLevel__children
+  //   font-size 0.9em
   .NavigationToggle
     position absolute
+    display flex
+    justify-content center
+    align-items center
     top auto
-    left -2.75ch
-    width 30px
-    padding 0 1ch 0.5ex 1ch
+    left -25px
+    width 22px
+    height 22px
+    padding 0
+    border 1px solid button-fg-faint
+    border-radius 9999px
   .NavigationToggle__icon
     transition transform 0.2s
     border-color button-fg

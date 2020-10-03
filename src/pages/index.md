@@ -55,7 +55,7 @@ contains a formal explanation of how fighting works in this game. The game is,
 by default, turn based. So this section explains the objective and de facto
 approach to determing position, damage, turn order, and the like.
 
-## [Magic Arts](magic)
+## [Magic Artes](magic)
 
 As wills and steel clash, some look to supernatural forces to achieve their
 goals. This section explains the types of magic usable by characters in this

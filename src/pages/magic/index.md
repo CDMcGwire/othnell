@@ -1,13 +1,13 @@
 ---
-title: Magic Arts
+title: Magic Artes
 layout: ~/layouts/Default.vue
 ---
 
 # {{ $frontmatter.title }}
 
-## Natural Arts
+## Natural Artes
 
-Natural arts are closely related to natural sciences and follow strict rules and
+Natural artes are closely related to natural sciences and follow strict rules and
 have predictable cause-and-effect results.
 
 Spells require the caster to use their body to channel the effect, thus
@@ -31,19 +31,19 @@ user's head.
 
 ### [Animare](magic/animare)
 
-## Supernatural Arts
+## Supernatural Artes
 
-Supernatural arts bargain with otherworldly influences to further the user's
+Supernatural artes bargain with otherworldly influences to further the user's
 goals. They are consequently both unpredictable and potentially very powerful.
 
-Supernatural arts are carried out by the mechanations of a powerful patron deity
+Supernatural artes are carried out by the mechanations of a powerful patron deity
 or a host of spirits. They are often negotiative in nature. A benevolant being,
 for instance, may require the practicioner to uphold a set of sacred laws and
 reward their dedication with direct assistance. A malevolant being may provide
 substantial power upfront but leave the cost vague and to be determined at will.
 
-While the give and take of Supernatural Arts is in some ways similar to the
-cause and effect of Natural Arts, Supernatural Arts follow symbolic logic. The
+While the give and take of Supernatural Artes is in some ways similar to the
+cause and effect of Natural Artes, Supernatural Artes follow symbolic logic. The
 cost of summoning water from thin air may be reciting 70 prayers while facing
 the setting sun. If it's a full moon that night, then the practitioner may
 instead have to lay prostrate with a hyssop branch in hand for an hour.
@@ -56,7 +56,7 @@ instead have to lay prostrate with a hyssop branch in hand for an hour.
 
 ## Enchanting
 
-Enchanting is the art of infusing inanimate objects with magical effects. There
+Enchanting is the arte of infusing inanimate objects with magical effects. There
 are different fundamental methods, but they all abide the same core process. A
 source of power is drawn from the world and suffused into the target object,
 changing its nature.

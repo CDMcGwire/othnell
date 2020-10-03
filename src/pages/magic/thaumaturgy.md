@@ -5,8 +5,8 @@ layout: ~/layouts/Default.vue
 
 # {{ $frontmatter.title }}
 
-The art of performing miracles. Spells and rituals of this practice break the
-known rules of the world quite literally. Such as bringing the dead back to
+The arte of performing miracles. Spells and rituals of this practice quite
+literally break the known rules of the world. Such as bringing the dead back to
 life, changing water to wine, or bringing down a pillar of searing light in the
 pitch dark of a cave.
 

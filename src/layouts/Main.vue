@@ -53,7 +53,10 @@
           >
             Close
           </button>
-          <character-sheet class="toolview-content" />
+          <character-sheet
+            class="toolview-content"
+            @close="toolviewOpen = false"
+          />
         </div>
       </div>
     </div>
@@ -93,8 +96,22 @@ export default {
               path: '/races',
             },
             {
+              name: 'Proficiencies',
+              path: '/proficiencies',
+            },
+            {
               name: 'Traits',
               path: '/traits',
+              children: [
+                {
+                  name: 'Mundane',
+                  path: '/mundane',
+                },
+                {
+                  name: 'Heroic',
+                  path: '/heroic',
+                },
+              ],
             },
           ],
         },
@@ -290,7 +307,6 @@ export default {
     width 100%
 .toolview-content
   padding 15px 15px 80px 15px
-  
 </style>
 
 <static-query>

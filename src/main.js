@@ -4,6 +4,8 @@
 import DefaultLayout from '~/layouts/Default.vue'
 import Vuex from 'vuex'
 import bs from '~/components/BetterSelect.vue'
+import RefAdder from '~/components/RefAdder.vue'
+import Term from '~/components/Term.vue'
 import 'tippy.js/dist/tippy.css'
 import '~/assets/main.styl'
 
@@ -11,6 +13,8 @@ export default function(Vue, { appOptions, router, head, isClient }) {
   Vue.use(Vuex)
   Vue.component('Layout', DefaultLayout)
   Vue.component('bs', bs)
+  Vue.component('ref-adder', RefAdder)
+  Vue.component('term', Term)
   if (isClient) {
     import('vue-tree-navigation')
       .then(esm => Vue.use(esm))
@@ -52,6 +56,9 @@ export default function(Vue, { appOptions, router, head, isClient }) {
           dulled: 0,
           dazed: 0,
         },
+        proficiencies: [],
+        mundaneTraits: [],
+        heroicTraits: [],
       },
     },
     mutations: {
@@ -123,6 +130,33 @@ export default function(Vue, { appOptions, router, head, isClient }) {
       },
       setCharacterDazed(state, dazed) {
         state.character.injuries.dazed = dazed
+      },
+      addProficiency(state, proficiency) {
+        if (state.character.proficiencies.includes(proficiency)) return
+        state.character.proficiencies.push(proficiency)
+      },
+      removeProficiency(state, proficiency) {
+        const index = state.character.proficiencies.indexOf(proficiency)
+        if (index < 0) return
+        state.character.proficiencies.splice(index, 1)
+      },
+      addMundaneTrait(state, mundaneTrait) {
+        if (state.character.proficiencies.includes(mundaneTrait)) return
+        state.character.mundaneTraits.push(mundaneTrait)
+      },
+      removeMundaneTrait(state, mundaneTrait) {
+        const index = state.character.proficiencies.indexOf(mundaneTrait)
+        if (index < 0) return
+        state.character.mundaneTraits.splice(index, 1)
+      },
+      addHeroicTrait(state, heroicTrait) {
+        if (state.character.proficiencies.includes(heroicTrait)) return
+        state.character.heroicTraits.push(heroicTrait)
+      },
+      removeHeroicTrait(state, heroicTrait) {
+        const index = state.character.proficiencies.indexOf(heroicTrait)
+        if (index < 0) return
+        state.character.heroicTraits.splice(index, 1)
       },
     },
     actions: {

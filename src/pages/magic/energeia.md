@@ -5,7 +5,7 @@ layout: ~/layouts/Default.vue
 
 # {{ $frontmatter.title }}
 
-The art of directing kinetic and potential energy in its many forms. For
+The arte of directing kinetic and potential energy in its many forms. For
 instance, concentrating thermal energy to ignite a flame or dispersing it to
 freeze an object, stopping a charging bull in its tracks by redirecting its
 momentum into the practitioner's surroundings, or sparking a bolt of lightning.

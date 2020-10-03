@@ -5,7 +5,7 @@ layout: ~/layouts/Default.vue
 
 # {{ $frontmatter.title }}
 
-The art of manipulating biological processes. For instance, speeding up or
+The arte of manipulating biological processes. For instance, speeding up or
 slowing a creatures natural healing or a plant's growth. More advanced forms can
 directly affect a sentient being's hormonal balance to influence emotions and
 reactions or even induce halucinations.
