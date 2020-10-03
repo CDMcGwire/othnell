@@ -39,12 +39,14 @@ button, input, select
 .basic-input
   border-radius 15px
   overflow hidden
-.basic-input-left
+.basic-input.left
   border-radius 15px 0 0 15px
   overflow hidden
-.basic-input-right
+.basic-input.right
   border-radius 0 15px 15px 0
   overflow hidden
+.basic-input + .basic-input
+  border-left 1px solid button-bg-dark
 
 h1, h2, h3, h4, h5, h6, p, ul, li, a, button, input, select, option
   margin 0

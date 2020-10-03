@@ -142,7 +142,7 @@ export default {
       if (window.innerWidth < 760) {
         dropdown.style.removeProperty('top')
         dropdown.style.removeProperty('bottom')
-        dropdown.style.removeProperty('maxHeight')
+        dropdown.style.removeProperty('max-height')
       } else if (distToBot > 200) {
         dropdown.style.top = '100%'
         dropdown.style.removeProperty('bottom')
@@ -187,7 +187,7 @@ export default {
   mounted() {
     const optElms = this.$refs.optionElms
     if (optElms.length > 0) this.setTarget(this.initial)
-    if (this.target > -1) this.current = optElms[this.target].label
+    if (this.target > -1) optElms[this.target].click()
   },
 }
 </script>
@@ -207,6 +207,7 @@ export default {
   align-items center
   cursor pointer
   overflow hidden
+  z-index 0
 .bs-current
   user-select none
 .bs-arrow
@@ -223,11 +224,12 @@ export default {
   color white
   padding-top 0
   padding-bottom 10px
+  z-index 1
   > div
     background-color hsl(0, 0, 15%)
     overflow-y scroll
     scrollbar-width thin
-  @media screen and (max-width: 760px)
+  @media screen and (max-width: 759px)
     position fixed
     justify-content center
     align-items center
@@ -252,8 +254,10 @@ export default {
 .bs-option
   user-select none
   cursor pointer
-  @media screen and (max-width: 760px)
+  @media screen and (max-width: 759px)
     padding 1ex
+.bs-option:hover
+  background-color hsl(0, 0, 17.5%)
 .bs-option.target
   background-color hsl(0, 0, 25%)
 .bs-option-group
@@ -261,7 +265,7 @@ export default {
   background-color hsl(0, 0, 10%)
   user-select none
   font-size 0.8em
-  @media screen and (max-width: 760px)
+  @media screen and (max-width: 759px)
     padding 0.8ex
 .bs-option-sub
   padding-left 2ch

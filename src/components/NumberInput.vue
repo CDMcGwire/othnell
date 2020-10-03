@@ -6,6 +6,7 @@
         'number-input-bttn',
         'number-input-down',
       ]"
+      @click="decrement"
       ref="down"
     >
       <svg class="number-input-icon" viewBox="0 0 100 100">
@@ -15,7 +16,7 @@
     <input
       class="number-input-field"
       type="text"
-      :value="current"
+      :value="value"
       @change="handleChange"
       ref="field"
       pattern="[+-]?[+-]?\d+"
@@ -26,6 +27,7 @@
         'number-input-bttn',
         'number-input-up',
       ]"
+      @click="increment"
       ref="up"
     >
       <svg class="number-input-icon" viewBox="0 0 100 100">
@@ -37,12 +39,8 @@
 
 <script>
 export default {
-  model: {
-    prop: 'initial',
-    event: 'change',
-  },
   props: {
-    initial: {
+    value: {
       type: Number,
       default: 0,
     },
@@ -67,11 +65,6 @@ export default {
       default: false,
     },
   },
-  data: function() {
-    return {
-      current: 0,
-    }
-  },
   methods: {
     validate: function(value) {
       const newVal = this.float ? value : Math.round(value)
@@ -81,9 +74,9 @@ export default {
     },
     calcTarget: function(value, additivity) {
       return additivity > 0
-        ? this.current + value
+        ? this.value + value
         : additivity < 0
-        ? this.current - value
+        ? this.value - value
         : value
     },
     handleChange: function(event) {
@@ -95,22 +88,18 @@ export default {
         : 0
       const newVal = parseInt(additivity === 0 ? input : input.slice(2))
       if (isNaN(newVal)) {
-        this.$refs.field.value = this.current
+        this.$refs.field.value = this.value
         return
       }
       const finalVal = this.validate(this.calcTarget(newVal, additivity))
-      this.current = finalVal
       this.$emit('input', finalVal)
     },
-  },
-  mounted() {
-    this.current = this.validate(this.initial)
-    this.$refs.up.onclick = () => {
-      this.current = this.validate(this.current + this.step)
-    }
-    this.$refs.down.onclick = () => {
-      this.current = this.validate(this.current - this.step)
-    }
+    increment() {
+      this.$emit('input', this.validate(this.value + this.step))
+    },
+    decrement() {
+      this.$emit('input', this.validate(this.value - this.step))
+    },
   },
 }
 </script>

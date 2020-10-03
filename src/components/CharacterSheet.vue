@@ -12,11 +12,11 @@
       </div>
       <div class="col title-row">
         <div id="char-name">
-          <input type="text" placeholder="Character Name" />
+          <input v-model="name" type="text" placeholder="Character Name" />
         </div>
         <div id="char-title" class="row-mobile-col">
           <div class="title-prefix">the</div>
-          <input type="text" placeholder="Character Title" />
+          <input v-model="title" type="text" placeholder="Character Title" />
         </div>
       </div>
     </div>
@@ -65,20 +65,35 @@
     </div>
     <div class="spacer-sheet" />
     <div class="trackers">
-      <div class="dmg-grid">
-        <div>Damage</div>
-        <div class="row m-center c-center">
-          <number-input class="row minor-stat" v-model="damage" :min="0" />
+      <div v-if="!dead" class="col">
+        <div class="dmg-grid">
+          <div>Damage</div>
+          <div class="row m-center c-center">
+            <number-input class="row minor-stat" v-model="damage" :min="0" />
+          </div>
+          <div />
+          <div class="dmg-over-thresh" />
+          <div>Threshold</div>
+          <div class="txt-center">{{ threshold }}</div>
+          <div class="thresh-over-wounds">
+            <button class="basic-input" @click="resolveDamage">Resolve</button>
+          </div>
+          <div>Wounds</div>
+          <div class="txt-center">{{ wounds }}</div>
         </div>
-        <div />
-        <div class="dmg-over-thresh" />
-        <div>Threshold</div>
-        <div class="txt-center">8</div>
-        <div class="thresh-over-wounds">
-          <button class="basic-input">Resolve</button>
+        <div class="row">
+          <div class="rest-label">Rest</div>
+          <button class="basic-input left grow" @click="rest(1)">
+            Partial
+          </button>
+          <button class="basic-input right grow" @click="rest(3)">
+            Full Day
+          </button>
         </div>
-        <div>Wounds</div>
-        <div class="txt-center">0</div>
+      </div>
+      <div v-else class="col">
+        <div class="txt-center">Dead</div>
+        <button class="basic-input" @click="revive">Resurrect</button>
       </div>
       <div class="col defense other-trackers">
         <div class="row m-spaced">
@@ -105,17 +120,33 @@
       <div class="col other-trackers">
         <div class="row m-spaced">
           <div>Cognition</div>
-          <number-input
-            class="row m-center minor-stat"
-            v-model="cognition"
-            :min="0"
-            :max="cognitionMax"
-          />
+          <div class="row">
+            <number-input
+              class="row m-center minor-stat"
+              v-model="cognition"
+              :min="0"
+              :max="cognitionMax"
+            />
+            <div class="out-of">of {{ cognitionMax }}</div>
+          </div>
         </div>
-        <button class="basic-input">Sleep</button>
         <div class="row">
-          <bs id="meal-type" class="food-type-select" :options="foodTypes" />
-          <button id="eat-button" class="grow basic-input-right">Eat</button>
+          <button class="basic-input left grow" @click="sleep(0.5)">Nap</button>
+          <button class="basic-input right grow" @click="sleep(1)">
+            Sleep
+          </button>
+        </div>
+        <div class="row">
+          <bs
+            id="meal-type"
+            class="food-type-select"
+            @select="handleFoodSelect"
+            :options="foodTypes"
+            :initial="1"
+          />
+          <button id="eat-button" class="grow basic-input right" @click="eat">
+            Eat
+          </button>
         </div>
       </div>
     </div>
@@ -124,15 +155,175 @@
       <div class="row m-spaced c-center">
         <h1 class="row c-center">Injuries</h1>
         <div class="row injury-controls">
-          <bs class="injury-type-select" :options="injuryTypes" />
-          <button class="injury-add-bttn basic-input-right">+</button>
+          <bs
+            class="injury-type-select"
+            :options="injuryTypes"
+            @select="handleInjurySelect"
+          />
+          <button class="injury-add-bttn basic-input right" @click="addInjury">
+            +
+          </button>
         </div>
       </div>
       <div class="col injury-list">
-        <div class="row injury-list-entry" v-if="injuries.minorDot > 0">
-          <div class="injury-type">Minor DoT</div>
-          <div class="injury-label">Burn</div>
-          <button class="injury-remove" @click="injuries.minorDot--">-</button>
+        <div class="col injury-list-entry" v-if="totalDot > 0">
+          <div class="row stat-injury-grid">
+            <div>Damage Over Time</div>
+            <div>{{ dotRange }}</div>
+          </div>
+          <button @click="applyDot">Apply</button>
+          <div class="row">
+            <button
+              class="grow"
+              @click="heal('minorDot')"
+              :disabled="minorDot < 1"
+            >
+              Heal Minor [{{ minorDot }}]
+            </button>
+            <button
+              class="grow"
+              @click="heal('severeDot')"
+              :disabled="severeDot < 1"
+            >
+              Heal Major [{{ severeDot }}]
+            </button>
+          </div>
+        </div>
+        <div class="col injury-list-entry" v-if="totalSlow > 0">
+          <div class="row stat-injury-grid">
+            <div>Slowed</div>
+            <div>
+              {{
+                immobile > 0
+                  ? 'Speed to 0'
+                  : `Speed -${slowed}`
+              }}
+            </div>
+          </div>
+          <div class="row">
+            <button
+              class="grow"
+              @click="heal('slowed')"
+              :disabled="slowed < 1"
+            >
+              Heal Minor [{{ slowed }}]
+            </button>
+            <button
+              class="grow"
+              @click="heal('immobile')"
+              :disabled="immobile < 1"
+            >
+              Heal Major [{{ immobile }}]
+            </button>
+          </div>
+        </div>
+        <div class="col injury-list-entry" v-if="totalWeaken > 0">
+          <div class="row stat-injury-grid">
+            <div>Weakened</div>
+            <div>
+              {{
+                drained > 0
+                  ? 'Brawn to 0'
+                  : `Brawn -${weakened}`
+              }}
+            </div>
+          </div>
+          <div class="row">
+            <button
+              class="grow"
+              @click="heal('weakened')"
+              :disabled="weakened < 1"
+            >
+              Heal Minor [{{ weakened }}]
+            </button>
+            <button
+              class="grow"
+              @click="heal('drained')"
+              :disabled="drained < 1"
+            >
+              Heal Major [{{ drained }}]
+            </button>
+          </div>
+        </div>
+        <div class="col injury-list-entry" v-if="totalStagger > 0">
+          <div class="row stat-injury-grid">
+            <div>Staggered</div>
+            <div>
+              {{
+                unstable > 0
+                  ? 'Poise to 0'
+                  : `Poise -${staggered}`
+              }}
+            </div>
+          </div>
+          <div class="row">
+            <button
+              class="grow"
+              @click="heal('staggered')"
+              :disabled="staggered < 1"
+            >
+              Heal Minor [{{ staggered }}]
+            </button>
+            <button
+              class="grow"
+              @click="heal('unstable')"
+              :disabled="unstable < 1"
+            >
+              Heal Major [{{ unstable }}]
+            </button>
+          </div>
+        </div>
+        <div class="col injury-list-entry" v-if="totalDistraction > 0">
+          <div class="row stat-injury-grid">
+            <div>Distracted</div>
+            <div>
+              {{
+                amnesia > 0
+                  ? 'Memory to 0'
+                  : `Memory -${distracted}`
+              }}
+            </div>
+          </div>
+          <div class="row">
+            <button
+              class="grow"
+              @click="heal('distracted')"
+              :disabled="distracted < 1"
+            >
+              Heal Minor [{{ distracted }}]
+            </button>
+            <button
+              class="grow"
+              @click="heal('amnesia')"
+              :disabled="amnesia < 1"
+            >
+              Heal Major [{{ amnesia }}]
+            </button>
+          </div>
+        </div>
+        <div class="col injury-list-entry" v-if="totalDull > 0">
+          <div class="row stat-injury-grid">
+            <div>Dulled</div>
+            <div>
+              {{ dazed > 0 ? 'Wit to 0' : `Wit -${dulled}` }}
+            </div>
+          </div>
+          <div class="row">
+            <button
+              class="grow"
+              @click="heal('dulled')"
+              :disabled="dulled < 1"
+            >
+              Heal Minor [{{ dulled }}]
+            </button>
+            <button
+              class="grow"
+              @click="heal('dazed')"
+              :disabled="dazed < 1"
+            >
+              Heal Major [{{ dazed }}]
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -192,41 +383,29 @@ export default {
   },
   data() {
     return {
-      brawn: 0,
-      poise: 0,
-      memory: 0,
-      wit: 0,
-      charisma: 0,
-      damage: 1,
-      armor: 2,
-      speed: 5,
-      cognition: 32,
-      cognitionMax: 32,
       foodTypes: [
         {
           label: 'Questionable',
-          value: '-4,2',
+          value: [-4, 1],
         },
         {
           label: 'Snack',
-          value: '2',
+          value: [2],
         },
         {
           label: 'Decent Meal',
-          value: '4',
+          value: [4],
         },
         {
           label: 'Good Meal',
-          value: '8',
+          value: [8],
         },
         {
           label: 'Hearty Meal',
-          value: '12',
+          value: [12],
         },
       ],
-      injuries: {
-        minorDot: 1,
-      },
+      foodValue: [2],
       injuryTypes: [
         {
           label: 'Minor Injuries',
@@ -309,14 +488,280 @@ export default {
       ],
     }
   },
+  computed: {
+    name: {
+      get() {
+        return this.$store.state.character.name
+      },
+      set(value) {
+        this.$store.commit('setCharacterName', value)
+        this.$store.dispatch('save')
+      },
+    },
+    title: {
+      get() {
+        return this.$store.state.character.title
+      },
+      set(value) {
+        this.$store.commit('setCharacterTitle', value)
+        this.$store.dispatch('save')
+      },
+    },
+    brawn: {
+      get() {
+        return this.$store.state.character.brawn
+      },
+      set(value) {
+        this.$store.commit('setCharacterBrawn', value)
+        this.$store.dispatch('save')
+      },
+    },
+    poise: {
+      get() {
+        return this.$store.state.character.poise
+      },
+      set(value) {
+        this.$store.commit('setCharacterPoise', value)
+        this.$store.dispatch('save')
+      },
+    },
+    memory: {
+      get() {
+        return this.$store.state.character.memory
+      },
+      set(value) {
+        this.$store.commit('setCharacterMemory', value)
+        this.$store.dispatch('save')
+      },
+    },
+    wit: {
+      get() {
+        return this.$store.state.character.wit
+      },
+      set(value) {
+        this.$store.commit('setCharacterWit', value)
+        this.$store.dispatch('save')
+      },
+    },
+    charisma: {
+      get() {
+        return this.$store.state.character.charisma
+      },
+      set(value) {
+        this.$store.commit('setCharacterCharisma', value)
+        this.$store.dispatch('save')
+      },
+    },
+    damage: {
+      get() {
+        return this.$store.state.character.damage
+      },
+      set(value) {
+        this.$store.commit('setCharacterDamage', value)
+        this.$store.dispatch('save')
+      },
+    },
+    threshold: {
+      get() {
+        return (
+          4 +
+          this.$store.state.character.brawn * 2 +
+          this.$store.state.character.poise
+        )
+      },
+    },
+    wounds: {
+      get() {
+        return this.$store.state.character.wounds
+      },
+      set(value) {
+        this.$store.commit('setCharacterWounds', value)
+        this.$store.dispatch('save')
+      },
+    },
+    armor: {
+      get() {
+        return this.$store.state.character.armor
+      },
+      set(value) {
+        this.$store.commit('setCharacterArmor', value)
+        this.$store.dispatch('save')
+      },
+    },
+    speed: {
+      get() {
+        return this.$store.state.character.speed
+      },
+      set(value) {
+        this.$store.commit('setCharacterSpeed', value)
+        this.$store.dispatch('save')
+      },
+    },
+    cognition: {
+      get() {
+        return this.$store.state.character.cognition
+      },
+      set(value) {
+        this.$store.commit('setCharacterCognition', value)
+        this.$store.dispatch('save')
+      },
+    },
+    cognitionMax: {
+      get() {
+        const wit = this.$store.state.character.wit
+        return wit > -1 ? 8 + wit * 8 : 8 / Math.pow(2, Math.abs(wit))
+      },
+    },
+    minorDot: {
+      get() {
+        return this.$store.state.character.injuries.minorDot
+      },
+      set(value) {
+        this.$store.commit('setCharacterMinorDot', value)
+        this.$store.dispatch('save')
+      },
+    },
+    severeDot: {
+      get() {
+        return this.$store.state.character.injuries.severeDot
+      },
+      set(value) {
+        this.$store.commit('setCharacterSevereDot', value)
+        this.$store.dispatch('save')
+      },
+    },
+    slowed: {
+      get() {
+        return this.$store.state.character.injuries.slowed
+      },
+      set(value) {
+        this.$store.commit('setCharacterSlowed', value)
+        this.$store.dispatch('save')
+      },
+    },
+    immobile: {
+      get() {
+        return this.$store.state.character.injuries.immobile
+      },
+      set(value) {
+        this.$store.commit('setCharacterImmobile', value)
+        this.$store.dispatch('save')
+      },
+    },
+    weakened: {
+      get() {
+        return this.$store.state.character.injuries.weakened
+      },
+      set(value) {
+        this.$store.commit('setCharacterWeakened', value)
+        this.$store.dispatch('save')
+      },
+    },
+    drained: {
+      get() {
+        return this.$store.state.character.injuries.drained
+      },
+      set(value) {
+        this.$store.commit('setCharacterDrained', value)
+        this.$store.dispatch('save')
+      },
+    },
+    staggered: {
+      get() {
+        return this.$store.state.character.injuries.staggered
+      },
+      set(value) {
+        this.$store.commit('setCharacterStaggered', value)
+        this.$store.dispatch('save')
+      },
+    },
+    unstable: {
+      get() {
+        return this.$store.state.character.injuries.unstable
+      },
+      set(value) {
+        this.$store.commit('setCharacterUnstable', value)
+        this.$store.dispatch('save')
+      },
+    },
+    distracted: {
+      get() {
+        return this.$store.state.character.injuries.distracted
+      },
+      set(value) {
+        this.$store.commit('setCharacterDistracted', value)
+        this.$store.dispatch('save')
+      },
+    },
+    amnesia: {
+      get() {
+        return this.$store.state.character.injuries.amnesia
+      },
+      set(value) {
+        this.$store.commit('setCharacterAmnesia', value)
+        this.$store.dispatch('save')
+      },
+    },
+    dulled: {
+      get() {
+        return this.$store.state.character.injuries.dulled
+      },
+      set(value) {
+        this.$store.commit('setCharacterDulled', value)
+        this.$store.dispatch('save')
+      },
+    },
+    dazed: {
+      get() {
+        return this.$store.state.character.injuries.dazed
+      },
+      set(value) {
+        this.$store.commit('setCharacterDazed', value)
+        this.$store.dispatch('save')
+      },
+    },
+    dead() {
+      return this.wounds >= this.threshold
+    },
+    totalDot() {
+      return this.minorDot + this.severeDot
+    },
+    dotRange() {
+      const minorDotTotal =
+        this.minorDot > 0 ? `${this.minorDot}` : ''
+      const combined =
+        this.minorDot > 0 && this.severeDot > 0 ? ' + ' : ''
+      const severeDotTotal =
+        this.severeDot > 0 ? `${this.severeDot}d3` : ''
+      return minorDotTotal + combined + severeDotTotal
+    },
+    totalSlow() {
+      return this.slowed + this.immobile
+    },
+    totalWeaken() {
+      return this.weakened + this.drained
+    },
+    totalStagger() {
+      return this.staggered + this.unstable
+    },
+    totalDistraction() {
+      return this.distracted + this.amnesia
+    },
+    totalDull() {
+      return this.dulled + this.dazed
+    },
+  },
+  watch: {
+    damage(val, old) {
+      if (this.damage < this.wounds) this.damage = this.wounds
+    },
+    wounds(val, old) {
+      if (this.damage < this.wounds) this.damage = this.wounds
+    },
+  },
   methods: {
     close() {
       this.$emit('close')
-    },
-    removeInjury(target) {
-      this.injuries = this.injuries.filter(
-        entry => entry.label !== target.label,
-      )
     },
     removeProficiency(target) {
       this.proficiencies = this.proficiencies.filter(
@@ -333,7 +778,60 @@ export default {
         entry => entry.name !== target.name,
       )
     },
+    resolveDamage() {
+      if (this.damage < this.threshold) return
+      const newWounds = Math.floor(this.damage / this.threshold)
+      if (newWounds > 2) this.wounds = this.threshold
+      else this.wounds += newWounds
+      this.damage = this.wounds
+    },
+    rest(amount) {
+      if (this.dead) return
+      this.wounds = Math.max(0, this.wounds - amount)
+      this.damage = this.wounds
+    },
+    revive() {
+      this.wounds = Math.max(0, this.threshold - 1)
+      this.damage = this.wounds
+    },
+    sleep(scale) {
+      this.cognition = Math.min(
+        this.cognition + Math.ceil(scale * this.cognitionMax),
+        this.cognitionMax,
+      )
+    },
+    handleInjurySelect(option) {
+      this.selectedInjury = option.value
+    },
+    addInjury() {
+      if (!this.$store.state.character.injuries.hasOwnProperty(this.selectedInjury)) return
+      const current = this[this.selectedInjury]
+      this[this.selectedInjury] = current + 1
+    },
+    handleFoodSelect(option) {
+      this.foodValue = option.value
+    },
+    eat() {
+      this.cognition += this.foodValue[
+        Math.floor(Math.random() * this.foodValue.length)
+      ]
+      if (this.cognition > this.cognitionMax) this.cognition = this.cognitionMax
+    },
+    applyDot() {
+      if (this.minorDot > 0) this.damage += this.minorDot > 0
+      if (this.severeDot > 0)
+        this.damage += Math.ceil(
+          Math.random() * 3 + (this.severeDot - 1),
+        )
+    },
+    heal(injuryType) {
+      const current = this[injuryType]
+      if (current > 0) this[injuryType] = current - 1
+    },
   },
+  created() {
+    this.$store.dispatch('load')
+  }
 }
 </script>
 
@@ -377,7 +875,7 @@ export default {
       filter brightness(1.5)
 
 .title-row
-  justify-content end
+  justify-content flex-end
   align-items center
   @media screen and (max-width: desktop-min-width)
     justify-content flex-start
@@ -427,7 +925,7 @@ export default {
   display grid
   grid-template-columns 1fr 1fr
   grid-gap 5px
-  font-size 1.5em
+  font-size 1.3em
   @media screen and (max-width: desktop-min-width)
     grid-template-columns 1fr
   > div
@@ -439,19 +937,19 @@ export default {
   grid-template-columns 1fr
   grid-auto-rows min-content
   grid-gap 5px
+.out-of
+  margin-left 1ch
 
 .dmg-grid
   display grid
   grid-template-columns auto auto
   grid-template-rows auto 1px auto 2ex auto
   grid-gap 5px 1ch
-
 .dmg-over-thresh
   grid-column 2
   width 100%
   height 100%
   background-color foreground
-
 .thresh-over-wounds
   grid-column 1 / span 2
   width 100%
@@ -460,6 +958,8 @@ export default {
     height 100%
     width 100%
     font-size 0.8em
+.rest-label
+  padding-right 1ch
 
 .number-entry
   width 2.4ch
@@ -491,17 +991,24 @@ export default {
   @media screen and (max-width: desktop-min-width)
     grid-template-columns 1fr
 .injury-list-entry
-  display grid
-  grid-template-columns 1fr 1fr 3ch
-  grid-gap 10px
   background-color background-dark
   border-radius 5px
-  font-size 0.9em
   overflow hidden
-  > *:nth-child(1)
-    color accent-light
+  button
+    padding 0.5ex
+    border-top 1px solid button-bg-dark
+  @media screen and (max-width: tablet-min-width)
+    font-size 1.2em
+  button + button
+    border-left 1px solid button-bg-dark
 .injury-label, .injury-type
   padding 4px
+.stat-injury-grid
+  display grid
+  grid-template-columns 3fr 2fr
+  padding 0.5ex
+  > *:nth-child(1)
+    color accent-light
 
 .reference-list
   > h1 + h2
@@ -608,7 +1115,7 @@ export default {
 
 .reference-list
   .reference-entry-name
-    margin-top 1ex
+    align-self flex-end
     color accent-light
   .reference-entry-desc
     margin-top .5ex

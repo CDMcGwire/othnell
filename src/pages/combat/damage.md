@@ -75,8 +75,8 @@ make sense for the scenario.
 
 **Minor Effects**
 
-- **Minor Damage Over Time)** Take 1 damage at the end of your turn in
-  combat, stacking.
+- **Minor Damage Over Time)** Take 1 damage at the end of your turn in combat,
+  stacking.
 - **Slowed)** Can only walk or run at half speed.
 - **Weakend)** -1 Brawn, stacking.
 - **Staggered)** -1 Poise, stacking.
@@ -110,16 +110,17 @@ Outside of combat, there are two conventional methods for healing. Rest and
 proper aid by a doctor.
 
 If your character can sleep and eat as needed and maintains a low level of
-activity, they are condidered "resting." While resting, they lose wounds at a
-rate of -1 wound every 12 hours. Or effectively -2 wounds per full day of rest.
+activity, they are considered "resting." While resting, they lose wounds at a
+rate of -1 wound every 8 hours. Or effectively -3 wounds per full day of rest.
 If your character has any minor crippling effects, they lose them at the same
 rate.
 
-Combat, of course, interrupts rest. But other stressful activities include, but
-are not limited to, a rushed march, an acrobatic performance, or the like. It'd
-be cumbersome and impossible to list all activities, so the only other hard rule
-is: if it requires a Clash Roll or a Skill Check of 7 or more, it interrupts
-rest. Anything else is up to the DM to determine.
+Combat, of course, interrupts rest as does sleep deprivation (more than 24 hours
+without sleep). But other stressful activities include, but are not limited to,
+a rushed march, an acrobatic performance, or the like. It'd be cumbersome and
+impossible to list all activities, so the only other hard rule is: if it
+requires a Clash Roll or a Skill Check of 7 or more, it interrupts rest.
+Anything else is up to the DM to determine.
 
 If attended by an actual doctor or a party member with an appropriate domain,
 the rate of natural healing is doubled. Additionally, the doctor or medic may

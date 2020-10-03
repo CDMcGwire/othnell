@@ -27,7 +27,7 @@ export default function(Vue, { appOptions, router, head, isClient }) {
 
   appOptions.store = new Vuex.Store({
     state: {
-      activeCharacter: {
+      character: {
         name: 'My Character',
         title: 'New',
         brawn: 0,
@@ -35,29 +35,109 @@ export default function(Vue, { appOptions, router, head, isClient }) {
         memory: 0,
         wit: 0,
         charisma: 0,
+        damage: 0,
+        wounds: 0,
+        cognition: 8,
+        injuries: {
+          minorDot: 0,
+          severeDot: 0,
+          slowed: 0,
+          immobile: 0,
+          weakened: 0,
+          drained: 0,
+          staggered: 0,
+          unstable: 0,
+          distracted: 0,
+          amnesia: 0,
+          dulled: 0,
+          dazed: 0,
+        },
       },
     },
     mutations: {
-      setActiveCharacterName(state, name) {
-        state.activeCharacter.name = name
+      setCharacter(state, character) {
+        state.character = character
       },
-      setActiveCharacterTitle(state, title) {
-        state.activeCharacter.title = title
+      setCharacterName(state, name) {
+        state.character.name = name
       },
-      setActiveCharacterBrawn(state, brawn) {
-        state.activeCharacter.brawn = brawn
+      setCharacterTitle(state, title) {
+        state.character.title = title
       },
-      setActiveCharacterPoise(state, poise) {
-        state.activeCharacter.poise = poise
+      setCharacterBrawn(state, brawn) {
+        state.character.brawn = brawn
       },
-      setActiveCharacterMemory(state, memory) {
-        state.activeCharacter.memory = memory
+      setCharacterPoise(state, poise) {
+        state.character.poise = poise
       },
-      setActiveCharacterWit(state, wit) {
-        state.activeCharacter.wit = wit
+      setCharacterMemory(state, memory) {
+        state.character.memory = memory
       },
-      setActiveCharacterCharisma(state, charisma) {
-        state.activeCharacter.charisma = charisma
+      setCharacterWit(state, wit) {
+        state.character.wit = wit
+      },
+      setCharacterCharisma(state, charisma) {
+        state.character.charisma = charisma
+      },
+      setCharacterDamage(state, damage) {
+        state.character.damage = damage
+      },
+      setCharacterWounds(state, wounds) {
+        state.character.wounds = wounds
+      },
+      setCharacterCognition(state, cognition) {
+        state.character.cognition = cognition
+      },
+      setCharacterMinorDot(state, minorDot) {
+        state.character.injuries.minorDot = minorDot
+      },
+      setCharacterSevereDot(state, severeDot) {
+        state.character.injuries.severeDot = severeDot
+      },
+      setCharacterSlowed(state, slowed) {
+        state.character.injuries.slowed = slowed
+      },
+      setCharacterImmobile(state, immobile) {
+        state.character.injuries.immobile = immobile
+      },
+      setCharacterWeakened(state, weakened) {
+        state.character.injuries.weakened = weakened
+      },
+      setCharacterDrained(state, drained) {
+        state.character.injuries.drained = drained
+      },
+      setCharacterStaggered(state, staggered) {
+        state.character.injuries.staggered = staggered
+      },
+      setCharacterUnstable(state, unstable) {
+        state.character.injuries.unstable = unstable
+      },
+      setCharacterDistracted(state, distracted) {
+        state.character.injuries.distracted = distracted
+      },
+      setCharacterAmnesia(state, amnesia) {
+        state.character.injuries.amnesia = amnesia
+      },
+      setCharacterDulled(state, dulled) {
+        state.character.injuries.dulled = dulled
+      },
+      setCharacterDazed(state, dazed) {
+        state.character.injuries.dazed = dazed
+      },
+    },
+    actions: {
+      async save({ state }) {
+        window.localStorage.setItem(
+          'activeCharacter',
+          JSON.stringify(state.character),
+        )
+      },
+      async load({ commit }) {
+        const character = JSON.parse(
+          window.localStorage.getItem('activeCharacter'),
+        )
+        if (character === null) return
+        commit('setCharacter', character)
       },
     },
   })

@@ -1,5 +1,5 @@
 ---
-title: Animare
+title: Thaumaturgy
 layout: ~/layouts/Default.vue
 ---
 
@@ -10,7 +10,7 @@ known rules of the world quite literally. Such as bringing the dead back to
 life, changing water to wine, or bringing down a pillar of searing light in the
 pitch dark of a cave.
 
-The cost of these miracles is based on the edicts of their patron. The
+The cost of these miracles is based on the edicts of the worker's patron. The
 practitioner is expected to lead a life dedicated to the teachings of their
 patron and in return the patron lends their power in times of need.
 

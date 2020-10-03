@@ -271,6 +271,7 @@ export default {
   border-radius 0 0 20px 0
   font-size 1.2em
   text-align left
+  z-index 100
   @media screen and (max-width: tablet-min-width)
     display block
 .toolview
@@ -283,11 +284,13 @@ export default {
   overflow-x hidden
   overflow-y auto
   background-color background
+  scrollbar-width thin
   @media screen and (max-width: desktop-min-width)
     flex unset
     width 100%
 .toolview-content
   padding 15px 15px 80px 15px
+  
 </style>
 
 <static-query>
