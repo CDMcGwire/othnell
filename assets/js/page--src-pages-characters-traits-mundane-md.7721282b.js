@@ -1,0 +1,87 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["page--src-pages-characters-traits-mundane-md"],{
+
+/***/ "44th":
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--15-0!./node_modules/vue-loader/lib??ref--17-0!./node_modules/@gridsome/vue-remark/lib/loader.js??ref--17-1!./src/pages/characters/traits/mundane.md?vue&type=custom&index=0&blockType=vue-remark-import ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _layouts_Default_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ~/layouts/Default.vue */ \"6ipC\");\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ \"BeV2\");\nfunction _typeof(obj) { \"@babel/helpers - typeof\"; if (typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; }; } return _typeof(obj); }\n\n\n\nvar strats = vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"].config.optionMergeStrategies;\nvar imported = {\n  VueRemarkRoot: _layouts_Default_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"]\n};\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (Component) {\n  var components = Component.options.components = Component.options.components || {};\n  var computed = Component.options.computed = Component.options.computed || {};\n  Object.keys(imported).forEach(function (key) {\n    if (_typeof(imported[key]) === 'object' && typeof imported[key].render === 'function') {\n      components[key] = imported[key];\n    } else {\n      computed[key] = function () {\n        return imported[key];\n      };\n    }\n  });\n});\n\n//# sourceURL=webpack:///./src/pages/characters/traits/mundane.md?./node_modules/babel-loader/lib??ref--15-0!./node_modules/vue-loader/lib??ref--17-0!./node_modules/@gridsome/vue-remark/lib/loader.js??ref--17-1");
+
+/***/ }),
+
+/***/ "7r0u":
+/*!****************************************************************************************************!*\
+  !*** ./src/pages/characters/traits/mundane.md?vue&type=custom&index=0&blockType=vue-remark-import ***!
+  \****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_15_0_node_modules_vue_loader_lib_index_js_ref_17_0_node_modules_gridsome_vue_remark_lib_loader_js_ref_17_1_mundane_md_vue_type_custom_index_0_blockType_vue_remark_import__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--15-0!../../../../node_modules/vue-loader/lib??ref--17-0!../../../../node_modules/@gridsome/vue-remark/lib/loader.js??ref--17-1!./mundane.md?vue&type=custom&index=0&blockType=vue-remark-import */ \"44th\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_babel_loader_lib_index_js_ref_15_0_node_modules_vue_loader_lib_index_js_ref_17_0_node_modules_gridsome_vue_remark_lib_loader_js_ref_17_1_mundane_md_vue_type_custom_index_0_blockType_vue_remark_import__WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./src/pages/characters/traits/mundane.md?");
+
+/***/ }),
+
+/***/ "8LmX":
+/*!*********************************************************************************************************!*\
+  !*** ./src/pages/characters/traits/mundane.md?vue&type=custom&index=1&blockType=vue-remark-frontmatter ***!
+  \*********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_16_0_node_modules_vue_loader_lib_index_js_ref_17_0_node_modules_gridsome_vue_remark_lib_loader_js_ref_17_1_mundane_md_vue_type_custom_index_1_blockType_vue_remark_frontmatter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--16-0!../../../../node_modules/vue-loader/lib??ref--17-0!../../../../node_modules/@gridsome/vue-remark/lib/loader.js??ref--17-1!./mundane.md?vue&type=custom&index=1&blockType=vue-remark-frontmatter */ \"ZvKt\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_babel_loader_lib_index_js_ref_16_0_node_modules_vue_loader_lib_index_js_ref_17_0_node_modules_gridsome_vue_remark_lib_loader_js_ref_17_1_mundane_md_vue_type_custom_index_1_blockType_vue_remark_frontmatter__WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./src/pages/characters/traits/mundane.md?");
+
+/***/ }),
+
+/***/ "EHzU":
+/*!************************************************!*\
+  !*** ./src/pages/characters/traits/mundane.md ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _mundane_md_vue_type_template_id_026ce35f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mundane.md?vue&type=template&id=026ce35f& */ \"ihJl\");\n/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"KHd+\");\n/* harmony import */ var _mundane_md_vue_type_custom_index_0_blockType_vue_remark_import__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mundane.md?vue&type=custom&index=0&blockType=vue-remark-import */ \"7r0u\");\n/* harmony import */ var _mundane_md_vue_type_custom_index_1_blockType_vue_remark_frontmatter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mundane.md?vue&type=custom&index=1&blockType=vue-remark-frontmatter */ \"8LmX\");\n\nvar script = {}\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(\n  script,\n  _mundane_md_vue_type_template_id_026ce35f___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _mundane_md_vue_type_template_id_026ce35f___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* custom blocks */\n\nif (typeof _mundane_md_vue_type_custom_index_0_blockType_vue_remark_import__WEBPACK_IMPORTED_MODULE_2__[\"default\"] === 'function') Object(_mundane_md_vue_type_custom_index_0_blockType_vue_remark_import__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(component)\n\nif (typeof _mundane_md_vue_type_custom_index_1_blockType_vue_remark_frontmatter__WEBPACK_IMPORTED_MODULE_3__[\"default\"] === 'function') Object(_mundane_md_vue_type_custom_index_1_blockType_vue_remark_frontmatter__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(component)\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./src/pages/characters/traits/mundane.md?");
+
+/***/ }),
+
+/***/ "ZvKt":
+/*!**********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--16-0!./node_modules/vue-loader/lib??ref--17-0!./node_modules/@gridsome/vue-remark/lib/loader.js??ref--17-1!./src/pages/characters/traits/mundane.md?vue&type=custom&index=1&blockType=vue-remark-frontmatter ***!
+  \**********************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return initFrontMatter; });\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ \"BeV2\");\n\nvar strats = vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"].config.optionMergeStrategies;\nvar key = '__vueRemarkFrontMatter';\nvar data = {\n  \"excerpt\": null,\n  \"title\": \"Mundane Traits\"\n};\nfunction initFrontMatter(Component) {\n  if (Component.options[key]) {\n    Component.options[key] = data;\n  }\n\n  vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"].util.defineReactive(Component.options, key, data);\n  Component.options.computed = strats.computed({\n    $frontmatter: function $frontmatter() {\n      return Component.options[key];\n    }\n  }, Component.options.computed);\n}\n\n//# sourceURL=webpack:///./src/pages/characters/traits/mundane.md?./node_modules/babel-loader/lib??ref--16-0!./node_modules/vue-loader/lib??ref--17-0!./node_modules/@gridsome/vue-remark/lib/loader.js??ref--17-1");
+
+/***/ }),
+
+/***/ "ihJl":
+/*!*******************************************************************************!*\
+  !*** ./src/pages/characters/traits/mundane.md?vue&type=template&id=026ce35f& ***!
+  \*******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_cache_loader_dist_cjs_js_cacheDirectory_node_modules_cache_gridsome_cacheIdentifier_b49a0ad2_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_ref_17_0_node_modules_gridsome_vue_remark_lib_loader_js_ref_17_1_mundane_md_vue_type_template_id_026ce35f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"node_modules/.cache/gridsome\",\"cacheIdentifier\":\"b49a0ad2-vue-loader-template\"}!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??ref--17-0!../../../../node_modules/@gridsome/vue-remark/lib/loader.js??ref--17-1!./mundane.md?vue&type=template&id=026ce35f& */ \"uR6c\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_cache_loader_dist_cjs_js_cacheDirectory_node_modules_cache_gridsome_cacheIdentifier_b49a0ad2_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_ref_17_0_node_modules_gridsome_vue_remark_lib_loader_js_ref_17_1_mundane_md_vue_type_template_id_026ce35f___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_cache_loader_dist_cjs_js_cacheDirectory_node_modules_cache_gridsome_cacheIdentifier_b49a0ad2_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_ref_17_0_node_modules_gridsome_vue_remark_lib_loader_js_ref_17_1_mundane_md_vue_type_template_id_026ce35f___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack:///./src/pages/characters/traits/mundane.md?");
+
+/***/ }),
+
+/***/ "uR6c":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/gridsome","cacheIdentifier":"b49a0ad2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??ref--17-0!./node_modules/@gridsome/vue-remark/lib/loader.js??ref--17-1!./src/pages/characters/traits/mundane.md?vue&type=template&id=026ce35f& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('VueRemarkRoot',[_c('h1',{attrs:{\"id\":\"-frontmattertitle-\"}},[_c('a',{attrs:{\"href\":\"#-frontmattertitle-\",\"aria-hidden\":\"true\"}},[_c('span',{staticClass:\"icon icon-link\"},[_vm._v(\"🠶\")])]),_vm._v(_vm._s(_vm.$frontmatter.title))]),_c('p',[_vm._v(\"Mundane Traits are acquired every level. They help define your character and\\nimprove their capabilities, but not in ways that would be particularly\\n\"),_c('em',[_vm._v(\"exceptional\")]),_vm._v(\".\")]),_c('p',[_vm._v(\"Put another way, a Mundane Trait would differentiate a body builder from a\\nrunner, but would not do well to tell you which body builder could carry the\\nheaviest load or which could bend steel with his legs.\")]),_c('h2',{attrs:{\"id\":\"high-attribute-traits\"}},[_c('a',{attrs:{\"href\":\"#high-attribute-traits\",\"aria-hidden\":\"true\"}},[_c('span',{staticClass:\"icon icon-link\"},[_vm._v(\"🠶\")])]),_vm._v(\"High Attribute Traits\")]),_c('p',[_vm._v(\"Traits acquired automatically by having a +3 in the associated attribute.\")]),_c('h3',{attrs:{\"id\":\"inspiring-charisma-ref-adder-mutationaddmundanetrait-targetinspiring-\"}},[_c('a',{attrs:{\"href\":\"#inspiring-charisma-ref-adder-mutationaddmundanetrait-targetinspiring-\",\"aria-hidden\":\"true\"}},[_c('span',{staticClass:\"icon icon-link\"},[_vm._v(\"🠶\")])]),_vm._v(\"Inspiring (Charisma) \"),_c('ref-adder',{attrs:{\"mutation\":\"addMundaneTrait\",\"target\":\"inspiring\"}})],1),_c('p',[_c('em',[_vm._v(\"Your personal Charm is downright infectious. You bring an extra spark to your\\nparty and things go just a bit smoother when you're around.\")])]),_c('p',[_vm._v(\"If you have at least +1 in another attribute, you gain an additional effect.\")]),_c('ul',[_c('li',[_c('strong',[_vm._v(\"Brawn)\")]),_vm._v(\" The next ally to make a Clash Roll against a creature you\\n\"),_c('term',{attrs:{\"target\":\"intimidate\"}},[_vm._v(\"intimidate\")]),_vm._v(\" gets advantage on that action.\")],1),_c('li',[_c('strong',[_vm._v(\"Poise)\")]),_vm._v(\" If a nearby ally is about to make a Skill Check, you may trade one\\ncard from your hand with one from theirs, if they are willing. \"),_c('strong',[_c('em',[_vm._v(\"Only one\\ncard may be traded per check made.\")])])]),_c('li',[_c('strong',[_vm._v(\"Memory)\")]),_vm._v(\" Nearby allies may perform the\\n\"),_c('term',{attrs:{\"target\":\"deceive\"}},[_vm._v(\"decieve\")]),_vm._v(\" action as if they have a Charisma of +2.\")],1),_c('li',[_c('strong',[_vm._v(\"Wit)\")]),_vm._v(\" You can ask nearby teammates to donate a cognition token towards your\\nattempts to \"),_c('term',{attrs:{\"target\":\"persuade\"}},[_vm._v(\"persuade\")]),_vm._v(\". \"),_c('strong',[_c('em',[_vm._v(\"Max one token per teammate, per attempt.\")])])],1)])])}\nvar staticRenderFns = []\n\n\n\n//# sourceURL=webpack:///./src/pages/characters/traits/mundane.md?./node_modules/cache-loader/dist/cjs.js?%7B%22cacheDirectory%22:%22node_modules/.cache/gridsome%22,%22cacheIdentifier%22:%22b49a0ad2-vue-loader-template%22%7D!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??ref--17-0!./node_modules/@gridsome/vue-remark/lib/loader.js??ref--17-1");
+
+/***/ })
+
+}]);
