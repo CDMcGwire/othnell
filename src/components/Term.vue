@@ -87,6 +87,7 @@ button
   background-color transparent
 button:hover, button:focus, button:active
   color accent-sec-dark
+  background-color transparent
   opacity 1
 
 pixel-spinner

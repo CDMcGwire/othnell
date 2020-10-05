@@ -51,6 +51,8 @@ h2 + h3
   margin-top 1ex
 p + h1, p + h2, p + h3, ul + h2, ul + h3, blockquote + h1, blockquote + h2, blockquote + h3
   margin-top 3ex
+
+// TODO: Fix this. Not rendering correct on website. Need to fix the side tags.
 h1, h2, h3, h4, h5, h6
   display flex
   flex-direction row
@@ -73,16 +75,13 @@ h1, h2, h3, h4, h5, h6
   a:not(:first-child)
     color unset
   a:not(:first-child):hover, a:not(:first-child):focus
-    color accent-dark
+    color accent-link
   a:not(:first-child)::after
     content "❱"
     margin-left 0.5ch
     color accent-link
   a:not(:first-child):hover::after, a:not(:first-child):focus::after
     color accent-link-dark
-h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover
-  a
-    opacity 100%
 
 a
   transition background-color 0.2s
@@ -102,4 +101,3 @@ blockquote
 strong
   color foreground-strong
 </style>
-

@@ -28,6 +28,7 @@ button
   transition background-color 0.2s
   color button-fg
   background-color button-bg
+  cursor pointer
 button:hover, button:focus
   background-color button-hover
 button:active
@@ -165,56 +166,6 @@ li
   .tippy-content
     display flex
     flex-direction column
-
-nav.rule-nav
-  .TreeNavigation
-    padding 0 0 4ex 0
-    ul
-      display flex
-      flex-direction column
-      li
-        display flex
-        flex-direction row
-        padding-left 25px
-  .NavigationLevel
-    flex 1 1 auto
-  .NavigationLevel__parent
-    position relative
-    display flex
-    flex-direction row
-    align-items center
-  // .NavigationLevel__children
-  //   font-size 0.9em
-  .NavigationToggle
-    position absolute
-    display flex
-    justify-content center
-    align-items center
-    top auto
-    left -25px
-    width 22px
-    height 22px
-    padding 0
-    border 1px solid button-fg-faint
-    border-radius 9999px
-  .NavigationToggle__icon
-    transition transform 0.2s
-    border-color button-fg
-  .NavigationItem
-    transition background-color 0.2s
-    flex 1 1 auto
-    padding 0
-    a
-      transition background-color 0.2s
-      display block
-      width 100%
-      padding 1ex 2ch 1ex 0.5ch
-    a:hover, a:focus
-      color accent-light
-  .NavigationItem--active
-    background-color accent-dark
-  .NavigationLevel--closed ul
-    display none !important
 
 .bs-dropdown.flipped
   padding-top 50px

@@ -5,9 +5,9 @@ layout: ~/layouts/Default.vue
 
 # {{ $frontmatter.title }}
 
-## Human
-
-Vanilla
+Additional playable species which you may choose if you don't want your
+character to be human. Each has its strengths and weaknesses and will change
+what actions you can perform and the difficulty of some actions.
 
 ## Wyrm
 

@@ -6,6 +6,7 @@ import Vuex from 'vuex'
 import bs from '~/components/BetterSelect.vue'
 import RefAdder from '~/components/RefAdder.vue'
 import Term from '~/components/Term.vue'
+import NavTree from '~/components/NavTree.vue'
 import 'tippy.js/dist/tippy.css'
 import '~/assets/main.styl'
 
@@ -15,11 +16,7 @@ export default function(Vue, { appOptions, router, head, isClient }) {
   Vue.component('bs', bs)
   Vue.component('ref-adder', RefAdder)
   Vue.component('term', Term)
-  if (isClient) {
-    import('vue-tree-navigation')
-      .then(esm => Vue.use(esm))
-      .catch(msg => console.error('Failed to load tree nav. ' + msg))
-  }
+  Vue.component('nav-tree', NavTree)
 
   router.addRoutes([
     {
@@ -29,6 +26,7 @@ export default function(Vue, { appOptions, router, head, isClient }) {
     },
   ])
 
+  const wasClient = isClient
   appOptions.store = new Vuex.Store({
     state: {
       character: {
@@ -161,12 +159,14 @@ export default function(Vue, { appOptions, router, head, isClient }) {
     },
     actions: {
       async save({ state }) {
+        if (!wasClient) return
         window.localStorage.setItem(
           'activeCharacter',
           JSON.stringify(state.character),
         )
       },
       async load({ commit }) {
+        if (!wasClient) return
         const character = JSON.parse(
           window.localStorage.getItem('activeCharacter'),
         )

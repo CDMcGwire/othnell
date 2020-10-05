@@ -7,8 +7,8 @@ layout: ~/layouts/Default.vue
 
 ## Natural Artes
 
-Natural artes are closely related to natural sciences and follow strict rules and
-have predictable cause-and-effect results.
+Natural artes are closely related to natural sciences and follow strict rules
+and have predictable cause-and-effect results.
 
 Spells require the caster to use their body to channel the effect, thus
 unpracticed or overly eager casters can harm themselves by putting too much of a
@@ -29,18 +29,23 @@ user's head.
 
 ### [Energeia](magic/energeia)
 
+A magic which pertains to the manipulation of energy in its various forms.
+
 ### [Animare](magic/animare)
+
+A magic which pertains to the manipulation of biological processes.
 
 ## Supernatural Artes
 
 Supernatural artes bargain with otherworldly influences to further the user's
 goals. They are consequently both unpredictable and potentially very powerful.
 
-Supernatural artes are carried out by the mechanations of a powerful patron deity
-or a host of spirits. They are often negotiative in nature. A benevolant being,
-for instance, may require the practicioner to uphold a set of sacred laws and
-reward their dedication with direct assistance. A malevolant being may provide
-substantial power upfront but leave the cost vague and to be determined at will.
+Supernatural artes are carried out by the mechanations of a powerful patron
+deity or a host of spirits. They are often negotiative in nature. A benevolant
+being, for instance, may require the practicioner to uphold a set of sacred laws
+and reward their dedication with direct assistance. A malevolant being may
+provide substantial power upfront but leave the cost vague and to be determined
+at will.
 
 While the give and take of Supernatural Artes is in some ways similar to the
 cause and effect of Natural Artes, Supernatural Artes follow symbolic logic. The
@@ -50,9 +55,17 @@ instead have to lay prostrate with a hyssop branch in hand for an hour.
 
 ### [Thaumaturgy](magic/thaumaturgy)
 
+A magic in which the practitioner appeals to a powerful Patron to perform
+miracles.
+
 ### [Hemoturgy](magic/hemoturgy)
 
+A magic in which the practitioner offers blood for power.
+
 ## [THE RULE OF LAW](magic/rule-of-law)
+
+A magic which gives power to those who would enforce the law of the land in
+which they stand.
 
 ## Enchanting
 
@@ -67,6 +80,14 @@ enchanted object stays intact.
 
 ### [Essence Weaving](magic/essence-weaving)
 
+The craft of extracting the "essence" of one material and weaving it into
+another, selectively giving it the properties of the source material.
+
 ### [Soul Binding](magic/soul-binding)
 
+The craft of binding a soul to an inanimate object giving that object magical
+properties and varying levels of sentience.
+
 ### [Veneration](magic/veneration)
+
+The creation, use, and maintenance of holy relics and other divine objects.

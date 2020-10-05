@@ -20,10 +20,6 @@ If your display is wide enough, you should see two panels. This left panel will
 always contain the currently opened section of the rules. The right panel will
 contain the active tool (currently, a mockup of the Player Sheet).
 
-\[Not yet implemented\] ~~If you're on a smaller display, then you can swap
-between the two panels at any time by swiping left and right, or by clicking or
-tapping the screen edges.~~
-
 Throughout the Ruleset, you will see <term target="demo-term">Terms like
 this</term>. Mouse over and hold (or tap on a touch device) to see a popup
 giving a brief explanation of the term.

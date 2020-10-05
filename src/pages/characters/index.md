@@ -5,3 +5,42 @@ layout: ~/layouts/Default.vue
 
 # {{ $frontmatter.title }}
 
+Every player needs a Character, which represents them in the game world and
+determines their available actions and chances of success. You start with an
+image in your head of the type of person you want to play as, then determine
+what attributes, proficiencies, and traits would best realize that idea.
+
+## [Attributes](characters/attributes)
+
+Attributes determine the high level of your character's strengths and weaknesses
+and thus set your general playstyle in the game. Each attribute has a direct
+effect on how you engage in the different mechanics. You will need to select
+which ones your character has a bonus in and which (if any) the receive a
+penalty in.
+
+> Why receive a penalty in an attribute? Because it will allow you to gain a
+> greater bonus in another. Just be sure that you're ready to close some "doors
+> of opportunity" before you do so.
+
+## [Races](characters/races)
+
+There are several playable species in the setting of Othnell besides humans.
+While it has little direct effect on the Core Mechanics, your race does
+determine what kind of actions are even feasible for your character. For
+instance, playing a Wyrm means you have the option to fly at-will.
+
+## [Proficiencies](characters/proficiencies)
+
+Proficiencies represent your character's training and knowledge of specialized
+topics. Candidates for proficiencies are tasks which would be nearly impossible
+for someone to pick up and accomplish on instinct.
+
+**If your character has any combat ability, these will be what determines the
+weapons and magic you can wield.**
+
+## [Traits](characters/traits)
+
+Traits represent aspects of your personality and physiology which are
+significantly different from the norm. In terms of gameplay, these allow you to
+make more detailed adjustments to your playstyle by changing when and how you
+interact with the Core Mechanics.

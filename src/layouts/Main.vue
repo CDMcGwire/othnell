@@ -4,33 +4,28 @@
       <span class="title">Othnell</span>
     </div>
     <div class="main row m-center">
-      <div class="row reader-wrapper m-end">
-        <div class="reader">
-          <nav class="row rule-nav">
-            <div class="row section-select-container">
-              <button
-                id="section-select"
-                href="#"
-                class="txt-left"
-                aria-haspopup="true"
-                ref="navbutton"
-              >
-                Select Section
-              </button>
-              <div class="col" ref="navtree">
-                <ClientOnly>
-                  <vue-tree-navigation :items="routes" :defaultOpenLevel="0" />
-                </ClientOnly>
-              </div>
-            </div>
-            <input
-              id="section-search"
-              type="text"
-              placeholder="Search... (not yet implemented)"
-            />
-          </nav>
-          <slot />
+      <nav :class="['section-nav', { open: navOpen }]" >
+        <button class="nav-close-bttn" @click="navOpen = false">
+          Close
+        </button>
+        <nav-tree :routes="routes" />
+      </nav>
+      <div class="reader">
+        <div class="row panel-buttons">
+          <button
+            :class="['section-nav-open-bttn', { 'nav-open': navOpen }]"
+            @click="navOpen = true"
+          >
+            Section Select
+          </button>
+          <button
+            :class="['toolview-open-bttn', {'toolview-open': toolviewOpen}]"
+            @click="toolviewOpen = true"
+          >
+            Character Sheet
+          </button>
         </div>
+        <slot />
       </div>
       <div
         :class="[
@@ -40,12 +35,6 @@
           { 'toolview-open': toolviewOpen },
         ]"
       >
-        <button
-          class="toolview-bttn toolview-bttn-open"
-          @click="toolviewOpen = true"
-        >
-          Character Sheet
-        </button>
         <div class="toolview">
           <button
             class="toolview-bttn toolview-bttn-close"
@@ -74,10 +63,11 @@ export default {
   data() {
     return {
       toolviewOpen: false,
+      navOpen: false,
       routes: [
         {
           name: 'Home',
-          path: '/home',
+          path: '/',
         },
         {
           name: 'Core Rules',
@@ -104,12 +94,16 @@ export default {
               path: '/traits',
               children: [
                 {
+                  name: 'Attribute',
+                  path: '/attribute',
+                },
+                {
                   name: 'Mundane',
                   path: '/mundane',
                 },
                 {
-                  name: 'Heroic',
-                  path: '/heroic',
+                  name: 'Exceptional',
+                  path: '/exceptional',
                 },
               ],
             },
@@ -166,29 +160,6 @@ export default {
       ],
     }
   },
-  mounted() {
-    tippy(this.$refs.navbutton, {
-      content: this.$refs.navtree,
-      arrow: false,
-      allowHTML: true,
-      interactive: true,
-      maxWidth: 600,
-      offset: 0,
-      placement: 'bottom-start',
-      theme: 'section-nav',
-      popperOptions: {
-        padding: 0,
-        modifiers: [
-          {
-            name: 'preventOverflow',
-            options: {
-              mainAxis: false,
-            },
-          },
-        ],
-      },
-    })
-  },
 }
 </script>
 
@@ -206,49 +177,83 @@ export default {
 .title
   padding 4px 15px
 
-.reader-wrapper
-  flex 1 1 800px
-  @media screen and (max-width: desktop-min-width)
-    flex 1 1 100%
+.section-nav
+  flex 0 1 400px
+  position sticky
+  top 40px
+  height calc(100vh - 40px)
+  color foreground-nav
+  background-color background-nav
+  overflow-y scroll
+  overflow-x hidden
+  z-index 1000
+  @media screen and (max-width: fullsize-min-width)
+    transition transform 0.5s
+    position fixed
+    top 40px
+    left 0
+    width min(calc(80vw), 300px)
+    transform translateX(min(calc(-80vw), -300px))
+    background-color background-nav-mobile
+  @media screen and (max-width: tablet-min-width)
+    width 100vw
+    transform translateX(-100vw)
+    background-color background-nav-mobile
+.nav-close-bttn
+  display none
+  position absolute
+  top 0
+  right 0
+  padding 0.5ex 1ch
+  border-left 2px solid accent-pri
+  border-bottom 2px solid accent-pri
+  border-radius 0 0 0 20px
+  @media screen and (max-width: fullsize-min-width)
+    display block
+
+@media screen and (max-width: fullsize-min-width)
+  .section-nav.open
+    transform translateX(0)
 
 .reader
   position relative
-  flex 0 1 800px
-  min-width 300px
+  flex 0 1 700px
+  min-height calc(100vh - 80px)
   background-color background-dark
   @media screen and (max-width: desktop-min-width)
     flex 1 1 100%
-
-  nav
-    position sticky
-    top 40px
-    height 40px
-    font-size 1.1em
-    z-index 100
-    @media screen and (max-width: desktop-min-width)
-      font-size 0.9em
-
-  .section-select-container
-    flex 0 1 18ch
-
-  #section-select
+.panel-buttons
+  position sticky
+  top 40px
+  z-index 50
+  font-size 1.2em
+.section-nav-open-bttn
+  display none
+  transition opacity 0.2s
+  padding 0.5ex 1ch
+  border-right 2px solid accent-pri
+  border-bottom 2px solid accent-pri
+  border-radius 0 0 20px 0
+  @media screen and (max-width: fullsize-min-width)
+    display block
+  @media screen and (max-width: tablet-min-width)
     flex 1 1 auto
-    height 100%
-    padding 0 2ch
-    color button-fg
-    background-color button-bg
-    @media screen and (max-width: desktop-min-width)
-      padding 0 1.5ch
-  #section-select[aria-expanded="true"]
-    background-color accent-dark
-
-  #section-search
-    flex 1 1 12ch
-    padding-left 1ch
-    padding-right 1ch
+    border-radius 0
+    border-right 1px solid accent-pri
+.section-nav-open-bttn.nav-open
+  opacity 0.4
+.toolview-open-bttn
+  display none
+  flex 1 1 auto
+  border-left 1px solid accent-pri
+  border-bottom 2px solid accent-pri
+  @media screen and (max-width: tablet-min-width)
+    display block
+.toolview-open-bttn.toolview-open
+  opacity 0.4
 
 .toolview-wrapper
-  flex 1 1 600px
+  flex 0 1 600px
   z-index 100
   @media screen and (max-width: tablet-min-width)
     transition transform 0.5s
@@ -261,28 +266,12 @@ export default {
 .toolview-wrapper.toolview-open
   @media screen and (max-width: tablet-min-width)
     transform translateX(0vw)
-.toolview-bttn-open
-  display none
-  position fixed
-  top 45px
-  left -35px
-  width 35px
-  height 16ch
-  border-top 2px solid accent-pri
-  border-left 2px solid accent-pri
-  border-bottom 2px solid accent-pri
-  border-radius 10px 0 0 10px
-  writing-mode vertical-rl
-  @media screen and (max-width: tablet-min-width)
-    display block
 .toolview-bttn-close
   display none
   position fixed
   top 0
   left 0
-  width 7ch
-  height 48px
-  padding 0.3ex 15px
+  padding 0.5ex 1ch
   border-right 2px solid accent-pri
   border-bottom 2px solid accent-pri
   border-radius 0 0 20px 0
@@ -307,6 +296,14 @@ export default {
     width 100%
 .toolview-content
   padding 15px 15px 80px 15px
+</style>
+
+<style lang="stylus">
+.section-nav
+  font-size 1.2em
+  .nav-tree-link
+    padding 0.5ex
+    width 100%
 </style>
 
 <static-query>
