@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style lang="stylus">
-@require '../assets/colors.styl'
+@require '../assets/vars.styl'
 
 .reference-entry-name
   display flex

@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&display=swap')
-@require 'colors.styl'
+@require 'vars.styl'
 
 *
   box-sizing border-box
@@ -70,7 +70,7 @@ li
 .row-mobile-col
   display flex
   flex-direction row
-  @media screen and (max-width: desktop-min-width)
+  @media screen and (max-width: wide-tablet-width)
     flex-direction column
 
 .col
@@ -80,7 +80,7 @@ li
 .col-mobile-row
   display flex
   flex-direction column
-  @media screen and (max-width: desktop-min-width)
+  @media screen and (max-width: wide-tablet-width)
     flex-direction row
 
 .grow
@@ -152,20 +152,6 @@ li
       margin-top 1ex
     > *:first-child
       margin-top 0
-
-.tippy-box[data-theme~='section-nav']
-  min-width 30ch
-  height calc(100vh - 80px)
-  margin 0
-  padding 0
-  border-radius 0
-  background-color button-bg
-  overflow-y auto
-  a
-    color button-fg
-  .tippy-content
-    display flex
-    flex-direction column
 
 .bs-dropdown.flipped
   padding-top 50px

@@ -7,7 +7,7 @@
     >
       <router-link
         :to="basePath + route.path"
-        v-slot="{ href, isActive, isExactActive }"
+        v-slot="{ href, navigate, isActive, isExactActive }"
       >
         <div
           :class="[
@@ -23,11 +23,12 @@
             :class="['nav-tree-arrow']"
             ref="arrows"
           />
-          <g-link
+          <a
             v-if="route.path !== undefined"
-            :to="href"
+            :href="href"
+            @click="navigate"
             :class="['nav-tree-link']"
-            >{{ route.name }}</g-link
+            >{{ route.name }}</a
           >
           <div v-else>{{ route.name }}</div>
         </div>

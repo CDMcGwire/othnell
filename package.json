@@ -9,6 +9,8 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "source-map-resolve": "^0.6.0",
+    "@gridsome/cli": "^0.3.4",
     "@gridsome/transformer-remark": "^0.6.1",
     "@gridsome/transformer-yaml": "^0.2.1",
     "@gridsome/vue-remark": "^0.2.2",
@@ -26,7 +28,8 @@
     "vue-server-renderer": "2.6.12",
     "vue-template-compiler": "^2.6.12",
     "vue-tree-navigation": "^4.0.1",
-    "vuex": "^3.5.1"
+    "vuex": "^3.5.1",
+    "chokidar": "^3.4.2"
   },
   "devDependencies": {
     "stylus": "^0.54.7",

@@ -5,14 +5,14 @@
 </template>
 
 <style lang="stylus" scoped>
-@require '../assets/colors.styl'
+@require '../assets/vars.styl'
 
 .layout
-  padding 40px 2ch 120px 2.5ch
+  padding banner-height 2ch 120px 2.5ch
 
 .layout > p, .layout > ul, .layout > blockquote
   padding-right 20%
-  @media screen and (max-width: desktop-min-width)
+  @media screen and (max-width: wide-tablet-width)
     padding-right 10%
 
 p, li
@@ -59,28 +59,37 @@ h1, h2, h3, h4, h5, h6
   align-items center
   position relative
   a:first-child
-    transition background-color 0.2s
+    transition opacity 0.2s
     display flex
-    flex-direction row
+    flex-direction column
     align-items center
     position absolute
     left -30px
-    height 1.5em
+    height 100%
     color accent-link
-    font-size 1.6rem
     opacity 0%
+    .icon
+      font-size 1.6rem
+      height 100%
   a:first-child:hover
     color accent-link-dark
     opacity 100%
+  &:hover
+    a:first-child
+      opacity 100%
   a:not(:first-child)
-    color unset
-  a:not(:first-child):hover, a:not(:first-child):focus
+    color inherit
+  a:not(:first-child):hover
+    color accent-link
+  a:not(:first-child):focus
     color accent-link
   a:not(:first-child)::after
     content "❱"
     margin-left 0.5ch
     color accent-link
-  a:not(:first-child):hover::after, a:not(:first-child):focus::after
+  a:not(:first-child):hover::after
+    color accent-link-dark
+  a:not(:first-child):focus::after
     color accent-link-dark
 
 a

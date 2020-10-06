@@ -816,7 +816,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@require '../assets/colors.styl'
+@require '../assets/vars.styl'
 
 .spacer-sheet
   flex 0 0 2px
@@ -827,7 +827,7 @@ export default {
   width 100px
   height 100px
   background center / contain no-repeat url('https://previews.123rf.com/images/markusgann/markusgann0904/markusgann090400005/4595771-an-illustration-of-a-square-wooden-frame.jpg')
-  @media screen and (max-width: desktop-min-width)
+  @media screen and (max-width: wide-tablet-width)
     align-self center
     width 180px
     height 180px
@@ -837,7 +837,7 @@ export default {
     margin 10px
     border none
     background-color black
-    @media screen and (max-width: desktop-min-width)
+    @media screen and (max-width: wide-tablet-width)
       margin 25px
       width 130px
       height 130px
@@ -857,7 +857,7 @@ export default {
 .title-row
   justify-content flex-end
   align-items center
-  @media screen and (max-width: desktop-min-width)
+  @media screen and (max-width: wide-tablet-width)
     justify-content flex-start
     align-items center
     max-width 100%
@@ -867,7 +867,7 @@ export default {
   margin-left 10px
   font-size 2em
   overflow hidden
-  @media screen and (max-width: desktop-min-width)
+  @media screen and (max-width: wide-tablet-width)
     margin-top 1ex
     margin-left 0
     width 100%
@@ -875,27 +875,27 @@ export default {
   input
     color accent-light
     background-color transparent
-    @media screen and (max-width: desktop-min-width)
+    @media screen and (max-width: wide-tablet-width)
       width 100%
       text-align center
 
 #char-title
   margin-left 10px
   padding-bottom 15px
-  @media screen and (max-width: desktop-min-width)
+  @media screen and (max-width: wide-tablet-width)
     align-items center
     margin-left 0
     padding-bottom 0
     width 100%
   .title-prefix
     margin-right 0.5ch
-    @media screen and (max-width: desktop-min-width)
+    @media screen and (max-width: wide-tablet-width)
       margin-top 0.4ex
   input
     width 40ch
     color accent-light
     background-color transparent
-    @media screen and (max-width: desktop-min-width)
+    @media screen and (max-width: wide-tablet-width)
       margin-top 0.4ex
       width 100%
       text-align center
@@ -906,7 +906,7 @@ export default {
   grid-template-columns 1fr 1fr
   grid-gap 5px
   font-size 1.3em
-  @media screen and (max-width: desktop-min-width)
+  @media screen and (max-width: wide-tablet-width)
     grid-template-columns 1fr
   > div
     padding 5px
@@ -968,7 +968,7 @@ export default {
   grid-template-columns 1fr 1fr
   grid-auto-rows min-content
   grid-gap 5px
-  @media screen and (max-width: desktop-min-width)
+  @media screen and (max-width: wide-tablet-width)
     grid-template-columns 1fr
 .injury-list-entry
   background-color background-dark
@@ -977,7 +977,7 @@ export default {
   button
     padding 0.5ex
     border-top 1px solid button-bg-dark
-  @media screen and (max-width: tablet-min-width)
+  @media screen and (max-width: portrait-tablet-width)
     font-size 1.2em
   button + button
     border-left 1px solid button-bg-dark
@@ -1016,14 +1016,14 @@ export default {
 </style>
 
 <style lang="stylus">
-@require '../assets/colors.styl'
+@require '../assets/vars.styl'
 
 .char-attr-grid
   display grid
   grid-template-columns 1fr 1fr
   grid-template-rows 2fr 1fr
   grid-template-areas "input input" "down up"
-  @media screen and (max-width: desktop-min-width)
+  @media screen and (max-width: wide-tablet-width)
     grid-template-columns 1fr 1.2fr 1fr
     grid-template-rows 1fr
     grid-template-areas "down input up"
@@ -1041,32 +1041,32 @@ export default {
   font-size 1.2em
   text-align center
   overflow hidden
-  @media screen and (max-width: desktop-min-width)
+  @media screen and (max-width: wide-tablet-width)
     max-width unset
     border-radius 25px
     font-size 1.4em
   .attribute-label
     padding .4ex 0 0 0
-    @media screen and (max-width: desktop-min-width)
+    @media screen and (max-width: wide-tablet-width)
       padding 1ex 1ch
   .number-input-field
     min-width 2ch
     width 100%
     font-size 1.8em
     order 0
-    @media screen and (max-width: desktop-min-width)
+    @media screen and (max-width: wide-tablet-width)
       width 3ch
       font-size 1.4em
   .number-input-bttn
     order 1
     border-radius 0
-  @media screen and (max-width: desktop-min-width)
+  @media screen and (max-width: wide-tablet-width)
     .number-input-down
       border-radius 25px 0 0 25px
     .number-input-up
       border-radius 0 25px 25px 0
 
-@media screen and (max-width: desktop-min-width)
+@media screen and (max-width: wide-tablet-width)
   .char-attribute + .char-attribute
     margin-top 5px
 
