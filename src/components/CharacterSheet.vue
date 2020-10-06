@@ -1,7 +1,7 @@
 <template>
   <div class="col container">
     <div class="row-mobile-col">
-      <div class="frame">
+      <!-- <div class="frame">
         <button id="portrait-upload">
           <img
             id="char-portrait"
@@ -9,7 +9,7 @@
             alt="Character Portrait"
           />
         </button>
-      </div>
+      </div> -->
       <div class="col title-row">
         <div id="char-name">
           <input v-model="name" type="text" placeholder="Character Name" />
