@@ -45,10 +45,12 @@
 
 <script>
 import CharacterSheet from '~/components/CharacterSheet.vue'
+import NavTree from '~/components/NavTree.vue'
 
 export default {
   components: {
     CharacterSheet: CharacterSheet,
+    NavTree: NavTree,
   },
   data() {
     return {

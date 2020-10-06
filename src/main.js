@@ -6,7 +6,6 @@ import Vuex from 'vuex'
 import bs from '~/components/BetterSelect.vue'
 import RefAdder from '~/components/RefAdder.vue'
 import Term from '~/components/Term.vue'
-import NavTree from '~/components/NavTree.vue'
 import 'tippy.js/dist/tippy.css'
 import '~/assets/main.styl'
 
@@ -16,7 +15,6 @@ export default function(Vue, { appOptions, router, head, isClient }) {
   Vue.component('bs', bs)
   Vue.component('ref-adder', RefAdder)
   Vue.component('term', Term)
-  Vue.component('nav-tree', NavTree)
 
   router.addRoutes([
     {
