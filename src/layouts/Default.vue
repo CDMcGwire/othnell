@@ -52,7 +52,6 @@ h2 + h3
 p + h1, p + h2, p + h3, ul + h2, ul + h3, blockquote + h1, blockquote + h2, blockquote + h3
   margin-top 3ex
 
-// TODO: Fix this. Not rendering correct on website. Need to fix the side tags.
 h1, h2, h3, h4, h5, h6
   display flex
   flex-direction row

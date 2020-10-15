@@ -800,7 +800,7 @@ export default {
       if (this.cognition > this.cognitionMax) this.cognition = this.cognitionMax
     },
     applyDot() {
-      if (this.minorDot > 0) this.damage += this.minorDot > 0
+      if (this.minorDot > 0) this.damage += this.minorDot
       if (this.severeDot > 0)
         this.damage += Math.ceil(Math.random() * 3 + (this.severeDot - 1))
     },
