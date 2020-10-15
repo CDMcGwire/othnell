@@ -252,7 +252,7 @@ import ChararacterAttribute from './ChararacterAttribute.svelte'
     .section-divider
       width 100%
       height 1px
-      margin 10px 0
+      margin 15px 0
       background-color accent-pri
     .section-header
       font-size 1.6em
@@ -521,7 +521,7 @@ import ChararacterAttribute from './ChararacterAttribute.svelte'
   {#if dead}
     <div class="char-death-panel">
       <div>{$name} is Dead</div>
-      <button class="char-revive-bttn" on:click={revive}></button>
+      <button class="basic-input" on:click={revive}>Revive</button>
     </div>
   {:else}
     <div class="char-dmg-grid">
@@ -587,34 +587,34 @@ import ChararacterAttribute from './ChararacterAttribute.svelte'
     </div>
     <div class="char-injury-trackers">
       <InjuryTracker bind:minor={$minorDot}
-                    bind:severe={$severeDot}
-                    effect={totalDot}
-                    actions={[{name: 'Apply', handler: applyDot}]}>
+                     bind:severe={$severeDot}
+                     effect={totalDot}
+                     actions={[{name: 'Apply', handler: applyDot}]}>
         Damage Over Time
       </InjuryTracker>
       <InjuryTracker bind:minor={$slowed}
-                    bind:severe={$immobile}
-                    effect={totalSlow}>
+                     bind:severe={$immobile}
+                     effect={totalSlow}>
         Slowed
       </InjuryTracker>
       <InjuryTracker bind:minor={$weakened}
-                    bind:severe={$drained}
-                    effect={totalWeaken}>
+                     bind:severe={$drained}
+                     effect={totalWeaken}>
         Weakened
       </InjuryTracker>
       <InjuryTracker bind:minor={$staggered}
-                    bind:severe={$unstable}
-                    effect={totalStagger}>
+                     bind:severe={$unstable}
+                     effect={totalStagger}>
         Staggered
       </InjuryTracker>
       <InjuryTracker bind:minor={$confused}
-                    bind:severe={$amnesia}
-                    effect={totalConfusion}>
+                     bind:severe={$amnesia}
+                     effect={totalConfusion}>
         Confused
       </InjuryTracker>
       <InjuryTracker bind:minor={$distracted}
-                    bind:severe={$dazed}
-                    effect={totalDistraction}>
+                     bind:severe={$dazed}
+                     effect={totalDistraction}>
         Distracted
       </InjuryTracker>
     </div>
@@ -622,7 +622,7 @@ import ChararacterAttribute from './ChararacterAttribute.svelte'
   <div class="section-divider" />
   <div class="char-sheet-section char-ref-list char-proficiencies col">
     <div class="section-header">
-      <a href="/characters/proficiencies">Proficiencies</a>
+      <a href="/characters/proficiencies" on:click={close}>Proficiencies</a>
     </div>
   {#if $proficiencies.length > 0}
   {#each $proficiencies as proficiency, i (proficiency)}
@@ -639,15 +639,15 @@ import ChararacterAttribute from './ChararacterAttribute.svelte'
   <div class="section-divider" />
   <div class="char-sheet-section char-ref-list char-traits col">
     <div class="section-header">
-      <a href="/characters/traits/mundane">Mundane Traits</a>
+      <a href="/characters/traits/mundane" on:click={close}>Mundane Traits</a>
     </div>
   {#if $mundaneTraits.length > 0}
   {#each $mundaneTraits as trait, i (trait)}
     <ReferenceEntry target={trait}
                     on:follow={close}
                     on:remove={() => $mundaneTraits = removeFromList($mundaneTraits, i)}
-                    baseRulesUrl="/characters/proficiencies"
-                    baseRefUrl="/ref/proficiencies" />
+                    baseRulesUrl="/characters/traits/mundane"
+                    baseRefUrl="/ref/traits/mundane" />
   {/each}
   {:else}
     <div class="char-empty-ref-list">Your character has no mundane traits yet...</div>
@@ -656,15 +656,15 @@ import ChararacterAttribute from './ChararacterAttribute.svelte'
   <div class="char-sheet-section char-ref-list char-traits col">
     <div class="section-divider" />
     <div class="section-header">
-      <a href="/characters/traits/exceptional">Exceptional Traits</a>
+      <a href="/characters/traits/exceptional" on:click={close}>Exceptional Traits</a>
     </div>
   {#if $exceptionalTraits.length > 0}
   {#each $exceptionalTraits as trait, i (trait)}
     <ReferenceEntry target={trait}
                     on:follow={close}
                     on:remove={() => $exceptionalTraits = removeFromList($exceptionalTraits, i)}
-                    baseRulesUrl="/characters/proficiencies"
-                    baseRefUrl="/ref/proficiencies" />
+                    baseRulesUrl="/characters/traits/exceptional"
+                    baseRefUrl="/ref/traits/exceptional" />
   {/each}
   {:else}
     <div class="char-empty-ref-list">Your character has no exceptional traits yet...</div>

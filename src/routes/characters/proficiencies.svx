@@ -25,7 +25,9 @@ one "arte" of magic does not imply proficiency in any other. Having proficiency
 in an arte is the first requirement to allow your character to use its spell,
 rituals, and techniques.
 
-### [Thaumaturgy](/magic/thaumaturgy) <RefAdder type="proficiency" target="thaumaturgy" />
+### [Thaumaturgy](/magic/thaumaturgy)
+
+<RefAdder type="proficiency" target="thaumaturgy" />
 
 Thaumaturgy is the art of performing miracles by petitioning some patron of
 Supernatural origin. You will be able to bend the world with your prayers, but

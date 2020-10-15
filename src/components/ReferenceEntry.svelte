@@ -44,5 +44,5 @@
     </div>
     <TwoStageButton on:click={() => dispatch('remove')}>Remove</TwoStageButton>
   </div>
-  <div class="ref-entry-content">{referenceDesc}</div>
+  <div class="ref-entry-content">{@html referenceDesc}</div>
 </div>

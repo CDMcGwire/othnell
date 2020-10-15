@@ -362,11 +362,8 @@
         color foreground-strong
     .hidden
       display none !important
-    
-    @media screen and (min-width: tablet-width)
-      .tool
-        .char-sheet
-          padding-bottom 160px
+    .char-sheet
+      padding-bottom 160px
 </style>
 
 <GlobalStyles />
@@ -388,5 +385,5 @@
 </main>
 <div class="tool" class:open={toolOpen}>
   <button class="tool-close-bttn" on:click={() => toolOpen = false}>Close</button>
-  <CharacterSheet />
+  <CharacterSheet on:close={() => toolOpen = false} />
 </div>

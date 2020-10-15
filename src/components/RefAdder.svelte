@@ -27,11 +27,12 @@
     display flex
     justify-content center
     align-items center
-    width 1.1em
-    height 1.1em
-    margin-left 1ch
+    margin-top -5px
+    margin-bottom 10px
+    padding 0.2em 0.4em
     border-radius 9999px
+    font-size 0.9em
     text-align center
 </style>
 
-<button class="ref-adder" on:click={add}>+</button>
+<button class="ref-adder" on:click={add}>+ Add To Character</button>
