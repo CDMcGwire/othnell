@@ -2,6 +2,10 @@
 title: Core Gameplay
 ---
 
+<script>
+import Term from '../../components/Term.svelte'
+</script>
+
 # {title}
 
 The actual gameplay elements that players will engage with. That is, when the
@@ -42,10 +46,7 @@ Every character has five defining characteristics called "Attributes" which are
 each represented by a number from -1 to 3. These numbers have an influence on
 results of the mechanics described below.
 
-The five attributes are: <term target="attr-brawn">Brawn</term>,
-<term target="attr-poise">Poise</term>,
-<term target="attr-memory">Memory</term>, <term target="attr-wit">Wit</term>,
-and <term target="attr-charisma">Charisma</term>.
+The five attributes are: <Term target="attr-brawn">Brawn</Term>, <Term target="attr-poise">Poise</Term>, <Term target="attr-memory">Memory</Term>, <Term target="attr-wit">Wit</Term>, and <Term target="attr-charisma">Charisma</Term>.
 
 ## Player Actions
 

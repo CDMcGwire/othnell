@@ -138,6 +138,8 @@
     filter drop-shadow(0 2px 10px black)
     .tippy-arrow
       color tooltip-bg
+    strong
+      color black
     blockquote
       margin 0
       padding 0 0 0 1ch
