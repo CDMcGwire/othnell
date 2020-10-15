@@ -1,5 +1,10 @@
+<script lang="ts" context="module">
+  let overlayDiv: HTMLElement
+  let overlayContentDiv: HTMLElement
+</script>
+
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
+  import { createEventDispatcher, onMount } from 'svelte'
 
   class OptionInput {
     name: string
@@ -26,6 +31,7 @@
   const listings: Array<OptionListing> = []
   const finalOptions: Array<Option> = []
   let open = false
+  let dropdownOpen = false
   export let current = 0
   let flipped = false
   $: setInitial(initial)
@@ -69,7 +75,7 @@
         if (event.defaultPrevented) return
         if (open) {
           select(current)
-          open = false
+          setOpen(false)
         }
         break;
       default:
@@ -77,6 +83,7 @@
     }
   }
   function handleBlur(event: FocusEvent) {
+    if (!dropdownOpen) return
     const currentTarget = event.currentTarget as HTMLElement
     const relatedTarget = event.relatedTarget as HTMLElement
     if (currentTarget.contains(relatedTarget)) return
@@ -84,7 +91,9 @@
   }
   function navigate(target: number) {
     if (options.length < 1) return
+    if (!dropdownOpen) overlayContentDiv.children[current].classList.remove('current')
     current = clampCurrent(target)
+    if (!dropdownOpen) overlayContentDiv.children[current].classList.add('current')
     if (open) optionElements[current].scrollIntoView(false)
     else select(current)
   }
@@ -96,16 +105,19 @@
   function setOpen(value: boolean) {
     open = value
     if (open) size()
+    else if (window.innerWidth < 760) {
+      overlayDiv.classList.remove('open')
+    }
   }
   function size() {
     if (!window) return
     const bounds = container.getBoundingClientRect()
     const distToBot = window.innerHeight - bounds.bottom
     flipped = false
+    dropdownOpen = true
     if (window.innerWidth < 760) {
-      dropdown.style.removeProperty('top')
-      dropdown.style.removeProperty('bottom')
-      dropdown.style.removeProperty('max-height')
+      populateOverlay()
+      dropdownOpen = false
     } else if (distToBot > 200) {
       dropdown.style.top = '100%'
       dropdown.style.removeProperty('bottom')
@@ -132,6 +144,34 @@
       if (current >= finalOptions.length)
         current = clampCurrent(finalOptions.length - 1)
     }
+  }
+  function populateOverlay() {
+    overlayDiv.classList.add('open')
+    overlayDiv.onclick = event => {
+      if (event.target === overlayDiv) setOpen(false)
+    }
+
+    for (let i = overlayContentDiv.childElementCount; i < listings.length; i++)
+      overlayContentDiv.appendChild(document.createElement('div'))
+    
+    let i = 0
+    for (; i < listings.length; i++) {
+      const option = overlayContentDiv.children[i] as HTMLElement
+      const listing = listings[i]
+      if ('index' in listing) {
+        option.className = 'select-overlay-option' + (listing.grouped ? ' grouped' : '')
+        if (listing.index === current) option.classList.add('current')
+        option.onclick = () => { select(listing.index); setOpen(false); }
+      }
+      else {
+        option.className = 'select-overlay-group'
+        option.onclick = null
+      }
+      option.textContent = listing.name ? listing.name : '- None -'
+      option.style.removeProperty('display')
+    }
+    for(; i < overlayContentDiv.childElementCount; i++)
+      (overlayContentDiv.children[i] as HTMLElement).style.display = 'none'
   }
 
   // Flatten the list of options
@@ -167,6 +207,17 @@
       })
     }
   }
+
+  onMount(() => {
+    if (overlayDiv) return
+    overlayDiv = document.createElement('div')
+    overlayDiv.className = 'select-overlay'
+    overlayContentDiv = document.createElement('div')
+    overlayContentDiv.className = 'select-overlay-content'
+
+    overlayDiv.appendChild(overlayContentDiv)
+    document.body.appendChild(overlayDiv)
+  })
 </script>
 
 <style lang="stylus">
@@ -209,7 +260,6 @@
     overflow-y auto
     background-color hsl(0, 0, 15%)
   .select-option
-    min-height 1em
     user-select none
     cursor pointer
   .select-option.current
@@ -236,6 +286,39 @@
     .select-dropdown-content
       width 100%
       max-height 100%
+
+  :global
+    .select-overlay
+      display none
+      flex-direction column
+      justify-content center
+      align-items center
+      position fixed
+      top 0
+      left 0
+      width 100vw
+      height 100vh
+      background-color hsla(0, 0, 10%, 0.8)
+      z-index 9999
+    .select-overlay.open
+      display flex
+    .select-overlay-content
+      width 80%
+      max-height 60%
+      overflow-x hidden
+      overflow-y auto
+      background-color hsl(0, 0, 15%)
+    .select-overlay-option
+      min-height 1em
+      padding 8px 10px
+      font-size 18pt
+      user-select none
+      cursor pointer
+    .select-overlay-option.current
+      background-color hsla(0, 0, 100%, 0.15)
+    .select-overlay-group
+      background-color hsla(0, 0, 0, 0.15)
+      user-select none
 </style>
 
 <div class={'select-input ' + _class}
@@ -257,9 +340,8 @@
     </div>
   </button>
   <div class="select-dropdown-wrapper"
-        class:open
+        class:open={open && dropdownOpen}
         class:flipped
-        on:click|self={() => setOpen(false)}
         bind:this={dropdown}>
     <div class="select-dropdown-content"
           tabindex="-1">
@@ -271,7 +353,7 @@
             on:mousedown={() => current = option.index}
             on:click={() => { select(option.index); setOpen(false); }}
             bind:this={optionElements[option.index]}>
-        {option.name}
+        {option.name ? option.name : '- None -'}
       </div>
     {:else}
       <div class="select-group">{option.name}</div>

@@ -391,13 +391,6 @@ import ChararacterAttribute from './ChararacterAttribute.svelte'
         border-radius 15px 0 0 15px
       .select-label
         padding 5px 10px
-      .select-option
-        padding 5px 10px
-      .select-option.grouped
-        padding-left calc(10px + 2ch)
-      .select-group
-        padding 5px 10px
-        font-size 0.8em
       .char-attrs
         font-size 1.2em
       .char-attr

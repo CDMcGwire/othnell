@@ -249,6 +249,13 @@
       flex 0 0 625px
 
   :global
+    .select-option
+      padding 5px 10px
+    .select-option.grouped
+      padding-left calc(10px + 2ch)
+    .select-group
+      padding 5px 10px
+      font-size 0.8em
     .rules-nav
       .nav-tree-label-text
         padding 1ex 1ch
