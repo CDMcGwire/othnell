@@ -4,161 +4,136 @@ title: Damage
 
 # {title}
 
-Damage is tracked as a number counting up from zero. If a character is hit,
-their total damage increases by the amount they are hit for.
+When a character attacks another, or if some sort of enviornmental hazard occurs, a character may receive damage. Every
+time a character receives damage, they risk serious injury that may incapacitate or kill them, or otherwise hinder their
+ability to act.
 
-## Threshold
-
-Every character has a certain amount of damage they can endure before they
-receive any significant ill effects. This amount is the character's "Threshold"
-and is equal to 4 + (2 x Brawn) + Poise.
-
-So, a character with 2 Brawn and 1 Poise has a damage Threshold of 9.
+There are many ways for damage to occur, both within the general rules and from specific events presented by your DM.
+**This section, however, describes what happens when damage has been received.**
 
 ## Wounds
 
-Wounds represent damage that has become significant enough to hinder the
-character. Like breaking a limb, bleeding profusely, or something lethal like a
-blade through the heart. A wound is acquired everytime a characters damage
-reaches their threshold value ("reach" meaning, Damage greater than or equal to
-Threshold).
+Wounds represent damage that was significant enough to hinder the character and potentially threaten their life. Like
+breaking a limb, bleeding profusely, or even a blade through the heart. Every time a character is damaged, the player
+inflicting the damage will roll to determine the wound _Severity_ and what effect it applies, if any.
 
-So, if a character has a Threshold of 7 and they take 4 damage, no effect occurs
-immediately. If that character takes another 3 damage to get them to 7, they
-immediately suffer a wound.
+### Severity
 
-If the character's Damage total is equal or greater than twice their Threshold,
-they additionally suffer a critical wound. If damage reaches triple Threshold,
-the character dies immediately.
+**To determine the Severity of a potential wound, roll a d3 for each point of damage dealt. Each 3 rolled is 1 point of
+Severity for the wound.** A Severity of zero means no wound was inflicted.
 
-If a character's damage is greater than or equal to their Threshold and they are
-alive at the start of their their next turn, their Damage total is reset to 0.
-
-> Example: John's Threshold is 10 and he takes his first 6 damage. No wounds. On
-> a following round he takes another 4, bringing his Damage total to 10. Since
-> that is at or above his Threshold, he suffers a Wound. Next, it's John's turn
-> and his Damage resets to 0, the number of wounds he's acquired. Eventually
-> John is attacked again for 11. He takes another wound. Then, before John's
-> turn, he's attacked twice more. The first hit does 9, bringing John to 20,
-> double his Threshold. He suffers a critical wound. The last hit does 10,
-> bringing him to 30, triple his Threshold. Unlucky John dies.
+If the Severity is at least 1, then roll another d6 to determine the effect.
 
 ### Wound Effects
 
-When a wound is suffered it is immediately counted in their wound total, a d20
-is rolled. If the value is less than or equal to their wound total, they die.
-Otherwise, one of the following occurs based on the roll value:
+To determine the effect of a wound, roll a d6 to pick from the following list, where X is the Severity.
 
-- 7 to 20) Normal Wound. No additional effect.
-- 1 to 6) Minor Crippling Wound. Roll for a minor crippling effect.
+- **1) Weaken** - X point of Brawn Damage
+- **2) Stagger** - X point of Poise Damage
+- **3) Daze** - X point of Wit Damage
+- **4) Slow** - Speed reduced by X
+- **5) Stun** - X turns of Stun
+- **6) Bloody** - Threshold reduced by X
 
-Critical Wounds count as 2 to the character's wound count and use the following
-effect table instead:
+Wound effects stack, that is another wound from another source with the same effect will add _on top of_ any previous,
+untreated wounds.
 
-- 13 to 20) Normal Wound. No additional effect.
-- 1 to 12) Severe Crippling Wound. Roll for a severe crippling effect.
+Natural limits apply. Attributes can't fall lower than -1, Speed cannot be reduced below 0, and if Threshold drops to 0,
+they immediately faint.
 
-### Crippling Effects
+## Threshold
 
-Cripple effects are assigned based on the effect, with it being you and the DM's
-job to describe the concrete details of the damage. For instance, your character
-may get a "Damage Over Time" effect and if you were hit by a sword the DM would
-say _“They gashed your neck, and now you're bleeding out.”_
+At some point, a single wound can be too severe for a character to handle and they will be either incapacitated
+immediately or even die on the spot. This is known as their **Threshold**. Every [Race](characters/races) has a base
+Threshold, which is the Severity the average person of that race can handle. A character's Brawn then increases (or
+decreases) their threshold. The final value is as follows:
 
-If, however, the attack was a fireball the following description would be more
-accurate, _“In the aftermath of the explosion your clothes catch fire and skin
-begins to melt.”_ The effect would be the same, but the flavor is adjusted to
-make sense for the scenario.
+> Threshold = Base Racial Threshold + Brawn
 
-> _Figure out roll weightings_
+So a Human character (Base = 3) with a Brawn of 2 has a threshold of 5. **If, for whatever reason, a character's
+threshold drops to 0, that character is incapacitated and will die if left untreated and exposed, unless the DM
+determines the situation warrants otherwise.**
 
-**Minor Effects**
+### Passing the Threshold
 
-- **Minor Damage Over Time)** Take 1 damage at the end of your turn in combat,
-  stacking.
-- **Slowed)** Can only walk or run at half speed.
-- **Weakend)** -1 Brawn, stacking.
-- **Staggered)** -1 Poise, stacking.
-- **Fogged Memory)** -1 Memory, stacking.
-- **Dulled Senses)** -1 Wit, stacking.
+If a character receives a wound with a Severity greater than their Threshold, then they are incapacitated. If the
+Severity is greater than double their threshold, then they die. If their Threshold is 0, the next wound received is
+lethal.
 
-**Severe Effects**
+## Attribute Damage
 
-- **Severe Damage Over Time)** Take d3 damage at the start of every turn in
-  combat or every minute out of combat, stacking.
-- **Immobile)** Can't use your legs to move.
-- **Drained)** Brawn set to -1.
-- **Unstable)** Poise set to -1.
-- **Amnesia)** Memory set to -1.
-- **Dazed)** Wit set to -1.
+If a character's attribute is 'damaged' as a result of a wound, then that character's attribute is lowered until they
+receive proper rest and aid. Any statistics and effects based on the character's attributes should be recalculated using
+their lowered value.
+
+> For example. A character with a permanent Wit of 3 takes 1 point of Wit Damage. Their Wit is now treated as a 2, and
+> their pool of Cognition Points lowers from 32 to 16. If they had more than 16 usable points, they lose those points
+> and go down to 16.
+
+If a character's Attribute score starts at or falls to -1, then any additional damage is counted as overflow. It does
+not reduce the Attribute further, but it does add to _that_ wound's Severity when calculating Threshold.
+
+> For example. A Human character has a Brawn of 0 and receives a 3 Severity Weaken. Their Brawn is reduced to -1 with 2
+> points of overflow. Originally, the 3 Severity would not have passed their Threshold of 3, but because of the 2 points
+> of overflow, the final value is 5 and they are incapacitated.
 
 ## Healing
 
 ### First Aid
 
-If in combat, the only conventional (non-magic) option for healing is First Aid.
-Applying first aid allows minor crippling effects to be removed in combat.
+If in combat, the only conventional (non-magic) option for healing is First Aid. Applying first aid allows for the
+reduction of effects inflicted by wounds.
 
-To apply First Aid, the performing character must choose a target and make a
-skill check with a difficulty of 6. If the character is targeting themself, the
-check is made with disadvantage.
+**To apply First Aid, the performing character must choose a target and make a skill check with a difficulty of 10. If
+the character is targeting themself, the check is made with disadvantage. If successful, choose one accumulated wound
+effect and reduce it by 1.**
+
+Proper equipment and medicine can reduce the difficulty of the check.
 
 ### Rest and Proper Aid
 
-Outside of combat, there are two conventional methods for healing. Rest and
-proper aid by a doctor.
+Outside of combat, there are two conventional methods for healing. Rest and proper aid by a doctor.
 
-If your character can sleep and eat as needed and maintains a low level of
-activity, they are considered "resting." While resting, they lose wounds at a
-rate of -1 wound every 8 hours. Or effectively -3 wounds per full day of rest.
-If your character has any minor crippling effects, they lose them at the same
-rate.
+If your character can sleep and eat as needed and maintains a low level of activity, they are considered "resting."
+While resting, their wound effects reduce at a rate of 1 every 8 hours, unaided.
 
-Combat, of course, interrupts rest as does sleep deprivation (more than 24 hours
-without sleep). But other stressful activities include, but are not limited to,
-a rushed march, an acrobatic performance, or the like. It'd be cumbersome and
-impossible to list all activities, so the only other hard rule is: if it
-requires a Clash Roll or a Skill Check of 7 or more, it interrupts rest.
-Anything else is up to the DM to determine.
+Combat, of course, interrupts rest as does sleep deprivation (more than 24 hours without sleep). But other stressful
+activities include, but are not limited to, a rushed march, an acrobatic performance, or the like. It'd be cumbersome
+and impossible to list all activities, so the only other hard rule is: if it requires a Clash Roll or a Skill Check of 7
+or more, it interrupts rest. Anything else is up to the DM to determine.
 
-If attended by an actual doctor or a party member with an appropriate domain,
-the rate of natural healing is doubled. Additionally, the doctor or medic may
-make one difficulty 7 check per day to remove a severe crippling effect.
+If attended by an actual doctor or a party member with the right tools or magic, the rate of healing is tripled.
 
 ## Armor
 
-A character's gear can reduce incoming damage by a flat amount known simply as
-their Armor Value. When dealing damage to a character in combat, the amount
-dealt by an individual attack is reduced by the target's Armor Value. Armor
-cannot reduce damage below 0.
+A character's gear can reduce incoming damage by a flat amount known simply as their Armor Value. When dealing damage to
+a character in combat, the amount dealt by an individual attack is reduced by the target's Armor Value. Armor cannot
+reduce damage below 0.
 
-If the target can't properly defend against a directed attack, armor is ignored.
-For instance, stabbing a sleeping target. Of course, in these cases, the
-helpless rule already applies.
+If the target can't properly defend against a directed attack, armor is ignored. For instance, stabbing a sleeping
+target. Of course, in these cases, the helpless rule already applies.
 
-If the attack is indirect, such as damage from an explosion, the target's armor
-value _is_ applied, even if the target can't actively defend against it.
+If the attack is indirect, such as damage from an explosion, the target's armor value _is_ applied, even if the target
+can't actively defend against it.
 
-### Anti Armor
+### Anti-Armor
 
-Some weapons and attacks ignore or reduce armor. This is denoted on the weapon
-description as either **Negate Armor** or **Halve Armor**, which do exactly as
-they say.
+Some weapons and attacks ignore or reduce armor. This is denoted on the weapon description as either **Negate Armor** or
+**Halve Armor**, which do exactly as they say.
 
 ### Magical Armor?
 
-Some Supernatural spells can protect characters. This is not considered "Armor"
-for the sake of damage calculations. These spells bypass natural laws, after
-all. The source of the magical protection will explain its own effect.
+Some Supernatural spells can protect characters from damage, lowering it the same way Armor does or potentially
+providing a more dramatic effect. As a rule of thumb, do not assume magic armor reacts the same way as physical armor.
+The magical effect should describe its own rules, but effects from mundane weapons, like Anti-Armor, may not apply. So
+keep that in mind.
 
 ## Damage Scaling
 
-It should be noted that, unlike many RPGs, health and damage does not scale up
-innately as the game progresses. A longsword is as effective for a late game
-character as it is for a beginner. In some cases, adventurers may find outright
-"better" equipment to replace their mundane weaponry and armor. When that
-happens, that character will gain a very significant advantage over anyone who
-does not find an equally impressive deterrent.
+It should be noted that, unlike many RPGs, health and damage does not scale up innately as the game progresses. A
+longsword is as effective for a late game character as it is for a beginner. In some cases, adventurers may find
+outright "better" equipment to replace their mundane weaponry and armor. When that happens, that character will gain a
+very significant advantage over anyone who does not find an equally impressive deterrent.
 
-But even the greatest adventurer, stripped naked and without a weapon, is
-vulnerable to an angry, pitchfork wielding peasant.
+But even the greatest adventurer, stripped naked and without a weapon, is vulnerable to an angry, pitchfork wielding
+peasant.

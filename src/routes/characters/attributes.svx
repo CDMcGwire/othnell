@@ -4,20 +4,32 @@ title: Character Attributes
 
 # {title}
 
-Attributes are the core of all character and creature definitions and are a
-general representation of how they interact with the world. In terms of
-gameplay, they determine scaling for many of the mechanics of the game. Such as
-changing the number of dice used in a roll, or allowing for drawing additional
-cards.
+Attributes are the core of all character and creature definitions and are a general representation of how they interact
+with the world. In terms of gameplay, they determine scaling for many of the mechanics of the game. Such as changing the
+number of dice used in a roll, or allowing for drawing additional cards.
 
 There are five attributes:
 
-- **Brawn -** Represents character's physique, willpower, and overall _force_ of
-  character.
-- **Poise -** Represents character's control over themself. Patience, grace, and
-  stability.
+- **Brawn -** Represents character's physique, willpower, and overall _force_ of character.
+- **Poise -** Represents character's control over themself. Patience, grace, and stability.
 - **Memory -** Represents character's ability to recall and retain information.
-- **Wit -** Represents character's inductive/deductive reasoning and speed of
-  mind.
-- **Charisma -** Represents character's charm, personality, and social
-  influence.
+- **Wit -** Represents character's inductive/deductive reasoning and speed of mind.
+- **Charisma -** Represents character's charm, personality, and social influence.
+
+**Each attribute can have a value between -1 and 3 and .**
+
+## Assigning Attribute Scores
+
+**When creating a new character, each attributes start at 0 and you get 7 points to buy higher scores.** Assigning a
+positive Score costs points. The higher the score, the more points it costs. **A score of 1 costs 1 point. Every score
+higher costs double the last.**
+
+Thus:
+
+- A score of 1 costs 1 point total
+- A score of 2 costs 2 points total
+- A score of 3 costs 4 points total
+
+**Lowering an Attribute to -1 gives you 1 more point to spend.** You can lower as many attributes as you want, but as
+the math works out, you'll only be able to lower 2 without wasting points. You do not have to spend all of your points,
+but you cannot change your attributes after you finish creating your character, so unspent points are wasted.
