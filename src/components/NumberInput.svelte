@@ -66,7 +66,7 @@
     border-radius 0 9999px 9999px 0
   .number-input-icon
     fill white
-    height 0.8em
+    height 0.6em
 </style>
 
 <div class="number-input">

@@ -15,51 +15,12 @@ export let cognition = writable(8)
 export let proficiencies = writable(new Array<string>())
 export let mundaneTraits = writable(new Array<string>())
 export let exceptionalTraits = writable(new Array<string>())
-export let minorDot = writable(0)
-export let severeDot = writable(0)
-export let slowed = writable(0)
-export let immobile = writable(0)
 export let weakened = writable(0)
-export let drained = writable(0)
 export let staggered = writable(0)
-export let unstable = writable(0)
-export let confused = writable(0)
-export let amnesia = writable(0)
-export let distracted = writable(0)
 export let dazed = writable(0)
-
-export let injuries = derived(
-  [minorDot, severeDot, slowed, immobile, weakened, drained, staggered, unstable, confused, amnesia, distracted, dazed],
-  ([
-    minorDot,
-    severeDot,
-    slowed,
-    immobile,
-    weakened,
-    drained,
-    staggered,
-    unstable,
-    confused,
-    amnesia,
-    distracted,
-    dazed,
-  ]) => {
-    return {
-      minorDot,
-      severeDot,
-      slowed,
-      immobile,
-      weakened,
-      drained,
-      staggered,
-      unstable,
-      confused,
-      amnesia,
-      distracted,
-      dazed,
-    }
-  },
-)
+export let slowed = writable(0)
+export let stunned = writable(0)
+export let bloodied = writable(0)
 
 export let activeCharacter = derived(
   [
@@ -78,7 +39,12 @@ export let activeCharacter = derived(
     proficiencies,
     mundaneTraits,
     exceptionalTraits,
-    injuries,
+    weakened,
+    staggered,
+    dazed,
+    slowed,
+    stunned,
+    bloodied,
   ],
   ([
     name,
@@ -96,7 +62,12 @@ export let activeCharacter = derived(
     proficiencies,
     mundaneTraits,
     exceptionalTraits,
-    injuries,
+    weakened,
+    staggered,
+    dazed,
+    slowed,
+    stunned,
+    bloodied,
   ]) => {
     return {
       name,
@@ -114,7 +85,12 @@ export let activeCharacter = derived(
       proficiencies,
       mundaneTraits,
       exceptionalTraits,
-      injuries,
+      weakened,
+      staggered,
+      dazed,
+      slowed,
+      stunned,
+      bloodied,
     }
   },
 )

@@ -14,24 +14,17 @@
     memory,
     wit,
     charisma,
-    damage,
     wounds,
     cognition,
     proficiencies,
     mundaneTraits,
     exceptionalTraits,
-    minorDot,
-    severeDot,
-    slowed,
-    immobile,
     weakened,
-    drained,
     staggered,
-    unstable,
-    confused,
-    amnesia,
-    distracted,
     dazed,
+    slowed,
+    stunned,
+    bloodied,
     activeCharacter,
   } from '../character-store'
 
@@ -44,6 +37,14 @@
     { name: 'Bofo' },
     { name: 'Carapact' },
   ]
+  const racialThresholds = new Map()
+  racialThresholds.set('Human', 3)
+  racialThresholds.set('Wyrm', 3)
+  racialThresholds.set('Wandering Spirit', 2)
+  racialThresholds.set('Stone Dweller', 3)
+  racialThresholds.set('Bofo', 4)
+  racialThresholds.set('Carapact', 2)
+
   const foodTypes = [
     {
       name: 'Questionable',
@@ -66,77 +67,17 @@
       value: [12],
     },
   ]
-  const injuryTypes = [
-    {
-      name: '',
-      value: '',
-    },
-    {
-      name: 'Minor',
-      children: [
-        {
-          name: 'Minor DoT',
-          value: 'minorDot',
-        },
-        {
-          name: 'Slowed',
-          value: 'slowed',
-        },
-        {
-          name: 'Weakened',
-          value: 'weakened',
-        },
-        {
-          name: 'Staggered',
-          value: 'staggered',
-        },
-        {
-          name: 'Confused',
-          value: 'confused',
-        },
-        {
-          name: 'Distracted',
-          value: 'distracted',
-        },
-      ],
-    },
-    {
-      name: 'Severe',
-      children: [
-        {
-          name: 'Severe DoT',
-          value: 'severeDot',
-        },
-        {
-          name: 'Immobile',
-          value: 'immobile',
-        },
-        {
-          name: 'Drained',
-          value: 'drained',
-        },
-        {
-          name: 'Unstable',
-          value: 'unstable',
-        },
-        {
-          name: 'Amnesia',
-          value: 'Amnesia',
-        },
-        {
-          name: 'Dazed',
-          value: 'dazed',
-        },
-      ],
-    },
-  ]
   const intimidateDice = ['d2', 'd4', 'd6', 'd8', 'd10', 'd12', 'd12 + d2', 'd12 + d4', 'd12 + d6']
 
   let unsubscribe
   let selectedFoodType: Array<number> = [2]
+  let armor = 0
+  let damage = 0
 
   $: cards = Math.abs($memory) + 1
-  $: threshold = 3 + $brawn
+  $: intimidate = $brawn + $charisma + 2
+  $: threshold = racialThresholds.get($race) + $brawn
+  $: deathLimit = threshold * 2 + 1
   $: cognitionMax = $wit > -1 ? 8 + $wit * 8 : 8 / Math.pow(2, Math.abs($wit))
 
   function loadLastCharacter() {
@@ -152,24 +93,17 @@
       $memory = lastCharacter.memory
       $wit = lastCharacter.wit
       $charisma = lastCharacter.charisma
-      $damage = lastCharacter.damage
       $wounds = lastCharacter.wounds
       $cognition = lastCharacter.cognition
       $proficiencies = lastCharacter.proficiencies
       $mundaneTraits = lastCharacter.mundaneTraits
       $exceptionalTraits = lastCharacter.exceptionalTraits
-      $minorDot = lastCharacter.injuries.minorDot
-      $severeDot = lastCharacter.injuries.severeDot
-      $slowed = lastCharacter.injuries.slowed
-      $immobile = lastCharacter.injuries.immobile
-      $weakened = lastCharacter.injuries.weakened
-      $drained = lastCharacter.injuries.drained
-      $staggered = lastCharacter.injuries.staggered
-      $unstable = lastCharacter.injuries.unstable
-      $confused = lastCharacter.injuries.confused
-      $amnesia = lastCharacter.injuries.amnesia
-      $distracted = lastCharacter.injuries.distracted
-      $dazed = lastCharacter.injuries.dazed
+      $weakened = lastCharacter.weakened
+      $staggered = lastCharacter.staggered
+      $dazed = lastCharacter.dazed
+      $slowed = lastCharacter.slowed
+      $stunned = lastCharacter.stunned
+      $bloodied = lastCharacter.bloodied
     }
   }
   function saveActiveCharacter(character: any) {
@@ -185,6 +119,38 @@
     const selectedValue = Math.floor(Math.random() * selectedFoodType.length)
     $cognition += selectedFoodType[selectedValue]
     if ($cognition > cognitionMax) $cognition = cognitionMax
+  }
+  // Why isn't this a std lib function...
+  function randInt(max: number) {
+    return Math.floor(Math.random() * Math.floor(max))
+  }
+  function applyDamage() {
+    const finalDamage = Math.min(Math.max(damage - armor, 0), deathLimit);
+    let severity = 0
+    for (var i = 0; i < finalDamage; i++)
+      if (randInt(3) == 2)
+        severity++
+    switch (randInt(6)) {
+      case 0:
+        $weakened += severity
+        break;
+      case 1:
+        $staggered += severity
+        break;
+      case 2:
+        $dazed += severity
+        break;
+      case 3:
+        $slowed += severity
+        break;
+      case 4:
+        $stunned += severity
+        break;
+      case 5:
+        $bloodied += severity
+        break;
+    }
+    damage = 0
   }
   function close() {
     dispatch('close')
@@ -205,6 +171,10 @@
   @require '../assets/vars.styl'
 
   .char-sheet
+    strong
+      color foreground-strong
+      &.negative
+        color foreground-negative
     .section-divider
       width 100%
       height 1px
@@ -295,6 +265,7 @@
     margin-left -15px
     padding-left 45px
     font-size 1.3em
+    font-weight 600
     border 4px solid accent-faint
     border-left none
     border-bottom none
@@ -306,7 +277,7 @@
     justify-content flex-start
     align-items center
     align-self flex-end
-    width 70%
+    width 80%
     min-width 30ch
     margin-right -15px
     padding 0.5ex 30px 0.5ex 1ch
@@ -314,13 +285,62 @@
     border-bottom 3px solid field-bg
     border-radius 0 0 0 5px
     overflow hidden
-    strong
-      color foreground-strong
     .left
       flex 0 1 10ch
     .right
       flex 0 1 16ch
       text-align right
+  .char-trackers
+    display flex
+    flex-direction column
+  .char-tracker-section
+    margin-bottom 1em
+    & > .row
+      margin-bottom 1px
+      &:last-of-type
+        margin-bottom 0
+  .char-tracker-section.calculator
+    display flex
+    flex-direction column
+    align-self flex-start
+    margin-left -15px
+    padding-left 15px
+    font-size 1.1em
+    background-color field-bg
+    border-radius 0 15px 15px 0
+    button
+      height 100%
+    &.cognition
+      width 26ch
+    & > div
+      height 1.8em
+  .damage-factors-display
+    padding-right 1ch
+    & > *
+      flex 0 1 12ch
+      margin-right 10px
+      &:last-of-type
+        margin-right 0
+  .damage-calc-tool
+    align-items center
+    width 30ch
+  .char-tracker-section.wounds
+    display flex
+    flex-direction row
+    flex-wrap wrap
+    max-width 65ch
+    font-size 1.1em
+  .char-tracker-wound
+    display flex
+    flex-direction row
+    justify-content space-between
+    align-items center
+    width 21ch
+    margin 0 1.5ch 1ex -30px
+    padding-left 30px
+    border-top 2px solid accent-dark
+    border-radius 0 20px 20px 0
+    overflow none
   .char-empty-ref-list
     font-size 0.8em
     color foreground-faint
@@ -384,6 +404,11 @@
         margin 0 1ch
       .number-input-field
         width 3.5ch
+    .char-trackers
+      .number-input
+        height 100%
+      .number-input-field
+        width 3.5ch
 
     //@media screen and (min-width: partial-width)
 
@@ -422,7 +447,7 @@
         <NumberInput bind:value={$brawn} min={-1} max={3} setonly />
       </div>
       <div class="char-attr-sub row">
-        <span><strong>{$brawn > 0 ? '+' : ''}{$brawn}</strong> to Clash Die Rank</span>
+        <span><strong class:negative={$brawn < 0}>{$brawn > 0 ? '+' : ''}{$brawn}</strong> to Clash Die Rank</span>
       </div>
     </div>
     <div class="char-attr-row col">
@@ -433,7 +458,7 @@
       <div class="char-attr-sub row">
         <span>
         {#if $poise < 0}
-          Hand size reduced to <strong>2</strong>
+          Held Cards Reduced to <strong class="negative">{3 + $poise}</strong>
         {:else}
           <strong>{$poise}</strong> Redraws
         {/if}
@@ -446,7 +471,7 @@
         <NumberInput bind:value={$memory} min={-1} max={3} setonly />
       </div>
       <div class="char-attr-sub row">
-        <span>Draw <strong>{cards}</strong> card{cards > 1 ? 's' : ''} - Match <strong>{$memory < 0 ? 'ALL' : 'ANY'}</strong></span>
+        <span>Draw <strong>{cards}</strong> Match <strong class:negative={$memory < 0}>{$memory < 0 ? 'ALL' : 'ANY'}</strong></span>
       </div>
     </div>
     <div class="char-attr-row col">
@@ -457,7 +482,7 @@
       <div class="char-attr-sub row">
         <span>Cognition</span>
         <NumberInput bind:value={$cognition} min={0} max={cognitionMax} />
-        <span>of <strong>{cognitionMax}</strong></span>
+        <span>of <strong class:negative={$wit < 0}>{cognitionMax}</strong></span>
       </div>
     </div>
     <div class="char-attr-row col">
@@ -467,29 +492,84 @@
       </div>
       <div class="char-attr-sub row m-spaced">
         <span class="left">Intimidate</span>
-        <span class="right"><strong>{intimidateDice[$brawn + $charisma + 2]}</strong> Clash Die</span>
+        <span class="right"><strong class:negative={intimidate <= 0}>{intimidateDice[intimidate]}</strong> Clash Die</span>
       </div>
       <div class="char-attr-sub row m-spaced">
         <span class="left">Charm</span>
-        <span class="right"><strong>{$charisma > 0 ? '+' : ''}{$charisma}</strong> to card played</span>
+        <span class="right"><strong class:negative={$charisma < 0}>{$charisma > 0 ? '+' : ''}{$charisma}</strong> to Card Played</span>
       </div>
       <div class="char-attr-sub row m-spaced">
         <span class="left">Lie</span>
       {#if $charisma >= 0}
-        <span class="right"><strong>{$charisma}</strong> redraw{$charisma > 1 ? 's' : ''}</span>
+        <span class="right"><strong>{$charisma}</strong> Redraw{$charisma > 1 ? 's' : ''}</span>
       {:else}
-        <span class="right">Must match <strong>{Math.abs($charisma) + 1}</strong> cards</span>
+        <span class="right">Must match <strong class="negative">{Math.abs($charisma) + 1}</strong> Cards</span>
       {/if}
       </div>
       <div class="char-attr-sub row m-spaced">
         <span class="left">Persuade</span>
-        <span class="right"><strong>{$charisma > 0 ? '+' : ''}{$charisma}</strong> starting wager</span>
+        <span class="right"><strong class:negative={$charisma < 0}>{$charisma > 0 ? '+' : ''}{$charisma}</strong> Starting Wager</span>
       </div>
     </div>
   </div>
   <!-- Tracker tools -->
   <div class="char-sheet-section char-trackers">
-
+    <div class="char-tracker-section calculator cognition">
+      <div class="row">
+        <Select _class="left grow"
+                on:select={event => selectedFoodType = event.detail.value}
+                options={foodTypes}
+                initial={1} />
+        <button class="basic-input top-right fw-short" on:click={eat}>Eat</button>
+      </div>
+      <div class="row">
+        <button class="basic-input top-left grow" on:click={() => sleep(0.5)}>Nap</button>
+        <button class="basic-input bot-right grow" on:click={() => sleep(1)}>Sleep</button>
+      </div>
+    </div>
+    <div class="char-tracker-section calculator damage">
+      <div class="row m-spaced c-center damage-factors-display">
+        <div class="row m-spaced">
+          <span class="label">Threshold</span>
+          <strong>{threshold}</strong>
+        </div>
+        <div class="row m-spaced c-center">
+          <span class="label">Armor</span>
+          <NumberInput bind:value={armor} min={0} max={5} setonly />
+        </div>
+      </div>
+      <div class="row m-spaced damage-calc-tool">
+        <div class="label">Damage</div>
+        <NumberInput bind:value={damage} min={0} max={threshold * 2} />
+        <button class="basic-input tl-br" on:click={applyDamage}>Apply</button>
+      </div>
+    </div>
+    <div class="char-tracker-section wounds">
+      <div class="char-tracker-wound">
+        <div class="char-wound-label">Weakened</div>
+        <NumberInput bind:value={$weakened} min={0} max={threshold * 2} />
+      </div>
+      <div class="char-tracker-wound">
+        <div class="char-wound-label">Staggered</div>
+        <NumberInput bind:value={$staggered} min={0} max={threshold * 2} />
+      </div>
+      <div class="char-tracker-wound">
+        <div class="char-wound-label">Dazed</div>
+        <NumberInput bind:value={$dazed} min={0} max={threshold * 2} />
+      </div>
+      <div class="char-tracker-wound">
+        <div class="char-wound-label">Slowed</div>
+        <NumberInput bind:value={$slowed} min={0} max={threshold * 2} />
+      </div>
+      <div class="char-tracker-wound">
+        <div class="char-wound-label">Stunned</div>
+        <NumberInput bind:value={$stunned} min={0} max={threshold * 2} />
+      </div>
+      <div class="char-tracker-wound">
+        <div class="char-wound-label">Bloodied</div>
+        <NumberInput bind:value={$bloodied} min={0} max={threshold * 2} />
+      </div>
+    </div>
   </div>
   <!-- Character Traits -->
   <div class="char-sheet-section char-ref-list char-proficiencies col">

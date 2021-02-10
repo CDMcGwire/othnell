@@ -227,12 +227,16 @@
     display flex
     flex-direction row
     justify-content space-between
+    align-items center
     width 100%
     height 100%
     background-color transparent
     user-select none
     cursor pointer
   .select-arrow
+    display flex
+    flex-direction row
+    align-items center
     height 100%
     width 1ch
     margin-left 5px

@@ -44,10 +44,18 @@
     overflow hidden
   .basic-input.left
     border-radius 15px 0 0 15px
-    overflow hidden
+  .basic-input.top-left
+    border-radius 15px 0 0 0
   .basic-input.right
     border-radius 0 15px 15px 0
-    overflow hidden
+  .basic-input.top-right
+    border-radius 0 15px 0 0
+  .basic-input.bot-right
+    border-radius 0 0 15px 0
+  .basic-input.tl-br
+    border-radius 15px 0 15px 0
+  .basic-input.tr-bl
+    border-radius 0 15px 0 15px
   .basic-input + .basic-input
     border-left 1px solid button-bg-dark
 
@@ -64,6 +72,9 @@
 
   .block
     display block
+
+  .accent-border
+    border 2px solid accent-pri
 
   .row
     display flex
