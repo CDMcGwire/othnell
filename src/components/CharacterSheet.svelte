@@ -2,9 +2,7 @@
   import { createEventDispatcher } from 'svelte'
   import { onMount, onDestroy } from 'svelte'
   import NumberInput from './NumberInput.svelte'
-  import CharacterAttribute from './ChararacterAttribute.svelte'
   import Select from './Select.svelte'
-  import InjuryTracker from './InjuryTracker.svelte'
   import ReferenceEntry from './ReferenceEntry.svelte'
   import {
     name,
@@ -36,7 +34,6 @@
     dazed,
     activeCharacter,
   } from '../character-store'
-import ChararacterAttribute from './ChararacterAttribute.svelte'
 
   const dispatch = createEventDispatcher()
   const raceOptions = [
@@ -133,21 +130,14 @@ import ChararacterAttribute from './ChararacterAttribute.svelte'
       ],
     },
   ]
+  const intimidateDice = ['d2', 'd4', 'd6', 'd8', 'd10', 'd12', 'd12 + d2', 'd12 + d4', 'd12 + d6']
 
   let unsubscribe
   let selectedFoodType: Array<number> = [2]
-  let selectedInjuryType: string = ''
-  let currentInjury: number = 0
 
-  $: threshold = 4 + (2 * $brawn) + $poise
-  $: dead = $wounds >= threshold
+  $: cards = Math.abs($memory) + 1
+  $: threshold = 3 + $brawn
   $: cognitionMax = $wit > -1 ? 8 + $wit * 8 : 8 / Math.pow(2, Math.abs($wit))
-  $: totalDot = ($minorDot > 0 ? `${$minorDot}` : '') + ($minorDot > 0 && $severeDot > 0 ? ' + ' : '') + ($severeDot > 0 ? `${$severeDot}d4` : '')
-  $: totalSlow = $immobile > 0 ? 'Speed 0' : `Speed -${$slowed}`
-  $: totalWeaken = $drained > 0 ? 'Brawn -2' : `Brawn -${$weakened}`
-  $: totalStagger = $unstable > 0 ? 'Poise -2' : `Poise -${$staggered}`
-  $: totalConfusion = $amnesia > 0 ? 'Memory -2' : `Memory -${$confused}`
-  $: totalDistraction = $dazed > 0 ? 'Wit -2' : `Wit -${$distracted}`
 
   function loadLastCharacter() {
     const serialCharacter = localStorage.getItem('activeCharacter')
@@ -185,17 +175,6 @@ import ChararacterAttribute from './ChararacterAttribute.svelte'
   function saveActiveCharacter(character: any) {
     localStorage.setItem('activeCharacter', JSON.stringify(character))
   }
-  function resolveDamage() {
-    if ($damage < threshold) return
-    const newWounds = Math.floor($damage / threshold)
-    if (newWounds > 2) $wounds = threshold
-    else $wounds += newWounds
-    $damage = $wounds
-  }
-  function revive() {
-    $wounds = Math.max(0, threshold - 1)
-    $damage = $wounds
-  }
   function sleep(amount: number) {
     $cognition = Math.min(
       $cognition + Math.ceil(amount * cognitionMax),
@@ -207,35 +186,12 @@ import ChararacterAttribute from './ChararacterAttribute.svelte'
     $cognition += selectedFoodType[selectedValue]
     if ($cognition > cognitionMax) $cognition = cognitionMax
   }
-  function applyDot() {
-    $damage += $minorDot
-    if ($severeDot > 0)
-      $damage += Math.ceil(Math.random() * 3 + ($severeDot - 1))
-  }
   function close() {
     dispatch('close')
   }
   function removeFromList(values: Array<any>, index: number, count: number = 1) {
     values.splice(index, count)
     return values
-  }
-  function addInjury() {
-    switch (selectedInjuryType) {
-      case 'minorDot': $minorDot++; break;
-      case 'severeDot': $severeDot++; break;
-      case 'slowed': $slowed++; break;
-      case 'immobile': $immobile++; break;
-      case 'weakened': $weakened++; break;
-      case 'drained': $drained++; break;
-      case 'staggered': $staggered++; break;
-      case 'unstable': $unstable++; break;
-      case 'confused': $confused++; break;
-      case 'amnesia': $amnesia++; break;
-      case 'distracted': $distracted++; break;
-      case 'dazed': $dazed++; break;
-    }
-    selectedInjuryType = ''
-    currentInjury = 0
   }
 
   onMount(() => {
@@ -268,6 +224,8 @@ import ChararacterAttribute from './ChararacterAttribute.svelte'
         font-size 0.8em
       a:hover::after, a:focus::after
         color accent-link-dark
+  .char-sheet-section
+    margin-bottom 2ex
   .char-portrait-change
     display flex
     flex 0 0 auto
@@ -327,44 +285,42 @@ import ChararacterAttribute from './ChararacterAttribute.svelte'
     color accent-light
     border-radius 10px
     overflow hidden
-  .char-trackers
-    display grid
-    grid-template-columns auto
-    grid-gap 5px
-    > div
-      padding 10px
-      background-color background-sub
-      border-radius 15px
-  .char-dmg-grid
-    display grid
-    grid-template-columns 1fr min-content
-    grid-template-rows auto 1px auto auto auto
-    grid-gap 5px
-  .char-other-stats
-    display grid
-    grid-template-columns auto
-    grid-auto-rows min-content
-    grid-gap 10px
-    background-color background-sub
-    border-radius 15px
-  .char-other-trackers
-    display grid
-    grid-template-columns auto
-    grid-auto-rows min-content
-    grid-gap 10px
-  .char-dmg-grid-left
-    grid-column 1
-  .char-dmg-grid-right
-    grid-column 2
-  .char-dmg-grid-span
-    grid-column 1 / span 2
-  .char-dmg-divider
-    background-color foreground
-  .char-injury-trackers
-    display grid
-    grid-template-columns 1fr
-    grid-gap 15px
-    margin-top 15px
+  .char-attr-row
+    margin-bottom 2ex
+  .char-attr-main
+    display flex
+    flex-direction row
+    justify-content space-between
+    width 17ch
+    margin-left -15px
+    padding-left 45px
+    font-size 1.3em
+    border 4px solid accent-faint
+    border-left none
+    border-bottom none
+    border-radius 0 20px 5px 0
+    overflow hidden
+  .char-attr-sub
+    display flex
+    flex-direction row
+    justify-content flex-start
+    align-items center
+    align-self flex-end
+    width 70%
+    min-width 30ch
+    margin-right -15px
+    padding 0.5ex 30px 0.5ex 1ch
+    color foreground-faint
+    border-bottom 3px solid field-bg
+    border-radius 0 0 0 5px
+    overflow hidden
+    strong
+      color foreground-strong
+    .left
+      flex 0 1 10ch
+    .right
+      flex 0 1 16ch
+      text-align right
   .char-empty-ref-list
     font-size 0.8em
     color foreground-faint
@@ -374,10 +330,6 @@ import ChararacterAttribute from './ChararacterAttribute.svelte'
     .char-portrait-change
       margin-bottom 0
       margin-right 15px
-    .char-trackers
-      grid-template-columns 1fr 1fr
-    .char-injury-trackers
-      grid-template-columns 1fr 1fr
 
   :global
     .char-sheet
@@ -391,21 +343,6 @@ import ChararacterAttribute from './ChararacterAttribute.svelte'
         border-radius 15px 0 0 15px
       .select-label
         padding 5px 10px
-      .char-attrs
-        font-size 1.2em
-      .char-attr
-        display flex
-        flex-direction row
-        justify-content space-between
-        background-color background-sub
-        border-radius 15px
-        overflow hidden
-        & + .char-attr
-          margin-top 10px
-        .number-input-field
-          width 3ch
-      .char-attr-label
-        padding 5px 1ch
       .ref-entry-header
         display flex
         flex-direction row
@@ -434,52 +371,21 @@ import ChararacterAttribute from './ChararacterAttribute.svelte'
       .ref-entry-name
         font-size 1.25em
         color foreground-minor
-      .injury-tracker
-        height min-content
-      .injury-action-bttn
-        border 1px solid accent-dark
-      .injury-type
-        color accent-light
     .char-id-race
       .select-input
         flex 1 0 20ch
         margin-left 0.5ch
-    .char-trackers
+    .char-attr-main
       .number-input-field
-        width 3ch
-    .char-injury-type-select
-      width 14ch
+        width 3.5ch
+        border-radius 0 0 0 20px
+    .char-attr-sub
+      .number-input
+        margin 0 1ch
+      .number-input-field
+        width 3.5ch
 
-    @media screen and (min-width: partial-width)
-      .char-sheet
-        .char-attrs
-          flex-direction row
-          justify-content space-between
-        .char-attr
-          flex 0 0 110px
-          flex-direction column
-          text-align center
-          & + .char-attr
-            margin-top 0
-          .number-input
-            display grid
-            grid-template-columns 1fr 1fr
-            grid-template-rows 2.5em 1.2em
-          .number-input-field
-            grid-column 1 / span 2
-            grid-row 1
-            width 100%
-            font-size 2em
-            background-color transparent
-          .number-input-button
-            grid-row 2
-          .number-input-button.decrement
-            border-radius 0
-          .number-input-button.increment
-            border-radius 0
-        .char-attr-label
-          font-size 1em
-          padding-bottom 0
+    //@media screen and (min-width: partial-width)
 
 </style>
 
@@ -508,118 +414,84 @@ import ChararacterAttribute from './ChararacterAttribute.svelte'
       </div>
     </div>
   </div>
-  <div class="section-divider" />
+  <!-- Character attributes -->
   <div class="char-sheet-section char-attrs col">
-    <ChararacterAttribute bind:value={$brawn}>Brawn</ChararacterAttribute>
-    <ChararacterAttribute bind:value={$poise}>Poise</ChararacterAttribute>
-    <ChararacterAttribute bind:value={$memory}>Memory</ChararacterAttribute>
-    <ChararacterAttribute bind:value={$wit}>Wit</ChararacterAttribute>
-    <ChararacterAttribute bind:value={$charisma}>Charisma</ChararacterAttribute>
+    <div class="char-attr-row col">
+      <div class="char-attr-main row c-center">
+        <div class="char-attr-label">Brawn</div>
+        <NumberInput bind:value={$brawn} min={-1} max={3} setonly />
+      </div>
+      <div class="char-attr-sub row">
+        <span><strong>{$brawn > 0 ? '+' : ''}{$brawn}</strong> to Clash Die Rank</span>
+      </div>
+    </div>
+    <div class="char-attr-row col">
+      <div class="char-attr-main row c-center">
+        <div class="char-attr-label">Poise</div>
+        <NumberInput bind:value={$poise} min={-1} max={3} setonly />
+      </div>
+      <div class="char-attr-sub row">
+        <span>
+        {#if $poise < 0}
+          Hand size reduced to <strong>2</strong>
+        {:else}
+          <strong>{$poise}</strong> Redraws
+        {/if}
+        </span>
+      </div>
+    </div>
+    <div class="char-attr-row col">
+      <div class="char-attr-main row c-center">
+        <div class="char-attr-label">Memory</div>
+        <NumberInput bind:value={$memory} min={-1} max={3} setonly />
+      </div>
+      <div class="char-attr-sub row">
+        <span>Draw <strong>{cards}</strong> card{cards > 1 ? 's' : ''} - Match <strong>{$memory < 0 ? 'ALL' : 'ANY'}</strong></span>
+      </div>
+    </div>
+    <div class="char-attr-row col">
+      <div class="char-attr-main row c-center">
+        <div class="char-attr-label">Wit</div>
+        <NumberInput bind:value={$wit} min={-1} max={3} setonly />
+      </div>
+      <div class="char-attr-sub row">
+        <span>Cognition</span>
+        <NumberInput bind:value={$cognition} min={0} max={cognitionMax} />
+        <span>of <strong>{cognitionMax}</strong></span>
+      </div>
+    </div>
+    <div class="char-attr-row col">
+      <div class="char-attr-main row c-center">
+        <div class="char-attr-label">Charisma</div>
+        <NumberInput bind:value={$charisma} min={-1} max={3} setonly />
+      </div>
+      <div class="char-attr-sub row m-spaced">
+        <span class="left">Intimidate</span>
+        <span class="right"><strong>{intimidateDice[$brawn + $charisma + 2]}</strong> Clash Die</span>
+      </div>
+      <div class="char-attr-sub row m-spaced">
+        <span class="left">Charm</span>
+        <span class="right"><strong>{$charisma > 0 ? '+' : ''}{$charisma}</strong> to card played</span>
+      </div>
+      <div class="char-attr-sub row m-spaced">
+        <span class="left">Lie</span>
+      {#if $charisma >= 0}
+        <span class="right"><strong>{$charisma}</strong> redraw{$charisma > 1 ? 's' : ''}</span>
+      {:else}
+        <span class="right">Must match <strong>{Math.abs($charisma) + 1}</strong> cards</span>
+      {/if}
+      </div>
+      <div class="char-attr-sub row m-spaced">
+        <span class="left">Persuade</span>
+        <span class="right"><strong>{$charisma > 0 ? '+' : ''}{$charisma}</strong> starting wager</span>
+      </div>
+    </div>
   </div>
-  <div class="section-divider" />
+  <!-- Tracker tools -->
   <div class="char-sheet-section char-trackers">
-  {#if dead}
-    <div class="char-death-panel">
-      <div>{$name} is Dead</div>
-      <button class="basic-input" on:click={revive}>Revive</button>
-    </div>
-  {:else}
-    <div class="char-dmg-grid">
-      <div class="char-dmg-grid-left">Damage</div>
-      <div class="char-dmg-grid-right row m-center">
-        <NumberInput bind:value={$damage} min={0} />
-      </div>
-      <div class="char-dmg-grid-right char-dmg-divider" />
-      <div class="char-dmg-grid-left">Threshold</div>
-      <div class="char-dmg-grid-right row m-center">{threshold}</div>
-      <button class="basic-input char-dmg-grid-span" on:click={resolveDamage}>Resolve</button>
-      <div class="char-dmg-grid-left">Wounds</div>
-      <div class="char-dmg-grid-right row m-center">{$wounds}</div>
-    </div>
-    <div class="char-other-stats">
-      <div class="row m-spaced c-center">
-        <div>Armor</div>
-        <NumberInput min={0} max={100} setonly />
-      </div>
-      <div class="row m-spaced c-center">
-        <div>Speed</div>
-        <NumberInput min={0} max={100} setonly />
-      </div>
-    </div>
-    <div class="char-other-trackers">
-      <div class="row m-spaced c-center">
-        <div>Cognition</div>
-        <div class="row c-center">
-          <NumberInput bind:value={$cognition} min={0} max={cognitionMax} />
-          <div class="txt-suffix">of {cognitionMax}</div>
-        </div>
-      </div>
-      <div class="row">
-        <button class="basic-input left grow" on:click={() => sleep(0.5)}>Nap</button>
-        <button class="basic-input right grow" on:click={() => sleep(1)}>Sleep</button>
-      </div>
-      <div class="row">
-        <Select _class="left grow"
-                on:select={event => selectedFoodType = event.detail.value}
-                options={foodTypes}
-                initial={1} />
-        <button class="basic-input right fw-short" on:click={eat}>Eat</button>
-      </div>
-    </div>
-  {/if}
+
   </div>
-  <div class="section-divider" />
-  <div class="char-sheet-section char-injuries">
-    <div class="section-header">Injuries</div>
-    <div class="row m-spaced c-center">
-      <div class="row">Add Injury</div>
-      <div class="row">
-        <Select _class="left char-injury-type-select"
-                on:select={event => selectedInjuryType = event.detail.value}
-                options={injuryTypes}
-                bind:current={currentInjury} />
-        <button class="basic-input right"
-                on:click={addInjury}
-                disabled={selectedInjuryType === ''}>
-          +
-        </button>
-      </div>
-    </div>
-    <div class="char-injury-trackers">
-      <InjuryTracker bind:minor={$minorDot}
-                     bind:severe={$severeDot}
-                     effect={totalDot}
-                     actions={[{name: 'Apply', handler: applyDot}]}>
-        Damage Over Time
-      </InjuryTracker>
-      <InjuryTracker bind:minor={$slowed}
-                     bind:severe={$immobile}
-                     effect={totalSlow}>
-        Slowed
-      </InjuryTracker>
-      <InjuryTracker bind:minor={$weakened}
-                     bind:severe={$drained}
-                     effect={totalWeaken}>
-        Weakened
-      </InjuryTracker>
-      <InjuryTracker bind:minor={$staggered}
-                     bind:severe={$unstable}
-                     effect={totalStagger}>
-        Staggered
-      </InjuryTracker>
-      <InjuryTracker bind:minor={$confused}
-                     bind:severe={$amnesia}
-                     effect={totalConfusion}>
-        Confused
-      </InjuryTracker>
-      <InjuryTracker bind:minor={$distracted}
-                     bind:severe={$dazed}
-                     effect={totalDistraction}>
-        Distracted
-      </InjuryTracker>
-    </div>
-  </div>
-  <div class="section-divider" />
+  <!-- Character Traits -->
   <div class="char-sheet-section char-ref-list char-proficiencies col">
     <div class="section-header">
       <a href="/characters/proficiencies" on:click={close}>Proficiencies</a>

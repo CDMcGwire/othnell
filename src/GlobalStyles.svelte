@@ -86,6 +86,8 @@
     flex 1 0 auto
   .fit
     flex 0 0 auto
+  .max
+    flex 1 1 100%
   .m-spaced
     justify-content space-between
   .m-space-around

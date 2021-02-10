@@ -18,8 +18,10 @@
 
   function validate(value: number) {
     const newVal = float ? value : Math.round(value)
-    incButton.disabled = newVal >= max
-    decButton.disabled = newVal <= min
+    if (!setonly) {
+      incButton.disabled = newVal >= max
+      decButton.disabled = newVal <= min
+    }
     return Math.max(Math.min(newVal, max), min)
   }
   function calcTarget(modifier: number, additivity: number) {
