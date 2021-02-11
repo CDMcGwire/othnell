@@ -4,13 +4,13 @@ export let name = writable('')
 export let title = writable('')
 export let race = writable('Human')
 export let homeland = writable('')
+export let portrait = writable('#')
 export let brawn = writable(0)
 export let poise = writable(0)
 export let memory = writable(0)
 export let wit = writable(0)
 export let charisma = writable(0)
 export let damage = writable(0)
-export let wounds = writable(0)
 export let cognition = writable(8)
 export let proficiencies = writable(new Array<string>())
 export let mundaneTraits = writable(new Array<string>())
@@ -28,13 +28,13 @@ export let activeCharacter = derived(
     title,
     race,
     homeland,
+    portrait,
     brawn,
     poise,
     memory,
     wit,
     charisma,
     damage,
-    wounds,
     cognition,
     proficiencies,
     mundaneTraits,
@@ -51,13 +51,13 @@ export let activeCharacter = derived(
     title,
     race,
     homeland,
+    portrait,
     brawn,
     poise,
     memory,
     wit,
     charisma,
     damage,
-    wounds,
     cognition,
     proficiencies,
     mundaneTraits,
@@ -74,13 +74,13 @@ export let activeCharacter = derived(
       title,
       race,
       homeland,
+      portrait,
       brawn,
       poise,
       memory,
       wit,
       charisma,
       damage,
-      wounds,
       cognition,
       proficiencies,
       mundaneTraits,

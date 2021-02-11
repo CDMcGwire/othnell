@@ -9,12 +9,12 @@
     title,
     race,
     homeland,
+    portrait,
     brawn,
     poise,
     memory,
     wit,
     charisma,
-    wounds,
     cognition,
     proficiencies,
     mundaneTraits,
@@ -73,6 +73,7 @@
   let selectedFoodType: Array<number> = [2]
   let armor = 0
   let damage = 0
+  let imgInput: HTMLInputElement
 
   $: cards = Math.abs($memory) + 1
   $: intimidate = $brawn + $charisma + 2
@@ -84,26 +85,26 @@
     const serialCharacter = localStorage.getItem('activeCharacter')
     if (serialCharacter) {
       const lastCharacter = JSON.parse(serialCharacter)
-      $name = lastCharacter.name
-      $title = lastCharacter.title
-      $race = lastCharacter.race
-      $homeland = lastCharacter.homeland
-      $brawn = lastCharacter.brawn
-      $poise = lastCharacter.poise
-      $memory = lastCharacter.memory
-      $wit = lastCharacter.wit
-      $charisma = lastCharacter.charisma
-      $wounds = lastCharacter.wounds
-      $cognition = lastCharacter.cognition
-      $proficiencies = lastCharacter.proficiencies
-      $mundaneTraits = lastCharacter.mundaneTraits
-      $exceptionalTraits = lastCharacter.exceptionalTraits
-      $weakened = lastCharacter.weakened
-      $staggered = lastCharacter.staggered
-      $dazed = lastCharacter.dazed
-      $slowed = lastCharacter.slowed
-      $stunned = lastCharacter.stunned
-      $bloodied = lastCharacter.bloodied
+      if (lastCharacter.name) $name = lastCharacter.name
+      if (lastCharacter.title) $title = lastCharacter.title
+      if (lastCharacter.race) $race = lastCharacter.race
+      if (lastCharacter.homeland) $homeland = lastCharacter.homeland
+      if (lastCharacter.portrait) $portrait = lastCharacter.portrait
+      if (lastCharacter.brawn) $brawn = lastCharacter.brawn
+      if (lastCharacter.poise) $poise = lastCharacter.poise
+      if (lastCharacter.memory) $memory = lastCharacter.memory
+      if (lastCharacter.wit) $wit = lastCharacter.wit
+      if (lastCharacter.charisma) $charisma = lastCharacter.charisma
+      if (lastCharacter.cognition) $cognition = lastCharacter.cognition
+      if (lastCharacter.proficiencies) $proficiencies = lastCharacter.proficiencies
+      if (lastCharacter.mundaneTraits) $mundaneTraits = lastCharacter.mundaneTraits
+      if (lastCharacter.exceptionalTraits) $exceptionalTraits = lastCharacter.exceptionalTraits
+      if (lastCharacter.weakened) $weakened = lastCharacter.weakened
+      if (lastCharacter.staggered) $staggered = lastCharacter.staggered
+      if (lastCharacter.dazed) $dazed = lastCharacter.dazed
+      if (lastCharacter.slowed) $slowed = lastCharacter.slowed
+      if (lastCharacter.stunned) $stunned = lastCharacter.stunned
+      if (lastCharacter.bloodied) $bloodied = lastCharacter.bloodied
     }
   }
   function saveActiveCharacter(character: any) {
@@ -152,6 +153,16 @@
     }
     damage = 0
   }
+  function portraitSelect(event: Event) {
+    const file = imgInput.files[0]
+    const reader = new FileReader()
+    reader.onload = event => {
+      const dataUrl = event.target.result as string
+      console.log(dataUrl)
+      $portrait = dataUrl
+    }
+    reader.readAsDataURL(file)
+  }
   function close() {
     dispatch('close')
   }
@@ -170,6 +181,8 @@
 <style lang="stylus">
   @require '../assets/vars.styl'
 
+  #char-portrait-select
+    display none
   .char-sheet
     strong
       color foreground-strong
@@ -416,8 +429,13 @@
 
 <div class="char-sheet">
   <div class="char-sheet-section char-id">
-    <button class="char-portrait-change">
-      <img class="char-portrait-img" src="#" alt="">
+    <button class="char-portrait-change" on:click={() => imgInput.click()}>
+      <input id="char-portrait-select" 
+             type="file"
+             accept="image/*"
+             bind:this={imgInput} 
+             on:change={portraitSelect} />
+      <img class="char-portrait-img" src={$portrait} alt="">
     </button>
     <div class="col char-id-entry">
       <input class="char-id-name-input" 
