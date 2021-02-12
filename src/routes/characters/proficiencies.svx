@@ -25,11 +25,67 @@ one "arte" of magic does not imply proficiency in any other. Having proficiency
 in an arte is the first requirement to allow your character to use its spell,
 rituals, and techniques.
 
+### [Animare](/magic/animare)
+
+<RefAdder type="proficiency" target="animare" />
+
+Animare is the arte of manipulating biological processes. You will be able to
+control an organism's natural healing, decay, mental ability, and the like by
+shifting nutritional resources between organisms and stimulating cellular
+activity as you see fit.
+
+### [Energeia](/magic/energeia)
+
+<RefAdder type="proficiency" target="energeia" />
+
+Energeia is the arte of manipulating energy in all of its forms. You will be
+able to convert energy from one form to another and transfer it between objects.
+Allowing for such effects as sending a rock flying, or igniting a ball of fire.
+
+### [Essense Weaving](/magic/essence-weaving)
+
+<RefAdder type="proficiency" target="essence-weaving" />
+
+Essense Weaving is the arte infusing the properties of one object into another.
+You will be able to create powerful gear and artifacts if you can acquire the
+materials to do so.
+
+### [Hemoturgy](/magic/hemoturgy)
+
+<RefAdder type="proficiency" target="hemoturgy" />
+
+Hemoturgy is the arte of using blood to bargain with otherworldly beings. You
+will be able to borrow their power, if you can pay the price.
+
+### [THE RULE OF LAW](/magic/rule-of-law)
+
+<RefAdder type="proficiency" target="rule-of-law" />
+
+The RULE OF LAW is the supernatural manifestation of the rules and practices of
+natural beings. A Paragon of Law can use its power to restrain and exact
+punishment on the unjust. But only when their guilt is made known.
+
+### [Sould Binding](/magic/soul-binding)
+
+<RefAdder type="proficiency" target="soul-binding" />
+
+Soul Binding is the arte of binding souls to inanimate objects. You will be able
+to give life to artificial beings or make allow an item to enhance its weilder's
+own spirit, if you can find a soul strong enough for your purposes.
+
 ### [Thaumaturgy](/magic/thaumaturgy)
 
 <RefAdder type="proficiency" target="thaumaturgy" />
 
-Thaumaturgy is the art of performing miracles by petitioning some patron of
-Supernatural origin. You will be able to bend the world with your prayers, but
+Thaumaturgy is the art of performing miracles by petitioning some Patron of
+supernatural origin. You will be able to bend the world with your prayers, but
 you must serve your patron dilligently and their plans will always take
 priority.
+
+### [Veneration](/magic/veneration)
+
+<RefAdder type="proficiency" target="veneration" />
+
+Veneration is the arte of creating relics infused with divine power. You will be
+able to capture a miraculous gift from your Patron in a more permanent form, if
+you can find an object worthy to contain it.

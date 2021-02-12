@@ -4,3 +4,17 @@ title: Relic Veneration
 
 # {title}
 
+The arte of creating relics infused with divine power. The exact mechanisms of
+Veneration depend on the practitioner's religion. In much the same way as
+Thaumaturgy. The end results are equally as miraculous, but permanent and more
+conditional. Such as a mummified finger of a Saint, which cures any it touches
+of flesh eating disease.
+
+Creating a Relic requires that the practitioner find some object that symbolizes
+their belief system, or embodies a significant event in its history. Then it
+must be consecrated through a ritual appropriate to the religion and for which
+the practitioner is qualified or can enlist someone who is.
+
+Once that process is over, the Patron of the religion will bestow an effect
+which is determined partly by the object's nature, partly by the practitioner's
+character, and partly by the Patron's whim.
