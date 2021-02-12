@@ -78,13 +78,17 @@ const intimidateDice = [
   'd12 + d4',
   'd12 + d6',
 ]
+const maxAttrTotal = 7
 
 let unsubscribe
+let itsFine = false
 let selectedFoodType: Array<number> = [2]
 let armor = 0
 let damage = 0
 let imgInput: HTMLInputElement
 
+$: attrTotal = calcAttrTotal($brawn, $poise, $memory, $wit, $charisma)
+$: itsFine = attrTotal >= maxAttrTotal
 $: cards = Math.abs($memory) + 1
 $: intimidate = $brawn + $charisma + 2
 $: threshold = racialThresholds.get($race) + $brawn
@@ -122,6 +126,14 @@ function loadLastCharacter() {
 }
 function saveActiveCharacter(character: any) {
   localStorage.setItem('activeCharacter', JSON.stringify(character))
+}
+function calcAttrTotal(...attrs: number[]): number {
+  let total = 0
+  for (let score of attrs) {
+    total += score
+    if (score > 2) total++
+  }
+  return total
 }
 function sleep(amount: number) {
   $cognition = Math.min(
@@ -240,6 +252,23 @@ onDestroy(() => {
   </div>
   <!-- Character attributes -->
   <div class="char-sheet-section char-attrs col">
+    {#if attrTotal > maxAttrTotal}
+      <div class="char-attr-score-warning">
+        <span>
+          Attribute Total is
+          <strong class="negative">{attrTotal - maxAttrTotal}</strong>
+          above the maximum
+        </span>
+      </div>
+    {:else if attrTotal < maxAttrTotal && !itsFine}
+      <div class="char-attr-score-warning">
+        <span>
+          <strong>{maxAttrTotal - attrTotal}</strong>
+          remaining attribute points
+        </span>
+        <button class="basic-input" on:click={() => itsFine = true}>That's fine</button>
+      </div>
+    {/if}
     <div class="char-attr-row col">
       <div class="char-attr-main row c-center">
         <div class="char-attr-label">Brawn</div>
@@ -572,6 +601,20 @@ onDestroy(() => {
     color accent-light
     border-radius 10px
     overflow hidden
+  .char-attr-score-warning
+    align-self flex-end
+    margin-right -15px
+    margin-bottom 2ex
+    padding 1ex 15px 1ex 1ch
+    background-color field-bg
+    border 3px solid button-bg
+    border-right none
+    border-radius 10px 0 0 10px
+    span
+      vertical-align middle
+    .basic-input
+      margin-left 1ch
+      font-size 0.875em
   .char-attr-row
     margin-bottom 2ex
   .char-attr-main
