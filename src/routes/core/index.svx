@@ -46,7 +46,10 @@ Every character has five defining characteristics called "Attributes" which are
 each represented by a number from -1 to 3. These numbers have an influence on
 results of the mechanics described below.
 
-The five attributes are: <Term target="attr-brawn">Brawn</Term>, <Term target="attr-poise">Poise</Term>, <Term target="attr-memory">Memory</Term>, <Term target="attr-wit">Wit</Term>, and <Term target="attr-charisma">Charisma</Term>.
+The five attributes are: <Term target="attr-brawn">Brawn</Term>, <Term target="attr-poise">Poise</Term>
+, <Term target="attr-memory">Memory</Term>
+, <Term target="attr-wit">Wit</Term>
+, and <Term target="attr-charisma">Charisma</Term>.
 
 ## Player Actions
 
@@ -92,7 +95,8 @@ set a value based on an objective difficulty and the player must play a card of
 equal or greater value.
 
 The lowest possible DC is 3, as anything lower would be automatic with a
-standard set of playing cards. The highest is an Ace.
+standard set of playing cards. An Ace is considered 1 higher than a King. The
+highest possible difficulty is an Ace Callout, which is described below.
 
 If the player has 1 or more Poise, they may choose to discard one card from
 their hand to draw up to their Poise in additional cards, but they must play the
@@ -115,6 +119,20 @@ size if below, or discard down to their hand size if above.
 > cards in their hand. So the player discards their 2 and uses their additional
 > Poise draws and hopes for the best. Unfortunately they pull a 3 and a Jack, so
 > they still fail.
+
+### Ace Callout
+
+When the DM really wants to drive home the difficulty of a Skill Check while
+acknowledging it as _**possible**_, they may set the difficulty to Ace then
+roll a d4 to determine the exact Suit that must be matched by the player.
+
+- **1)** Spade
+- **2)** Heart
+- **3)** Club
+- **4)** Diamond
+
+> As a player, this means that if you have three Aces in your hand, **it's time to
+  do something wild**.
 
 ## Memory Pull
 
@@ -170,6 +188,8 @@ Charisma mechanics are
 - **Persuade)** Make a Cognition wager where the cost is based on the target's
   Wit and the nature of the action you are attempting to compel them to. Your
   starting wager is equal to your Charisma bonus.
+
+[Additional notes on Charisma Challenges](core/charisma)
 
 ## Acting with Advantage
 

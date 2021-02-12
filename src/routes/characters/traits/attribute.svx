@@ -18,24 +18,104 @@ are somehow changed permanently.
 
 Traits acquired automatically by having a +3 in the associated attribute.
 
-### Inspiring (Charisma) <RefAdder type="mundaneTrait" target="inspiring" />
+### Mighty (Brawn)
 
-_Your personal Charm is downright infectious. You bring an extra spark to your
+_You are a force to be reckonened with. Those who oppose you must stand firm or
+they will be crushed entirely._
+
+After winning a <Term target="core-clash-roll">Clash Roll</Term> by 5 or more,
+roll an additional d4 and add it to the total.
+
+### Graceful (Poise)
+
+_With your superb self-control, you flow from action to action making it look
+like a choreographed dance._
+
+After making a successful <Term target="core-skill-check">Skill Check</Term>,
+you may choose to discard one card in your hand to draw a new one. Allowing you
+to discard low cards for a chance at a higher one.
+
+### Domain Expert (Memory)
+
+_When it comes to your preferred subject matter, you're a living encylopedia._
+
+You do not need to make a <Term target="core-memory-pull">Memory Pull</Term> on
+subject matter related to your character's background or proficiencies.
+
+### Intuitive (Wit)
+
+_People speak with more than their words and you pick up everything they're
+saying._
+
+When making a <Term target="core-cog-wager">Cognition Wager</Term> the DM must
+tell you if the target value is high or low. Where high is half your total
+Cognition or more, and low is less than half.
+
+### Inspiring (Charisma)
+
+_Your personal charm is downright infectious. You bring an extra spark to your
 party and things go just a bit smoother when you're around._
 
-If you have at least +1 in another attribute, you gain an additional effect.
+If you have at least +1 in another attribute, you gain an additional effect as
+listed below.
 
-- **Brawn)** The next ally to make a Clash Roll against a creature you
-  <Term target="intimidate">intimidate</Term> gets advantage on that action.
-- **Poise)** If a nearby ally is about to make a Skill Check, you may trade one
-  card from your hand with one from theirs, if they are willing. **_Only one
-  card may be traded per check made._**
-- **Memory)** Nearby allies may perform the
-  <Term target="deceive">decieve</Term> action as if they have a Charisma of +2.
+- **Brawn)** The next ally to make a <Term target="core-clash-roll">Clash Roll</Term>
+  against a creature you <Term target="chr-intimidate">Intimidate</Term> gets
+  advantage on that action.
+- **Poise)** If a nearby ally is about to make a <Term target="core-skill-check">Skill Check</Term>
+  , you may trade one card from your hand with one from theirs, if they are
+  willing. **_Only one card may be traded per check made._**
+- **Memory)** Nearby allies may perform the <Term target="chr-deceive">Deceive</Term>
+  action as if they have a Charisma of +2.
 - **Wit)** You can ask nearby teammates to donate a cognition token towards your
-  attempts to <Term target="persuade">persuade</Term>. **_Max one token per
+  attempts to <Term target="chr-persuade">Persuade</Term>. **_Max one token per
   teammate, per attempt._**
 
 ## Low Attribute Traits
 
 Traits acquired automatically by having a -1 in the associated attribute.
+
+### Frail (Brawn)
+
+_You are lacking in physical development and mental fortitude. Any sort of
+direct opposition has a good chance of ruining your day._
+
+Suffer one turn of <Term target="cmbt-clash-roll">Stun</Term> after failing a <Term target="cmbt-clash-roll">Clash Roll</Term>
+by 5 or more. Additionally, you cannot wield weapons with the <Term target="wpn-trait-long">Long</Term>
+or <Term target="wpn-trait-heavy">Heavy</Term> trait, nor may you wear armor
+with the <Term target="armr-trait-heavy">Heavy</Term> trait.
+
+### Clumsy (Poise)
+
+_You're something of a menace to yourself and those around you. Every day is a
+struggle to avoid a horrible accident._
+
+Every time you fail a <Term target="core-skill-check">Skill Check</Term>, the
+DM will draw a card. If the card is a 2, 3 or a Joker, something bad happens.
+The exact effect is up to the DM's discretion.
+
+### Forgetful (Memory)
+
+_Your memory is a bucket with a hole in the bottom. You have a hard time
+retaining any sort of information._
+
+Make a<Term target="cmbt-memory-pull">Memory Pull</Term> everytime you attempt
+to communicate important information to an NPC or when trying to tell other
+players information that was only given to you by the DM.
+
+### A Few Eggs Short of a Dozen (Wit)
+
+_You need assistance when trying to perform any mental task harder than adding
+one and one._
+
+You must be able to actively communicate with an ally in order to use your <Term target="core-cognition">Cognition points</Term>.
+Additionally, creatures with a Wit of 1 or greater automatically succeed <Term target="core-cog-wager">Wagers</Term>
+against you.
+
+### Repulsive (Charisma)
+
+_No one likes you. The ones that seem like they do probably have some kind of
+stockholm syndrome._
+
+NPCs will try to avoid speaking to you unless you pass a DC 6 <Term target="chr-charm">Charm</Term>
+attempt at the start of every new conversation.

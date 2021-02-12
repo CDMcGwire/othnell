@@ -6,7 +6,7 @@ title: Character Traits
 
 Traits are additional effects and gameplay modifiers that your character
 acquires can acquire. Your character will begin with two Mundane traits, then
-gain more as they level.
+gain more as their legend grows.
 
 ## [Attribute Traits](characters/traits/attribute)
 
@@ -26,3 +26,36 @@ make you stand out from among all of your species.
 This section contains the list of available Exceptional traits. Exceptional
 traits are the parts of your character which make heads turn, inspire stories
 and songs, and build your reputation in lands you've never seen.
+
+## Gaining New Traits
+
+New traits are acquired by growing your character's legacy. That is to say, when
+the DM has decided you and your party have accomplished some significant task,
+the DM will reward you with either or a Mundane or Exceptional trait depending
+on the significance of the task.
+
+### Mundane Traits
+
+Examples of when the DM should award a Mundane trait:
+
+- **Low-Stakes, One-Shot Quests:** Smaller, self-contained adventures that only
+  take one or two sessions to complete. Say, hunting a dangerous but not quite
+  legendary monster, sneaking into a keep to steal a fair amount of treasure, or
+  rescuing a trade convoy from a band of pirates.
+- **After a Chapter of a Longer Quest:** If the party is on a longer, multi-week
+  quest, then the DM should consider when significant progress has been made and
+  award mundane traits at those milestone points. Say, after the party captures
+  a Tyrant's General to get information on his wherabouts, or after they explore
+  an ancient temple to retrieve an artifact they require for a ritual.
+
+### Exceptional Traits
+
+Examples of when the DM should award an Exceptional trait:
+
+- **High-Stakes, One-Shot Quests:** Smaller, self-contained adventures that only
+  take one or two sessions to complete, but involve a considerable amount of
+  challenge. Say, hunting a legendary monster (like a Hydra), stealing a great
+  relic from a powerful emperor, or raiding the base of a Pirate Lord.
+- **At the End of a Long Quest:** If players have made their way to the end of a
+  multi-week quest, they've earned a an Exceptional trait. Unless the quest is
+  intentionally designed to be mundane and the player's know that.
