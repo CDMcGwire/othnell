@@ -15,15 +15,10 @@ let incButton: HTMLButtonElement
 let decButton: HTMLButtonElement
 
 $: dispatch('input', value)
+$: value = Math.max(Math.min(float ? value : Math.round(value), max), min)
+$: minReached = value <= min
+$: maxReached = value >= max
 
-function validate(value: number) {
-  const newVal = float ? value : Math.round(value)
-  if (!setonly) {
-    incButton.disabled = newVal >= max
-    decButton.disabled = newVal <= min
-  }
-  return Math.max(Math.min(newVal, max), min)
-}
 function calcTarget(modifier: number, additivity: number) {
   return additivity > 0
     ? value + modifier
@@ -43,7 +38,7 @@ function handleChange(event: Event) {
     field.value = value.toString()
     return
   }
-  value = validate(calcTarget(newVal, additivity))
+  value = calcTarget(newVal, additivity)
 }
 </script>
 
@@ -51,12 +46,11 @@ function handleChange(event: Event) {
   {#if !setonly}
     <button
       class="number-input-button decrement"
-      on:click="{() => (value = validate(value - step))}"
+      on:click="{() => (value = value - step)}"
       bind:this="{decButton}"
+      disabled={minReached}
     >
-      <svg class="number-input-icon decrement" viewBox="0 0 100 100">
-        <polygon points="90,0 10,50 90,100"></polygon>
-      </svg>
+      -
     </button>
   {/if}
   <input
@@ -69,12 +63,11 @@ function handleChange(event: Event) {
   {#if !setonly}
     <button
       class="number-input-button increment"
-      on:click="{() => (value = validate(value + step))}"
+      on:click="{() => (value = value + step)}"
       bind:this="{incButton}"
+      disabled={maxReached}
     >
-      <svg class="number-input-icon increment" viewBox="0 0 100 100">
-        <polygon points="10,0 10,100 90,50"></polygon>
-      </svg>
+      +
     </button>
   {/if}
 </div>
@@ -85,18 +78,15 @@ function handleChange(event: Event) {
     flex-direction row
   .number-input-field
     text-align center
-    padding 0.3em 0
+    padding 0.3ex 0
   .number-input-button
     display flex
     flex-direction row
     justify-content center
     align-items center
-    padding 0.3em 0.3em
+    padding 0 0.625ch
   .number-input-button.decrement
     border-radius 9999px 0 0 9999px
   .number-input-button.increment
     border-radius 0 9999px 9999px 0
-  .number-input-icon
-    fill white
-    height 0.6em
 </style>

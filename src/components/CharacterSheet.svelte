@@ -283,27 +283,32 @@ onDestroy(() => {
   <div class="char-sheet-section char-attrs col">
     {#if attrTotal > maxAttrTotal}
       <div class="char-attr-score-warning">
-        <span>
-          Attribute Total is
-          <strong class="negative">{attrTotal - maxAttrTotal}</strong>
-          above the maximum
-        </span>
+        <div>Total</div>
+        <div class="ratio-display">
+          <div class="numerator">
+            <strong class="negative">{attrTotal}</strong>
+          </div>
+          <div class="line">/</div>
+          <div class="denominator"><strong>{maxAttrTotal}</strong></div>
+        </div>
       </div>
     {:else if attrTotal < maxAttrTotal && !itsFine}
       <div class="char-attr-score-warning">
-        <span>
-          <strong>{maxAttrTotal - attrTotal}</strong>
-          remaining attribute points
-        </span>
-        <button class="basic-input" on:click="{() => (itsFine = true)}"
-          >That's fine</button
-        >
+        <div>Total</div>
+        <div class="ratio-display">
+          <div class="numerator"><strong>{attrTotal}</strong></div>
+          <div class="line">/</div>
+          <div class="denominator"><strong>{maxAttrTotal}</strong></div>
+        </div>
+        <button class="basic-input" on:click="{() => (itsFine = true)}">
+          That's fine
+        </button>
       </div>
     {/if}
     <div class="char-attr-row col">
       <div class="char-attr-main row c-center">
         <div class="char-attr-label">Brawn</div>
-        <NumberInput bind:value="{$brawn}" min="{-1}" max="{3}" setonly />
+        <NumberInput bind:value="{$brawn}" min="{-1}" max="{3}" />
       </div>
       <div class="char-attr-sub row">
         <span
@@ -316,7 +321,7 @@ onDestroy(() => {
     <div class="char-attr-row col">
       <div class="char-attr-main row c-center">
         <div class="char-attr-label">Poise</div>
-        <NumberInput bind:value="{$poise}" min="{-1}" max="{3}" setonly />
+        <NumberInput bind:value="{$poise}" min="{-1}" max="{3}" />
       </div>
       <div class="char-attr-sub row">
         <span>
@@ -331,7 +336,7 @@ onDestroy(() => {
     <div class="char-attr-row col">
       <div class="char-attr-main row c-center">
         <div class="char-attr-label">Memory</div>
-        <NumberInput bind:value="{$memory}" min="{-1}" max="{3}" setonly />
+        <NumberInput bind:value="{$memory}" min="{-1}" max="{3}" />
       </div>
       <div class="char-attr-sub row">
         <span
@@ -345,7 +350,7 @@ onDestroy(() => {
     <div class="char-attr-row col">
       <div class="char-attr-main row c-center">
         <div class="char-attr-label">Wit</div>
-        <NumberInput bind:value="{$wit}" min="{-1}" max="{3}" setonly />
+        <NumberInput bind:value="{$wit}" min="{-1}" max="{3}" />
       </div>
       <div class="char-attr-sub row">
         <span>Cognition</span>
@@ -358,7 +363,7 @@ onDestroy(() => {
     <div class="char-attr-row col">
       <div class="char-attr-main row c-center">
         <div class="char-attr-label">Charisma</div>
-        <NumberInput bind:value="{$charisma}" min="{-1}" max="{3}" setonly />
+        <NumberInput bind:value="{$charisma}" min="{-1}" max="{3}" />
       </div>
       <div class="char-attr-sub row m-spaced">
         <span class="left">Intimidate</span>
@@ -497,7 +502,9 @@ onDestroy(() => {
   <div class="section-divider"></div>
   <div class="char-sheet-section char-ref-list char-traits col">
     <div class="section-header">
-      <a href="/characters/traits/attribute" on:click="{close}">Attribute Traits</a>
+      <a href="/characters/traits/attribute" on:click="{close}"
+        >Attribute Traits</a
+      >
     </div>
     {#if attrTraits.length > 0}
       {#each attrTraits as trait, i (trait)}
@@ -653,27 +660,47 @@ onDestroy(() => {
     border-radius 10px
     overflow hidden
   .char-attr-score-warning
-    align-self flex-end
-    margin-right -15px
-    margin-bottom 2ex
-    padding 1ex 15px 1ex 1ch
+    position absolute
+    right 0
+    width 6ch
+    padding 0.5ex 0.5ch
+    font-size 1.8em
     background-color field-bg
     border 3px solid button-bg
     border-right none
     border-radius 10px 0 0 10px
-    span
-      vertical-align middle
+    div
+      text-align center
     .basic-input
       margin-left 1ch
-      font-size 0.875em
+      font-size 0.5em
+  .ratio-display
+    position relative
+    display flex
+    flex-direction column
+    justify-content center
+    align-items center
+    height 2em
+    .numerator
+      position absolute
+      top 0
+      left 0.5ch
+    .denominator
+      position absolute
+      bottom 0
+      right 0.5ch
+    .line
+      font-size 1.5em
+      color button-fg-faint
   .char-attr-row
     margin-bottom 2ex
   .char-attr-main
     display flex
     flex-direction row
     justify-content space-between
-    width 17ch
+    width 20ch
     margin-left -15px
+    margin-bottom 0.6ex
     padding-left 45px
     font-size 1.3em
     font-weight 600
@@ -808,8 +835,11 @@ onDestroy(() => {
         margin-left 0.5ch
     .char-attr-main
       .number-input-field
-        width 3.5ch
+        width 2.5ch
+      .number-input-button.decrement
         border-radius 0 0 0 20px
+      .number-input-button.increment
+        border-radius 0
     .char-attr-sub
       .number-input
         margin 0 1ch
