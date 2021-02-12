@@ -1,0 +1,63 @@
+---
+title: Additional Notes on Charisma
+---
+
+<script>
+import Term from '../../components/Term.svelte'
+</script>
+
+# {title}
+
+This page provides additional information on playing out Charisma based events,
+such as how determine cognition costs for <Term target="chr-persuasion">Persuasion</Term> attempts. These are not hard and
+fast rules, but more a baseline suggestion to DMs as to what might work best. If
+you have ideas that work better with your players, use those.
+
+## Determining the DC of a Charm Attempt
+
+The <Term taget="core-dc">DC</Term> cost of a Charm attempt should be
+mostly determined by the target's Poise.
+
+> **Base DC** = 3 at Poise -1, 5 at 0, 7 at 1, 9 at 2, and Jack at 3
+
+If the target has a *negative* disposition towards the player, then the DC
+should go up accordingly.
+
+- **+1:** The target has a bad impression of the player.
+- **+2:** The target actively dislikes the player.
+- **+4:** The target hates the player.
+
+If the target has a *positive* disposition towards the player, then the DC
+should go down accordingly. If the DC goes below 3, then the player
+automatically succeeds.
+
+- **-1:** The target has a good impression of the player.
+- **-2:** The target actively likes the player.
+- **-4:** The target loves the player.
+
+## Determining the Cost of Persuasion
+
+The <Term taget="core-cognition">Cognition</Term> cost of a Persuasion attempt should
+be mostly determined by the target's Wit and what the NPC is being persuaded to
+believe, but with some room for circumstances that can't be deterministically
+accounted for, like mood, health, and their personal history.
+
+As such, a good formula for determining the cost is:
+
+> Cost = **Base Cost** + (**Target Wit**)d8
+
+Where **Base Cost** is one of the following:
+
+- **1:** Accepting the player's argument would be mildly inconvenient for the
+  target.
+- **2:** Accepting the player's argument would be significantly inconvenient
+  for the target but is only a small material cost at most.
+- **4:** Accepting the player's argument would result in a net-negative for the
+  target, but doesn't go against strongly held beliefs.
+- **8:** Accepting the player's argument would go against held convictions,
+  risk betraying the target's allies, or come at a substantial material cost.
+- **16:** Accepting the player's argument would go against fundamental beliefs
+  or put their loved ones at risk.
+
+If the target's <Term taget="attr-wit">Wit</Term> is negative, then you should roll
+as many die as they are negative and subtract the total from the base cost.

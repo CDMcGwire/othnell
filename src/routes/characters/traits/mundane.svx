@@ -4,16 +4,30 @@ title: Mundane Traits
 
 <script>
 import RefAdder from '../../../components/RefAdder.svelte'
+import Term from '../../../components/Term.svelte'
 </script>
 
 # {title}
 
-Mundane Traits are acquired every level. They help define your character and
-improve their capabilities, but not in ways that would be particularly
-_exceptional_.
+Mundane Traits define your character and improve their capabilities, but not in
+ways that would be particularly _exceptional_.
 
 Put another way, a Mundane Trait would differentiate a body builder from a
-runner, but would not do well to tell you which body builder could carry the
-heaviest load or which could bend steel with his legs.
+runner, but would not say if that body builder can lift a full-size ox or if
+that runner can make a 3 minute mile.
 
+## Danger Sense
 
+<RefAdder type="mundaneTrait" target="danger-sense" />
+
+You are not considered <Term target="cmbt-defenseless">defenseless</Term> when
+attacked by surprise if no other circumstance would make it impossible to defend
+yourself. However, your attributes are considered to be -1 during a surprise
+attack.
+
+## Pack Mule
+
+<RefAdder type="mundaneTrait" target="pack-mule" />
+
+Your <Term target="expl-encumbrance">encumbrance</Term> limit is 50% higher and
+the speed penalties for being encumbered are halved.

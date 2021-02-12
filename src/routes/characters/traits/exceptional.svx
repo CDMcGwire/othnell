@@ -4,15 +4,15 @@ title: Exceptional Traits
 
 <script>
 import RefAdder from '../../../components/RefAdder.svelte'
+import Term from '../../../components/Term.svelte'
 </script>
 
 # {title}
 
-Exceptional Traits are dramatic effects your character receives every fifth
-level. These represent the aspects of your character that make them stand out
-from among their peers in ways that some may even believe to be inhuman.
+Exceptional Traits represent the aspects of your character that make them stand
+out from among their peers in ways that some may even believe to be inhuman.
 
-## Iron Stomach 
+## Iron Stomach
 
 <RefAdder type="exceptionalTrait" target="iron-stomach" />
 

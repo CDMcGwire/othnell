@@ -21,6 +21,6 @@ export function delayedHover(node: Node, duration: number) {
     destroy() {
       node.removeEventListener('mouseover', handleMouseover)
       node.removeEventListener('mouseleave', handleMouseleave)
-    }
+    },
   }
 }
