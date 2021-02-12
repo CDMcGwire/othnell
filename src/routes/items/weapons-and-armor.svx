@@ -1,0 +1,59 @@
+---
+title: Weapons and Armor
+---
+
+# {title}
+
+## Melee Weapons
+
+### Blades
+
+- **Knife or Dagger** -- d4 --
+  <Term target="wpn-trait-throwable">Throwable</Term>,
+  <Term target="wpn-trait-concealable">Concealable</Term>,
+  <Term target="wpn-trait-tool">Tool</Term>
+- **Parrying Dagger** -- <Term target="wpn-trait-offhand">Offhand +1</Term> --
+  <Term target="wpn-trait-disarming">Disarming</Term>
+- **Gladius** -- d6 -- <Term target="wpn-trait-shield-pair">Shield Pair</Term>
+- **Long Sword/Katana** -- d8/d10 -- <Term target="wpn-trait-long">Long</Term>,
+  <Term target="wpn-trait-two-handable">Two Handable</Term>
+- **Zweihander/Tachi** -- d6+d4 -- <Term target="wpn-trait-long">Long</Term>,
+  <Term target="wpn-trait-two-handed">Two Handed</Term>,
+  <Term target="wpn-trait-armor-piercing">Armor Pierce 1</Term>
+
+### Axes
+
+- **Hatchet** -- d4 -- <Term target="wpn-trait-throwable">Throwable</Term>,
+  <Term target="wpn-trait-concealable">Concealable</Term>,
+  <Term target="wpn-trait-tool">Tool</Term>
+- **War Axe** -- d8 -- <Term target="wpn-trait-shield-pair">Shield Pair</Term>,
+  <Term target="wpn-trait-unbalanced">Unbalanced</Term>,
+  <Term target="wpn-trait-Armor Pierce 1">Armor Pierce 1</Term>
+- **Greataxe** -- 2d6 -- <Term target="wpn-trait-long">Long</Term>,
+  <Term target="wpn-trait-two-handed">Two Handed</Term>,
+  <Term target="wpn-trait-unbalanced">Unbalanced</Term>,
+  <Term target="wpn-trait-armor-piercing">Armor Pierce 2</Term>
+
+### Blunt Weapons
+
+- **Club** -- d6 -- <Term target="wpn-trait-shield-pair">Shield Pair</Term>,
+  <Term target="wpn-trait-unbalanced">Unbalanced</Term>,
+  <Term target="wpn-trait-armor-halve">Armor Halve</Term>
+- **Mace** -- d8 -- <Term target="wpn-trait-shield-pair">Shield Pair</Term>,
+  <Term target="wpn-trait-heavy">Heavy</Term>,
+  <Term target="wpn-trait-armor-negate">Armor Negate</Term>
+- **Morningstar** -- d6+d4 -- <Term target="wpn-trait-shield-pair">Shield
+  Pair</Term>, <Term target="wpn-trait-heavy">Heavy</Term>,
+  <Term target="wpn-trait-armor-pierce">Armor Pierce 3</Term>
+- **Heavy Flail** -- 2d6 -- <Term target="wpn-trait-shield-pair">Shield
+  Pair</Term>, <Term target="wpn-trait-unwieldy">Unwieldy</Term>,
+  <Term target="wpn-trait-long">Long</Term>,
+  <Term target="wpn-trait-armor-pierce">Armor Negate</Term>
+
+## Armor
+
+- Leather/Padded -- Armor 1
+- Studded Leather -- Armor 2
+- Chain Mail/Scale Mail -- Armor 3
+- Half Plate -- Armor 4
+- Plate -- Armor 5

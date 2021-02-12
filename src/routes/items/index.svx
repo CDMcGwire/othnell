@@ -1,5 +1,17 @@
 ---
-title: Gear, Treasure, and Miscellaneous Things
+title: Gear, Treasure, and Economic Matters
 ---
 
 # {title}
+
+Whether its food, treasure, or gear, all adventures involve or revolve around
+material objects. This section describes common items that interact with the
+Core Rules and Combat in specific ways as well as some of the ways wealth flows
+in Othnell.
+
+## [Weapons and Armor](items/weapons-and-armor)
+
+An essential page for players who intend to participate in Combat (probably all
+of you). Here you'll find the base Clash Die for a variety of weapons, special
+rules, and a list of different kinds of armor.
+
