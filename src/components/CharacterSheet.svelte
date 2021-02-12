@@ -78,6 +78,8 @@ const intimidateDice = [
   'd12 + d4',
   'd12 + d6',
 ]
+const minAttrScore = -1
+const maxAttrScore = 3
 const maxAttrTotal = 7
 
 let unsubscribe
@@ -86,6 +88,7 @@ let selectedFoodType: Array<number> = [2]
 let armor = 0
 let damage = 0
 let imgInput: HTMLInputElement
+let attrTraits: string[] = []
 
 $: attrTotal = calcAttrTotal($brawn, $poise, $memory, $wit, $charisma)
 $: itsFine = attrTotal >= maxAttrTotal
@@ -94,6 +97,11 @@ $: intimidate = $brawn + $charisma + 2
 $: threshold = racialThresholds.get($race) + $brawn
 $: deathLimit = threshold * 2 + 1
 $: cognitionMax = $wit > -1 ? 8 + $wit * 8 : 8 / Math.pow(2, Math.abs($wit))
+$: checkAttrTraits($brawn, 'frail', 'mighty')
+$: checkAttrTraits($poise, 'clumsy', 'graceful')
+$: checkAttrTraits($memory, 'forgetful', 'domain-expert')
+$: checkAttrTraits($wit, 'a-few-eggs-short-of-a-dozen', 'intuitive')
+$: checkAttrTraits($charisma, 'repulsive', 'inspiring')
 
 function loadLastCharacter() {
   const serialCharacter = localStorage.getItem('activeCharacter')
@@ -134,6 +142,22 @@ function calcAttrTotal(...attrs: number[]): number {
     if (score > 2) total++
   }
   return total
+}
+function checkAttrTraits(
+  score: number,
+  negativeTrait: string,
+  positiveTrait: string,
+) {
+  const hadPositive = attrTraits.includes(positiveTrait)
+  if (score >= maxAttrScore && !hadPositive)
+    attrTraits = [...attrTraits, positiveTrait].sort()
+  else if (hadPositive)
+    attrTraits = removeValueFromList(attrTraits, positiveTrait)
+  const hadNegative = attrTraits.includes(negativeTrait)
+  if (score <= minAttrScore && !hadNegative)
+    attrTraits = [...attrTraits, negativeTrait].sort()
+  else if (hadNegative)
+    attrTraits = removeValueFromList(attrTraits, negativeTrait)
 }
 function sleep(amount: number) {
   $cognition = Math.min(
@@ -191,6 +215,11 @@ function close() {
 }
 function removeFromList(values: Array<any>, index: number, count: number = 1) {
   values.splice(index, count)
+  return values
+}
+function removeValueFromList(values: Array<any>, value: any) {
+  const index = values.indexOf(value)
+  values.splice(index, 1)
   return values
 }
 
@@ -266,7 +295,9 @@ onDestroy(() => {
           <strong>{maxAttrTotal - attrTotal}</strong>
           remaining attribute points
         </span>
-        <button class="basic-input" on:click={() => itsFine = true}>That's fine</button>
+        <button class="basic-input" on:click="{() => (itsFine = true)}"
+          >That's fine</button
+        >
       </div>
     {/if}
     <div class="char-attr-row col">
@@ -464,6 +495,26 @@ onDestroy(() => {
     {/if}
   </div>
   <div class="section-divider"></div>
+  <div class="char-sheet-section char-ref-list char-traits col">
+    <div class="section-header">
+      <a href="/characters/traits/attribute" on:click="{close}">Attribute Traits</a>
+    </div>
+    {#if attrTraits.length > 0}
+      {#each attrTraits as trait, i (trait)}
+        <ReferenceEntry
+          target="{trait}"
+          on:follow="{close}"
+          baseRulesUrl="/characters/traits/attribute"
+          baseRefUrl="/ref/traits/attribute"
+          noremove
+        />
+      {/each}
+    {:else}
+      <div class="char-empty-ref-list">
+        Your character has no attribute traits yet...
+      </div>
+    {/if}
+  </div>
   <div class="char-sheet-section char-ref-list char-traits col">
     <div class="section-header">
       <a href="/characters/traits/mundane" on:click="{close}">Mundane Traits</a>

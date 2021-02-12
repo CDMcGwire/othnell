@@ -9,6 +9,7 @@ export let target: string
 export let baseRulesUrl: string
 export let baseRefUrl: string
 export let _class: string = ''
+export let noremove: boolean = false
 
 let referenceDesc = ''
 
@@ -44,8 +45,11 @@ onMount(() => {
         {referenceName}
       </a>
     </div>
-    <TwoStageButton on:click="{() => dispatch('remove')}">Remove</TwoStageButton
-    >
+  {#if !noremove}
+    <TwoStageButton on:click="{() => dispatch('remove')}">
+      Remove
+    </TwoStageButton>
+  {/if}
   </div>
   <div class="ref-entry-content">{@html referenceDesc}</div>
 </div>

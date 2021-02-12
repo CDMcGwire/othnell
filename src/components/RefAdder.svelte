@@ -12,15 +12,15 @@ function add() {
   switch (type) {
     case 'proficiency':
       if ($proficiencies.includes(target)) return
-      $proficiencies = [...$proficiencies, target]
+      $proficiencies = [...$proficiencies, target].sort()
       return
     case 'mundaneTrait':
       if ($mundaneTraits.includes(target)) return
-      $mundaneTraits = [...$mundaneTraits, target]
+      $mundaneTraits = [...$mundaneTraits, target].sort()
       return
     case 'exceptionalTrait':
       if ($exceptionalTraits.includes(target)) return
-      $exceptionalTraits = [...$exceptionalTraits, target]
+      $exceptionalTraits = [...$exceptionalTraits, target].sort()
       return
   }
 }
