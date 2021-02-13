@@ -15,14 +15,59 @@ holy text.
 
 From a gameplay perspective, having proficiency lets you make Clash Rolls, Skill
 Checks, Memory Draws, and spend Cognition on related tasks without extreme
-penalties. The DM may even decide that some task is entirely impossible without
-proficiency.
+penalties. The DM may even decide that some tasks are entirely impossible
+without the appropriate proficiency.
+
+## Martial
+
+Martial proficiencies are those which pertain to combat through physical means.
+Such as swordplay, archery, or mounted combat.
+
+### [Weapon Types](/items/weapons-and-armor)
+
+A Weapon Type proficiency lets you use a weapon of the chosen type (as listed in
+the Weapons and Armor page) without additional penalties. **If you try to use a
+weapon that you are not proficient with, its Clash Die rank is reduced by 1 and
+its positive traits do not apply.** Negative weapon traits apply whether or not
+you are proficient.
+
+- **Axes** <RefAdder type="proficiency" target="axes" />
+- **Blades** <RefAdder type="proficiency" target="blades" />
+- **Bludgeoning Weapons**
+  <RefAdder type="proficiency" target="bludgeoning-weapons" />
+- **Polearms** <RefAdder type="proficiency" target="polearms" />
+- **Bows** <RefAdder type="proficiency" target="bows" />
+
+### [Throwing Weapons](/items/weapons-and-armor)
+
+<RefAdder type="proficiency" target="throwing-weapons" />
+
+Proficiency in Throwing Weapons lets you hurl weapons with the Throwing trait or
+in the Special Thrown Weapons category without penalty. **Attempting to throw a
+weapon (with exception to rocks and rock-like objects) without proficiency
+increases the DC by 3.**
+
+### [Full Body Armor](/items/weapons-and-armor)
+
+<RefAdder type="proficiency" target="full-body-armor" />
+
+Proficiency in Full Body Armor lets you wear armor with the Full Body trait
+without additional penalties. **Wearing heavy armor without proficiency lowers
+your Effective Poise by 3.**
+
+### [Mounted Combat](/items/mounted-combat)
+
+<RefAdder type="proficiency" target="mounted-combat" />
+
+Proficiency in Mounted Combat gives you a +2 Clash Roll bonus when if your mount
+moved before you attacked. It also reduces the DC when making a ranged attack or
+when attempting to remain seated on the mount.
 
 ## Magic
 
 Magic comes is a wide variety of origins and forms and as such proficiency in
 one "arte" of magic does not imply proficiency in any other. Having proficiency
-in an arte is the first requirement to allow your character to use its spell,
+in an arte is the first requirement to allow your character to use its spells,
 rituals, and techniques.
 
 ### [Animare](/magic/animare)
