@@ -133,6 +133,16 @@
     margin-left 1ch
   .txt-prefix
     margin-right 1ch
+  
+  div.note
+    padding 1ex 1ch
+    color foreground-faint
+    background-color background-sub
+    border-radius 10px
+    & > p
+      margin-bottom 1ex
+    & > p:last-of-type
+      margin-bottom 0
 
   .tippy-box
     font-size unset

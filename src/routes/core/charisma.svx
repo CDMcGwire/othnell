@@ -1,5 +1,5 @@
 ---
-title: Additional Notes on Charisma
+title: Charisma Actions
 ---
 
 <script>

@@ -36,6 +36,12 @@ So if the rules or the DM say "roll 2d8" that means "roll two eight-sided dice."
 If the rules say "increase die rank by one" then that 2d8 becomes 2d10, since a
 ten-sided die is the next larger die.
 
+#### Impossible Dice
+
+Sometimes the rules will tell you to roll a d2, d3, or d5. These are not
+physically possible polyhedrals, this is a mathematical trick. A d2 is a real
+d4 but halving the result, rounding up. d3 comes from a d6 and a d5 from a d10.
+
 ### Brief on Attributes
 
 While described in more detail in the [Attributes](/characters/attributes) page
@@ -46,10 +52,7 @@ Every character has five defining characteristics called "Attributes" which are
 each represented by a number from -1 to 3. These numbers have an influence on
 results of the mechanics described below.
 
-The five attributes are: <Term target="attr-brawn">Brawn</Term>, <Term target="attr-poise">Poise</Term>
-, <Term target="attr-memory">Memory</Term>
-, <Term target="attr-wit">Wit</Term>
-, and <Term target="attr-charisma">Charisma</Term>.
+The five attributes are: <Term target="attr-brawn">Brawn</Term>, <Term target="attr-poise">Poise</Term>, <Term target="attr-memory">Memory</Term>, <Term target="attr-wit">Wit</Term>, and <Term target="attr-charisma">Charisma</Term>.
 
 ## Player Actions
 
@@ -77,7 +80,7 @@ Single Die Roll Ranks - This is the default type of roll
 
 Two Die Roll Ranks - Used when specified by other rules
 
-- 2d2 > d4 + d2 > 2d4 > d6 + d4 > 2d6 > d8 + d6...
+- 2d2 > 2d3 > 2d4 > 2d5 > 2d6 > d8 + d6...
 
 > **Example:** A barbarian with a great axe attacks a old wizard with a dagger.
 > The greataxe gives the barbarian a base die of d10 and the wizard has a d6
@@ -123,16 +126,16 @@ size if below, or discard down to their hand size if above.
 ### Ace Callout
 
 When the DM really wants to drive home the difficulty of a Skill Check while
-acknowledging it as _**possible**_, they may set the difficulty to Ace then
-roll a d4 to determine the exact Suit that must be matched by the player.
+acknowledging it as _**possible**_, they may set the difficulty to Ace then roll
+a d4 to determine the exact Suit that must be matched by the player.
 
 - **1)** Spade
 - **2)** Heart
 - **3)** Club
 - **4)** Diamond
 
-> As a player, this means that if you have three Aces in your hand, **it's time to
-  do something wild**.
+> As a player, this means that if you have three Aces in your hand, **it's time
+> to do something wild**.
 
 ## Memory Pull
 

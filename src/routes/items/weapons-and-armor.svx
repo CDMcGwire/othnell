@@ -2,58 +2,83 @@
 title: Weapons and Armor
 ---
 
+<script>
+import Term from '../../components/Term.svelte'
+</script>
+
 # {title}
+
+This page lists the base stat lines for common weapon and armor types you may
+use on an adventure. It is by no means exhaustive, but should serve as a good
+baseline if you have additional varieties you want to include in your
+adventures.
 
 ## Melee Weapons
 
 ### Blades
 
-- **Knife or Dagger** -- d4 --
-  <Term target="wpn-trait-throwable">Throwable</Term>,
-  <Term target="wpn-trait-concealable">Concealable</Term>,
-  <Term target="wpn-trait-tool">Tool</Term>
-- **Parrying Dagger** -- <Term target="wpn-trait-offhand">Offhand +1</Term> --
-  <Term target="wpn-trait-disarming">Disarming</Term>
-- **Gladius** -- d6 -- <Term target="wpn-trait-shield-pair">Shield Pair</Term>
-- **Long Sword/Katana** -- d8/d10 -- <Term target="wpn-trait-long">Long</Term>,
-  <Term target="wpn-trait-two-handable">Two Handable</Term>
-- **Zweihander/Tachi** -- d6+d4 -- <Term target="wpn-trait-long">Long</Term>,
-  <Term target="wpn-trait-two-handed">Two Handed</Term>,
-  <Term target="wpn-trait-armor-piercing">Armor Pierce 1</Term>
+- **Large Knife or Dagger**: d4
+  - <Term target="wpn-trait-throwable">Throwable</Term>, <Term target="wpn-trait-concealable">Concealable</Term>, <Term target="wpn-trait-tool">Tool</Term>
+- **Parrying Dagger**: <Term target="wpn-trait-offhand">Offhand</Term> +1
+  - <Term target="wpn-trait-disarming">Disarming</Term>
+- **Gladius**: 2d3/2d4
+  - <Term target="wpn-trait-shield-pair">Shield Pair</Term>
+- **Long Sword**: 2d4/2d5
+  - <Term target="wpn-trait-long">Long</Term>, <Term target="wpn-trait-two-handable">Two Handable</Term>
+- **Katana or Tachi**: d8/2d5
+  - <Term target="wpn-trait-long">Long</Term>, <Term target="wpn-trait-two-handable">Two Handable</Term>, <Term target="wpn-trait-cavalry-weapon">Cavalry Weapon</Term>
+- **Zweihander**: 2d6
+  - <Term target="wpn-trait-long">Long</Term>, <Term target="wpn-trait-two-handed">Two Handed</Term>, <Term target="wpn-trait-armor-piercing">Armor Pierce</Term> 2
 
 ### Axes
 
-- **Hatchet** -- d4 -- <Term target="wpn-trait-throwable">Throwable</Term>,
-  <Term target="wpn-trait-concealable">Concealable</Term>,
-  <Term target="wpn-trait-tool">Tool</Term>
-- **War Axe** -- d8 -- <Term target="wpn-trait-shield-pair">Shield Pair</Term>,
-  <Term target="wpn-trait-unbalanced">Unbalanced</Term>,
-  <Term target="wpn-trait-Armor Pierce 1">Armor Pierce 1</Term>
-- **Greataxe** -- 2d6 -- <Term target="wpn-trait-long">Long</Term>,
-  <Term target="wpn-trait-two-handed">Two Handed</Term>,
-  <Term target="wpn-trait-unbalanced">Unbalanced</Term>,
-  <Term target="wpn-trait-armor-piercing">Armor Pierce 2</Term>
+- **Hatchet**: d4
+  - <Term target="wpn-trait-throwable">Throwable</Term>, <Term target="wpn-trait-concealable">Concealable</Term>, <Term target="wpn-trait-tool">Tool</Term>
+- **War Axe**: d8/d10
+  - <Term target="wpn-trait-shield-pair">Shield Pair</Term>, <Term target="wpn-trait-unbalanced">Unbalanced</Term>, <Term target="wpn-trait-Armor Pierce 1">Armor Pierce</Term> 2
+- **Greataxe**: 2d6
+  - <Term target="wpn-trait-long">Long</Term>, <Term target="wpn-trait-two-handed">Two Handed</Term>, <Term target="wpn-trait-unbalanced">Unbalanced</Term>, <Term target="wpn-trait-armor-piercing">Armor Pierce 3</Term>
 
 ### Blunt Weapons
 
-- **Club** -- d6 -- <Term target="wpn-trait-shield-pair">Shield Pair</Term>,
-  <Term target="wpn-trait-unbalanced">Unbalanced</Term>,
-  <Term target="wpn-trait-armor-halve">Armor Halve</Term>
-- **Mace** -- d8 -- <Term target="wpn-trait-shield-pair">Shield Pair</Term>,
-  <Term target="wpn-trait-heavy">Heavy</Term>,
-  <Term target="wpn-trait-armor-negate">Armor Negate</Term>
-- **Morningstar** -- d6+d4 -- <Term target="wpn-trait-shield-pair">Shield
-  Pair</Term>, <Term target="wpn-trait-heavy">Heavy</Term>,
-  <Term target="wpn-trait-armor-pierce">Armor Pierce 3</Term>
-- **Heavy Flail** -- 2d6 -- <Term target="wpn-trait-shield-pair">Shield
-  Pair</Term>, <Term target="wpn-trait-unwieldy">Unwieldy</Term>,
-  <Term target="wpn-trait-long">Long</Term>,
-  <Term target="wpn-trait-armor-pierce">Armor Negate</Term>
+- **Club**: d6
+  - <Term target="wpn-trait-shield-pair">Shield Pair</Term>, <Term target="wpn-trait-unbalanced">Unbalanced</Term>, <Term target="wpn-trait-armor-halve">Armor Halve</Term>
+- **Mace**: d6/d8
+  - <Term target="wpn-trait-shield-pair">Shield Pair</Term>, <Term target="wpn-trait-heavy">Unbalanced</Term>, <Term target="wpn-trait-armor-pierce">Armor Pierce</Term> 3
+- **Flail**: d6/d8
+  - <Term target="wpn-trait-shield-pair">ShieldPair</Term>, <Term target="wpn-trait-unwieldy">Unwieldy</Term>, <Term target="wpn-trait-armor-pierce">Shield Negate</Term>, <Term target="wpn-trait-armor-pierce">Armor Pierce</Term> 3
+- **Heavy Flail**: d12
+  - <Term target="wpn-trait-shield-pair">Shield Pair</Term>, <Term target="wpn-trait-unwieldy">Unwieldy</Term>, <Term target="wpn-trait-long">Long</Term>, <Term target="wpn-trait-armor-pierce">Armor Negate</Term>
+
+### Polearms
+
+- **Quarterstaff or Bo**: d6
+  - <Term target="wpn-trait-long">Long</Term>, <Term target="wpn-trait-sheilding">Shielding</Term> +1
+- **Spear**: d8/d10
+  - <Term target="wpn-trait-long">Long</Term>, <Term target="wpn-trait-shield-pair">Shield Pair</Term>, <Term target="wpn-trait-calvary-weapon">Calvary Weapon</Term>
+
+## Ranged Weapons
+
+### Bows
+
+- **Shortbow**: Range 400 | 4 Damage
+- **Longbow**: Range 700 | 5 Damage
+  - <Term target="wpn-trait-long">Long</Term>
+- **Mongolian Recurve**: Range 400-1,600 | 3-6 Damage
+  - <Term target="wpn-trait-scaling">Scaling</Term> (Brawn), <Term target="wpn-trait-cavalry-weapon">Cavalry Weapon</Term>
+- **Flight Bow**: Range 1,500 | 4 Damage
+  - <Term target="wpn-trait-cavalry-weapon">Cavalry Weapon</Term>
+
+### Ammunition
+
+- **Heavy Arrow**: <Term target="wpn-trait-short-range">Short Range</Term> | <Term target="wpn-trait-armor-piercing">Armor Pierce</Term> 2
+- **Light Arrow**: <Term target="wpn-trait-long-range">Long Range</Term> | -1 Damage
+- **Barbed Arrow**: <Term target="wpn-trait-short-range">Short Range</Term> | +1 <Term target="cmbt-severity">Severity</Term>
 
 ## Armor
 
-- Leather/Padded -- Armor 1
-- Studded Leather -- Armor 2
-- Chain Mail/Scale Mail -- Armor 3
-- Half Plate -- Armor 4
-- Plate -- Armor 5
+- **Leather or Padded**: Armor 1
+- **Studded Leather**: Armor 2
+- **Chain Mail or Scale Mail**: Armor 3
+- **Half Plate**: Armor 4
+- **Plate**: Armor 5

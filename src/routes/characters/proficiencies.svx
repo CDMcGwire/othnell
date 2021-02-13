@@ -33,8 +33,7 @@ you are proficient.
 
 - **Axes** <RefAdder type="proficiency" target="axes" />
 - **Blades** <RefAdder type="proficiency" target="blades" />
-- **Bludgeoning Weapons**
-  <RefAdder type="proficiency" target="bludgeoning-weapons" />
+- **Bludgeoning Weapons** <RefAdder type="proficiency" target="bludgeoning-weapons" />
 - **Polearms** <RefAdder type="proficiency" target="polearms" />
 - **Bows** <RefAdder type="proficiency" target="bows" />
 
@@ -52,7 +51,7 @@ increases the DC by 3.**
 <RefAdder type="proficiency" target="full-body-armor" />
 
 Proficiency in Full Body Armor lets you wear armor with the Full Body trait
-without additional penalties. **Wearing heavy armor without proficiency lowers
+without additional penalties. **Wearing full body armor without proficiency lowers
 your Effective Poise by 3.**
 
 ### [Mounted Combat](/items/mounted-combat)

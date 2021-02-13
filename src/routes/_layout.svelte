@@ -1,109 +1,157 @@
 <script lang="ts">
-  import { stores } from '@sapper/app'
-  import GlobalStyles from '../GlobalStyles.svelte'
-  import NavTree from '../components/NavTree.svelte'
-  import CharacterSheet from '../components/CharacterSheet.svelte'
+import { stores } from '@sapper/app'
+import GlobalStyles from '../GlobalStyles.svelte'
+import NavTree from '../components/NavTree.svelte'
+import CharacterSheet from '../components/CharacterSheet.svelte'
 
-  const { page } = stores()
+const { page } = stores()
 
-  let navOpen = false
-  let toolOpen = false
+let navOpen = false
+let toolOpen = false
 
-  const routes = [
-    {
-      name: 'Home',
-      path: '/',
-    },
-    {
-      name: 'Core Rules',
-      path: '/core',
-    },
-    {
-      name: 'Player Characters',
-      path: '/characters',
-      children: [
-        {
-          name: 'Attributes',
-          path: '/attributes',
-        },
-        {
-          name: 'Races',
-          path: '/races',
-        },
-        {
-          name: 'Proficiencies',
-          path: '/proficiencies',
-        },
-        {
-          name: 'Traits',
-          path: '/traits',
-          children: [
-            {
-              name: 'Attribute',
-              path: '/attribute',
-            },
-            {
-              name: 'Mundane',
-              path: '/mundane',
-            },
-            {
-              name: 'Exceptional',
-              path: '/exceptional',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: 'Combat',
-      path: '/combat',
-      children: [
-        {
-          name: 'Damage',
-          path: '/damage',
-        },
-      ],
-    },
-    {
-      name: 'Magic',
-      path: '/magic',
-      children: [
-        {
-          name: 'Animare',
-          path: '/animare',
-        },
-        {
-          name: 'Energeia',
-          path: '/energeia',
-        },
-        {
-          name: 'Essense Weaving',
-          path: '/essence-weaving',
-        },
-        {
-          name: 'Hemoturgy',
-          path: '/hemoturgy',
-        },
-        {
-          name: 'THE RULE OF LAW',
-          path: '/rule-of-law',
-        },
-        {
-          name: 'Soul Binding',
-          path: '/soul-binding',
-        },
-        {
-          name: 'Thaumaturgy',
-          path: '/thaumaturgy',
-        },
-        {
-          name: 'Veneration',
-          path: '/veneration',
-        },
-      ],
-    },
-  ]
+const routes = [
+  {
+    name: 'Home',
+    path: '/',
+  },
+  {
+    name: 'Core Rules',
+    path: '/core',
+    children: [
+      {
+        name: 'Charisma Actions',
+        path: '/charisma',
+      },
+    ],
+  },
+  {
+    name: 'Player Characters',
+    path: '/characters',
+    children: [
+      {
+        name: 'Attributes',
+        path: '/attributes',
+      },
+      {
+        name: 'Races',
+        path: '/races',
+      },
+      {
+        name: 'Proficiencies',
+        path: '/proficiencies',
+      },
+      {
+        name: 'Traits',
+        path: '/traits',
+        children: [
+          {
+            name: 'Attribute',
+            path: '/attribute',
+          },
+          {
+            name: 'Mundane',
+            path: '/mundane',
+          },
+          {
+            name: 'Exceptional',
+            path: '/exceptional',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: 'Combat',
+    path: '/combat',
+    children: [
+      {
+        name: 'Damage',
+        path: '/damage',
+      },
+    ],
+  },
+  {
+    name: 'Magic',
+    path: '/magic',
+    children: [
+      {
+        name: 'Animare',
+        path: '/animare',
+      },
+      {
+        name: 'Energeia',
+        path: '/energeia',
+      },
+      {
+        name: 'Essense Weaving',
+        path: '/essence-weaving',
+      },
+      {
+        name: 'Hemoturgy',
+        path: '/hemoturgy',
+      },
+      {
+        name: 'THE RULE OF LAW',
+        path: '/rule-of-law',
+      },
+      {
+        name: 'Soul Binding',
+        path: '/soul-binding',
+      },
+      {
+        name: 'Thaumaturgy',
+        path: '/thaumaturgy',
+      },
+      {
+        name: 'Veneration',
+        path: '/veneration',
+      },
+    ],
+  },
+  {
+    name: 'Items',
+    path: '/items',
+    children: [
+      {
+        name: 'Weapons and Armor',
+        path: '/weapons-and-armor',
+      },
+    ],
+  },
+]
 </script>
+
+<GlobalStyles />
+
+<main class="reader-panel">
+  <nav class="rules-nav" class:open="{navOpen}">
+    <button class="rules-nav-close-bttn" on:click="{() => (navOpen = false)}"
+      >Close</button
+    >
+    <NavTree routes="{routes}" activePath="{$page.path}" />
+  </nav>
+  <div class="col">
+    <div class="panel-controls">
+      <button
+        class="panel-control-bttn rules-nav-open-bttn"
+        on:click="{() => (navOpen = true)}">Page Select</button
+      >
+      <button
+        class="panel-control-bttn tool-open-bttn"
+        on:click="{() => (toolOpen = true)}">Character Sheet</button
+      >
+    </div>
+    <div class="reader">
+      <slot />
+    </div>
+  </div>
+</main>
+<div class="tool" class:open="{toolOpen}">
+  <button class="tool-close-bttn" on:click="{() => (toolOpen = false)}"
+    >Close</button
+  >
+  <CharacterSheet on:close="{() => (toolOpen = false)}" />
+</div>
 
 <style lang="stylus">
   @require '../assets/vars.styl'
@@ -365,25 +413,3 @@
     .char-sheet
       padding-bottom 160px
 </style>
-
-<GlobalStyles />
-
-<main class="reader-panel">
-  <nav class="rules-nav" class:open={navOpen}>
-    <button class="rules-nav-close-bttn" on:click={() => navOpen = false}>Close</button>
-    <NavTree routes={routes} activePath={$page.path} />
-  </nav>
-  <div class="col">
-    <div class="panel-controls">
-      <button class="panel-control-bttn rules-nav-open-bttn" on:click={() => navOpen = true}>Page Select</button>
-      <button class="panel-control-bttn tool-open-bttn" on:click={() => toolOpen = true}>Character Sheet</button>
-    </div>
-    <div class="reader">
-      <slot></slot>
-    </div>
-  </div>
-</main>
-<div class="tool" class:open={toolOpen}>
-  <button class="tool-close-bttn" on:click={() => toolOpen = false}>Close</button>
-  <CharacterSheet on:close={() => toolOpen = false} />
-</div>
