@@ -24,11 +24,11 @@ adventures.
 - **Gladius**: 2d3/2d4
   - <Term target="wpn-trait-shield-pair">Shield Pair</Term>
 - **Long Sword**: 2d4/2d5
-  - <Term target="wpn-trait-long">Long</Term>, <Term target="wpn-trait-two-handable">Two Handable</Term>
+  - <Term target="wpn-trait-two-handable">Two Handable</Term>
 - **Katana or Tachi**: d8/2d5
-  - <Term target="wpn-trait-long">Long</Term>, <Term target="wpn-trait-two-handable">Two Handable</Term>, <Term target="wpn-trait-cavalry-weapon">Cavalry Weapon</Term>
+  - <Term target="wpn-trait-two-handable">Two Handable</Term>, <Term target="wpn-trait-cavalry-weapon">Cavalry Weapon</Term>
 - **Zweihander**: 2d6
-  - <Term target="wpn-trait-long">Long</Term>, <Term target="wpn-trait-two-handed">Two Handed</Term>, <Term target="wpn-trait-armor-piercing">Armor Pierce</Term> 2
+  - <Term target="wpn-trait-two-handed">Two Handed</Term>, <Term target="wpn-trait-armor-piercing">Armor Pierce</Term> 2
 
 ### Axes
 
@@ -37,7 +37,7 @@ adventures.
 - **War Axe**: d8/d10
   - <Term target="wpn-trait-shield-pair">Shield Pair</Term>, <Term target="wpn-trait-unbalanced">Unbalanced</Term>, <Term target="wpn-trait-Armor Pierce 1">Armor Pierce</Term> 2
 - **Greataxe**: 2d6
-  - <Term target="wpn-trait-long">Long</Term>, <Term target="wpn-trait-two-handed">Two Handed</Term>, <Term target="wpn-trait-unbalanced">Unbalanced</Term>, <Term target="wpn-trait-armor-piercing">Armor Pierce 3</Term>
+  - <Term target="wpn-trait-two-handed">Two Handed</Term>, <Term target="wpn-trait-unbalanced">Unbalanced</Term>, <Term target="wpn-trait-armor-piercing">Armor Pierce</Term> 3
 
 ### Blunt Weapons
 
@@ -46,16 +46,16 @@ adventures.
 - **Mace**: d6/d8
   - <Term target="wpn-trait-shield-pair">Shield Pair</Term>, <Term target="wpn-trait-heavy">Unbalanced</Term>, <Term target="wpn-trait-armor-pierce">Armor Pierce</Term> 3
 - **Flail**: d6/d8
-  - <Term target="wpn-trait-shield-pair">ShieldPair</Term>, <Term target="wpn-trait-unwieldy">Unwieldy</Term>, <Term target="wpn-trait-armor-pierce">Shield Negate</Term>, <Term target="wpn-trait-armor-pierce">Armor Pierce</Term> 3
+  - <Term target="wpn-trait-shield-pair">ShieldPair</Term>, <Term target="wpn-trait-unwieldy">Unwieldy</Term>, <Term target="wpn-trait-shield-negate">Shield Negate</Term>, <Term target="wpn-trait-armor-pierce">Armor Pierce</Term> 3
 - **Heavy Flail**: d12
-  - <Term target="wpn-trait-shield-pair">Shield Pair</Term>, <Term target="wpn-trait-unwieldy">Unwieldy</Term>, <Term target="wpn-trait-long">Long</Term>, <Term target="wpn-trait-armor-pierce">Armor Negate</Term>
+  - <Term target="wpn-trait-shield-pair">Shield Pair</Term>, <Term target="wpn-trait-unwieldy">Unwieldy</Term>, <Term target="wpn-trait-armor-negate">Armor Negate</Term>
 
 ### Polearms
 
 - **Quarterstaff or Bo**: d6
-  - <Term target="wpn-trait-long">Long</Term>, <Term target="wpn-trait-sheilding">Shielding</Term> +1
+  - <Term target="wpn-trait-sheilding">Shielding</Term> +1
 - **Spear**: d8/d10
-  - <Term target="wpn-trait-long">Long</Term>, <Term target="wpn-trait-shield-pair">Shield Pair</Term>, <Term target="wpn-trait-calvary-weapon">Calvary Weapon</Term>
+  - <Term target="wpn-trait-shield-pair">Shield Pair</Term>, <Term target="wpn-trait-calvary-weapon">Cavalry Weapon</Term>
 
 ## Ranged Weapons
 
@@ -63,7 +63,6 @@ adventures.
 
 - **Shortbow**: Range 400 | 4 Damage
 - **Longbow**: Range 700 | 5 Damage
-  - <Term target="wpn-trait-long">Long</Term>
 - **Mongolian Recurve**: Range 400-1,600 | 3-6 Damage
   - <Term target="wpn-trait-scaling">Scaling</Term> (Brawn), <Term target="wpn-trait-cavalry-weapon">Cavalry Weapon</Term>
 - **Flight Bow**: Range 1,500 | 4 Damage
@@ -80,5 +79,5 @@ adventures.
 - **Leather or Padded**: Armor 1
 - **Studded Leather**: Armor 2
 - **Chain Mail or Scale Mail**: Armor 3
-- **Half Plate**: Armor 4
-- **Plate**: Armor 5
+- **Half Plate**: Armor 4, <Term target="armr-trait-full">Full Body</Term>
+- **Plate**: Armor 5, <Term target="armr-trait-full">Full Body</Term>
